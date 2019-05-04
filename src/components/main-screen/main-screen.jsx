@@ -14,7 +14,7 @@ const MainScreen = ({movieTitles}) => {
     </article>
   );
 
-  return <div>
+  return <React.Fragment>
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg">
         <symbol id="add" viewBox="0 0 19 20">
@@ -130,7 +130,7 @@ const MainScreen = ({movieTitles}) => {
             <a href="#" className="catalog__genres-link">Sci-Fi</a>
           </li>
           <li className="catalog__genres-item">
-            <a href="#" claclassNamess="catalog__genres-link">Thrillers</a>
+            <a href="#" className="catalog__genres-link">Thrillers</a>
           </li>
         </ul>
 
@@ -157,7 +157,7 @@ const MainScreen = ({movieTitles}) => {
         </div>
       </footer>
     </div>
-  </div>;
+  </React.Fragment>;
 };
 
 MainScreen.propTypes = {
