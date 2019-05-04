@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Aleksandr Malinin](https://up.htmlacademy.ru/react/1/user/321121).
-* Наставник: `Неизвестно`.
+* Наставник: [Егор Огарков](https://up.htmlacademy.ru/react/1/user/58697).
 
 ---
 
