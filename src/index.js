@@ -14,7 +14,7 @@ const init = () => {
       <App
         movieTitles={movieTitlesArray}
       />,
-      document.querySelector(`body`)
+      document.getElementById(`root`)
   );
 };
 
