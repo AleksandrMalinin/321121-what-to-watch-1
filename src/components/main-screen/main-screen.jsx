@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MainScreen = ({movieTitles}) => {
+const MainScreen = (props) => {
+  const {movieTitles} = props;
   const movieCard = movieTitles.map((title, i) =>
     <article className="small-movie-card catalog__movies-card" key={i}>
       <button className="small-movie-card__play-btn" type="button">Play</button>
