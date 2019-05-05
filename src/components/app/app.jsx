@@ -2,8 +2,8 @@ import React from 'react';
 import MainScreen from '../main-screen/main-screen.jsx';
 import PropTypes from 'prop-types';
 
-const App = (movieTitlesArray) => {
-  const {movieTitles} = movieTitlesArray;
+const App = (props) => {
+  const {movieTitles} = props;
 
   return <MainScreen
     movieTitles={movieTitles}
