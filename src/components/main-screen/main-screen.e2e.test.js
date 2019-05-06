@@ -23,9 +23,8 @@ it(`Movie title click correctly works`, () => {
     onClick={clickHandler}
   />);
 
-  app.find(`.small-movie-card__title`).forEach((node) => {
-    node.simulate(`click`);
-  });
+  const link = app.find(`.small-movie-card__link`).first();
+  link.simulate(`click`);
 
   expect(clickHandler).toHaveBeenCalledTimes(1);
 });
