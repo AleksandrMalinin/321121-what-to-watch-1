@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MainScreen = (props) => {
-  const {movieTitles} = props;
+  const {movieTitles, onClick} = props;
   const movieCard = movieTitles.map((title, i) =>
     <article className="small-movie-card catalog__movies-card" key={i}>
       <button className="small-movie-card__play-btn" type="button">Play</button>
@@ -10,7 +10,7 @@ const MainScreen = (props) => {
         <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+        <a className="small-movie-card__link" href="movie-page.html" onClick={onClick}>{title}</a>
       </h3>
     </article>
   );
@@ -162,7 +162,8 @@ const MainScreen = (props) => {
 };
 
 MainScreen.propTypes = {
-  movieTitles: PropTypes.arrayOf(PropTypes.string)
+  movieTitles: PropTypes.arrayOf(PropTypes.string),
+  onClick: PropTypes.func
 };
 
 export default MainScreen;
