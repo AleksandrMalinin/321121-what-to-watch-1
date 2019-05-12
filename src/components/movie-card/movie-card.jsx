@@ -8,7 +8,12 @@ const MovieCard = (props) => {
     onMouseEnter={() => {
       onMouseEnter(movie);
     }}>
-    <button className="small-movie-card__play-btn" type="button" onClick={onPlayClick}>Play</button>
+    <button className="small-movie-card__play-btn" type="button"
+      onClick={() => {
+        onPlayClick(movie);
+      }}>
+      Play
+    </button>
     <div className="small-movie-card__image">
       <img src={movie.src} alt={movie.title} width="280" height="175"/>
     </div>

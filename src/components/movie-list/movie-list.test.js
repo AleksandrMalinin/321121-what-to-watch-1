@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import MovieList from './movie-list.jsx';
 
-const mock = [
+const props = [
   {
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
     src: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`
@@ -25,10 +25,11 @@ const mock = [
   }
 ];
 
-it(`App correctly renders`, () => {
+it(`MainScreen correctly renders`, () => {
+
   const tree = renderer
-  .create(<App
-    movies={mock}
+  .create(<MovieList
+    movies={props}
   />)
   .toJSON();
 
