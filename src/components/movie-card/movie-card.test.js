@@ -1,17 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import MovieCard from './movie-card.jsx';
+import {films} from '../../mocks/films.js';
 
-const mock = {
-  title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  src: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`
-};
-
-it(`MainScreen correctly renders`, () => {
+it(`MovieCard correctly renders`, () => {
 
   const tree = renderer
   .create(<MovieCard
-    movie={mock}
+    movie={films[0]}
   />)
   .toJSON();
 
