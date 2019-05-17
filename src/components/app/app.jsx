@@ -3,15 +3,18 @@ import MainScreen from '../main-screen/main-screen.jsx';
 import PropTypes from 'prop-types';
 
 const App = (props) => {
-  const {movieTitles} = props;
+  const {movies} = props;
 
   return <MainScreen
-    movieTitles={movieTitles}
+    movies={movies}
   />;
 };
 
 App.propTypes = {
-  movieTitles: PropTypes.arrayOf(PropTypes.string)
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    src: PropTypes.string.isRequired
+  })).isRequired
 };
 
 export default App;

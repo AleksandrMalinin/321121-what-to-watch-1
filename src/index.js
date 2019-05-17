@@ -1,21 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
+import {films} from './mocks/films.js';
 
-const init = () => {
-  const movieTitlesArray = [
-    `Fantastic Beasts: The Crimes of Grindelwald`,
-    `Bohemian Rhapsody`,
-    `Macbeth`,
-    `Aviator`
-  ];
-
-  ReactDOM.render(
-      <App
-        movieTitles={movieTitlesArray}
-      />,
-      document.getElementById(`root`)
-  );
-};
-
-init();
+ReactDOM.render(
+    <App
+      movies={films}
+    />,
+    document.getElementById(`root`)
+);
