@@ -14,11 +14,10 @@ class MovieCard extends PureComponent {
     this._onMouseLeave = this._onMouseLeave.bind(this);
   }
 
-
   render() {
-    const {movie, onClick} = this.props;
+    const {movie, onClick, onMouseEnter = this._onMouseEnter, onMouseLeave = this._onMouseLeave} = this.props;
 
-    return <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
+    return <article className="small-movie-card catalog__movies-card" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <VideoPlayer
         poster={movie.poster}
         preview={movie.preview}
@@ -53,7 +52,9 @@ MovieCard.propTypes = {
     poster: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired
   }),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func
 };
 
 export default MovieCard;

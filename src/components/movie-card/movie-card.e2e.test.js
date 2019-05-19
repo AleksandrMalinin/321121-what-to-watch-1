@@ -7,7 +7,7 @@ import {films} from '../../mocks/films.js';
 // React 16 Enzyme adapter
 Enzyme.configure({adapter: new Adapter()});
 
-it(`On movie card click`, () => {
+it(`On movie card click handler is being called`, () => {
   const clickHandler = jest.fn();
   const app = shallow(<MovieCard
     movie={films[0]}
@@ -20,15 +20,24 @@ it(`On movie card click`, () => {
   expect(clickHandler).toHaveBeenCalledTimes(1);
 });
 
-it(`On play-button click callback's information is correct`, () => {
-  const clickHandler = jest.fn();
+it(`On movie-card mouseenter handler is being called`, () => {
+  const mouseEnterHandler = jest.fn();
   const app = shallow(<MovieCard
     movie={films[0]}
-    onPlayClick={clickHandler}
+    onMouseEnter={mouseEnterHandler}
   />);
 
-  const play = app.find(`.small-movie-card__play-btn`);
-  play.simulate(`click`);
+  app.simulate(`mouseenter`);
+  expect(mouseEnterHandler).toHaveBeenCalledTimes(1);
+});
 
-  expect(clickHandler).toHaveBeenCalledWith(films[0]);
+it(`On movie-card mouseleave handler is being called`, () => {
+  const mouseLeaveHandler = jest.fn();
+  const app = shallow(<MovieCard
+    movie={films[0]}
+    onMouseLeave={mouseLeaveHandler}
+  />);
+
+  app.simulate(`mouseleave`);
+  expect(mouseLeaveHandler).toHaveBeenCalledTimes(1);
 });
