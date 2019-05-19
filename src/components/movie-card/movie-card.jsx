@@ -6,6 +6,7 @@ class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.TIMEOUT = 1000;
     this.state = {
       isPlaying: false
     };
@@ -34,7 +35,7 @@ class MovieCard extends PureComponent {
       this.setState({
         isPlaying: !this.state.isPlaying
       });
-    }, 1000);
+    }, this.TIMEOUT);
   }
 
   _onMouseLeave() {
