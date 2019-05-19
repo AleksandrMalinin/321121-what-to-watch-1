@@ -1,43 +1,59 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import VideoPlayer from '../video-player/video-player.jsx';
 
 class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onMouseEnter = () => {
-      props.onMouseEnter(props.movie);
+    this.state = {
+      isPlaying: false
     };
 
-    this.onPlayClick = () => {
-      props.onPlayClick(props.movie);
-    };
+    this._onMouseEnter = this._onMouseEnter.bind(this);
+    this._onMouseLeave = this._onMouseLeave.bind(this);
   }
 
 
   render() {
     const {movie, onClick} = this.props;
 
-    return <article className="small-movie-card catalog__movies-card" onMouseEnter={this.onMouseEnter}>
-      <button className="small-movie-card__play-btn" type="button" onClick={this.onPlayClick}>Play</button>
-      <div className="small-movie-card__image">
-        <img src={movie.src} alt={movie.title} width="280" height="175"/>
-      </div>
+    return <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
+      <VideoPlayer
+        poster={movie.poster}
+        preview={movie.preview}
+        isPlaying={this.state.isPlaying}
+      />
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html" onClick={onClick}>{movie.title}</a>
       </h3>
     </article>;
+  }
+
+  _onMouseEnter() {
+    setTimeout(() => {
+      this.setState({
+        isPlaying: !this.state.isPlaying
+      });
+    }, 1000);
+  }
+
+  _onMouseLeave() {
+    clearTimeout();
+
+    this.setState({
+      isPlaying: !this.state.isPlaying
+    });
   }
 }
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string,
-    src: PropTypes.string.isRequired
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired
   }),
-  onClick: PropTypes.func,
-  onPlayClick: PropTypes.func,
-  onMouseEnter: PropTypes.func
+  onClick: PropTypes.func
 };
 
 export default MovieCard;
