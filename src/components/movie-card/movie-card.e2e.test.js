@@ -8,36 +8,36 @@ import {films} from '../../mocks/films.js';
 Enzyme.configure({adapter: new Adapter()});
 
 it(`On movie card click handler is being called`, () => {
-  const clickHandler = jest.fn();
+  const handleClick = jest.fn();
   const app = shallow(<MovieCard
     movie={films[0]}
-    onClick={clickHandler}
+    onClick={handleClick}
   />);
 
   const link = app.find(`.small-movie-card__link`);
   link.simulate(`click`);
 
-  expect(clickHandler).toHaveBeenCalledTimes(1);
+  expect(handleClick).toHaveBeenCalledTimes(1);
 });
 
 it(`On movie-card mouseenter handler is being called`, () => {
-  const mouseEnterHandler = jest.fn();
+  const handleMouseEnter = jest.fn();
   const app = shallow(<MovieCard
     movie={films[0]}
-    onMouseEnter={mouseEnterHandler}
+    onMouseEnter={handleMouseEnter}
   />);
 
   app.simulate(`mouseenter`);
-  expect(mouseEnterHandler).toHaveBeenCalledTimes(1);
+  expect(handleMouseEnter).toHaveBeenCalledTimes(1);
 });
 
 it(`On movie-card mouseleave handler is being called`, () => {
-  const mouseLeaveHandler = jest.fn();
+  const handleMouseLeave = jest.fn();
   const app = shallow(<MovieCard
     movie={films[0]}
-    onMouseLeave={mouseLeaveHandler}
+    onMouseLeave={handleMouseLeave}
   />);
 
   app.simulate(`mouseleave`);
-  expect(mouseLeaveHandler).toHaveBeenCalledTimes(1);
+  expect(handleMouseLeave).toHaveBeenCalledTimes(1);
 });
