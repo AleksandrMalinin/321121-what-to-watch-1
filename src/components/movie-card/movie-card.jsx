@@ -8,7 +8,8 @@ class MovieCard extends PureComponent {
 
     this.TIMEOUT = 1000;
     this.state = {
-      isPlaying: false
+      isPlaying: false,
+      timeoutId: null
     };
 
     this._onMouseEnter = this._onMouseEnter.bind(this);
@@ -31,18 +32,23 @@ class MovieCard extends PureComponent {
   }
 
   _onMouseEnter() {
-    setTimeout(() => {
+    const id = setTimeout(() => {
       this.setState({
-        isPlaying: !this.state.isPlaying
+        isPlaying: true
       });
     }, this.TIMEOUT);
+
+    this.setState({
+      timeoutId: id
+    });
   }
 
   _onMouseLeave() {
-    clearTimeout();
+    clearTimeout(this.setState.timeoutId);
 
     this.setState({
-      isPlaying: !this.state.isPlaying
+      isPlaying: false,
+      timeoutId: null
     });
   }
 }
