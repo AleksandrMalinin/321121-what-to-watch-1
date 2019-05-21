@@ -1,22 +1,27 @@
 export const films = [
   {
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
-    src: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`
+    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
     title: `Bohemian Rhapsody`,
-    src: `img/bohemian-rhapsody.jpg`
+    poster: `img/bohemian-rhapsody.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
     title: `Macbeth`,
-    src: `img/macbeth.jpg`
+    poster: `img/macbeth.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
     title: `Aviator`,
-    src: `img/aviator.jpg`
+    poster: `img/aviator.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
     title: `We need to talk about Kevin`,
-    src: `img/we-need-to-talk-about-kevin.jpg`
+    poster: `img/we-need-to-talk-about-kevin.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   }
 ];

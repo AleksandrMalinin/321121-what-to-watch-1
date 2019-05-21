@@ -153,8 +153,7 @@ const MainScreen = (props) => {
 
 MainScreen.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string,
-    src: PropTypes.string.isRequired,
+    title: PropTypes.string
   })).isRequired
 };
 
