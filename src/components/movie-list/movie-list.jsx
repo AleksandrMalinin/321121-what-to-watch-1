@@ -5,6 +5,18 @@ import MovieCard from '../movie-card/movie-card.jsx';
 class MovieList extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.state = {
+      activeMovieCard: null
+    };
+
+    this.onMouseEnter = (movie) => this.setState({
+      activeMovieCard: movie
+    });
+
+    this.onPlayClick = (movie) => this.setState({
+      activeMovieCard: movie
+    });
   }
 
   render() {
@@ -14,6 +26,8 @@ class MovieList extends PureComponent {
       {movies.map((movie) => <MovieCard
         movie={movie}
         key={movie.title}
+        onMouseEnter={this.onMouseEnter}
+        onPlayClick={this.onPlayClick}
       />)}
     </div>;
   }

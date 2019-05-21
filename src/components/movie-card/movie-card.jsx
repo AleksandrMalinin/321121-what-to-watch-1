@@ -17,9 +17,9 @@ class MovieCard extends PureComponent {
   }
 
   render() {
-    const {movie, onClick, onMouseEnter = this._onMouseEnter, onMouseLeave = this._onMouseLeave} = this.props;
+    const {movie, onClick} = this.props;
 
-    return <article className="small-movie-card catalog__movies-card" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    return <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
       <VideoPlayer
         poster={movie.poster}
         preview={movie.preview}
@@ -32,6 +32,8 @@ class MovieCard extends PureComponent {
   }
 
   _onMouseEnter() {
+    this.props.onMouseEnter(this.props.movie);
+
     const id = setTimeout(() => {
       this.setState({
         isPlaying: true
