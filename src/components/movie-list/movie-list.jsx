@@ -14,7 +14,7 @@ class MovieList extends PureComponent {
       activeMovieCard: movie
     });
 
-    this.onPlayClick = (movie) => this.setState({
+    this.onMouseLeave = (movie) => this.setState({
       activeMovieCard: movie
     });
   }
@@ -27,7 +27,7 @@ class MovieList extends PureComponent {
         movie={movie}
         key={movie.title}
         onMouseEnter={this.onMouseEnter}
-        onPlayClick={this.onPlayClick}
+        onMouseLeave={this.onMouseLeave}
       />)}
     </div>;
   }

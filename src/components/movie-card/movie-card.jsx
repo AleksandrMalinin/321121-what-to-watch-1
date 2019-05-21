@@ -46,6 +46,8 @@ class MovieCard extends PureComponent {
   }
 
   _onMouseLeave() {
+    this.props.onMouseLeave(this.props.movie);
+
     clearTimeout(this.setState.timeoutId);
 
     this.setState({

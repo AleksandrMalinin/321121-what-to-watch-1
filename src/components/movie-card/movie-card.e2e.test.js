@@ -30,3 +30,14 @@ it(`On movie-card mouseenter handler is being called`, () => {
   app.simulate(`mouseenter`);
   expect(handleMouseEnter).toHaveBeenCalledTimes(1);
 });
+
+it(`On movie-card mouseleave handler is being called`, () => {
+  const handleMouseLeave = jest.fn();
+  const app = shallow(<MovieCard
+    movie={films[0]}
+    onMouseLeave={handleMouseLeave}
+  />);
+
+  app.simulate(`mouseleave`);
+  expect(handleMouseLeave).toHaveBeenCalledTimes(1);
+});
