@@ -5,11 +5,11 @@ exports[`VideoPlayer correctly renders 1`] = `
   className="small-movie-card__image"
   height="175"
   muted={true}
-  poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+  poster=""
   width="280"
 >
   <source
-    src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+    src=""
     type="video/mp4"
   />
 </video>

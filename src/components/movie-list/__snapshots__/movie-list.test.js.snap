@@ -13,6 +13,34 @@ exports[`MovieList correctly renders 1`] = `
       className="small-movie-card__image"
       height="175"
       muted={true}
+      poster=""
+      width="280"
+    >
+      <source
+        src=""
+        type="video/mp4"
+      />
+    </video>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <video
+      className="small-movie-card__image"
+      height="175"
+      muted={true}
       poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
       width="280"
     >

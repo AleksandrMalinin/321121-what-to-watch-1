@@ -1,7 +1,6 @@
 import {reducer} from './reducer.js';
 import {films} from './mocks/films.js';
 
-
 it(`Reducer without additional parameters returns initial state`, () => {
   expect(reducer(undefined, {})).toEqual({
     moviesList: films,

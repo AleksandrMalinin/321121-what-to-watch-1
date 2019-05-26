@@ -1,33 +1,24 @@
 import {films} from './mocks/films.js';
+import {constants} from './constants.js';
 
 const initialState = {
   moviesList: films,
-  activeGenre: `All genres`
+  activeGenre: constants.DEFAULT_GENRE
 };
 
 const ActionCreators = {
-  'CHANGE_FILTER_GENRE': (genre) => {
+  changeGenre: (genre) => {
     return {
-      type: `CHANGE_FILTER_GENRE`,
+      type: constants.ACTION_TYPE.changeFilterGenre,
       payload: genre
     };
   },
 
-  'GET_MOVIES_LIST': (genre) => {
-    let movies = [];
-
-    if (genre === initialState.activeGenre) {
-      movies = initialState.moviesList;
-    } else {
-      initialState.moviesList.forEach((film) => {
-        if (genre === film.genre) {
-          movies.push(film);
-        }
-      });
-    }
+  getMoviesList: (genre) => {
+    let movies = genre === initialState.activeGenre ? initialState.moviesList.slice(1) : initialState.moviesList.filter((film) => genre === film.genre);
 
     return {
-      type: `GET_MOVIES_LIST`,
+      type: constants.ACTION_TYPE.getMoviesList,
       payload: movies
     };
   }
@@ -35,11 +26,11 @@ const ActionCreators = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case `CHANGE_FILTER_GENRE`: return Object.assign({}, state, {
+    case constants.ACTION_TYPE.changeFilterGenre: return Object.assign({}, state, {
       activeGenre: action.payload
     });
 
-    case `GET_MOVIES_LIST`: return Object.assign({}, state, {
+    case constants.ACTION_TYPE.getMoviesList: return Object.assign({}, state, {
       moviesList: action.payload
     });
   }
