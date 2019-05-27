@@ -9,31 +9,22 @@ class App extends PureComponent {
     super();
 
     this.genresList = this.fillGenres(props.moviesList);
-    this.state = {
-      moviesList: props.moviesList.slice(1)
-    };
   }
 
   render() {
-    const {activeGenre, onGenreChange} = this.props;
+    const {activeGenre, moviesList, onGenreChange} = this.props;
 
     return <MainScreen
       genres={this.genresList}
-      moviesList={this.state.moviesList}
+      moviesList={moviesList}
       activeGenre={activeGenre}
       onGenreChange={onGenreChange}
     />;
   }
 
-  componentDidUpdate() {
-    this.setState({
-      moviesList: this.props.moviesList
-    });
-  }
-
   fillGenres(movies) {
-    let genres = movies.map((movie) => movie.genre);
-    let genresList = [...new Set(genres)];
+    const genresList = movies.map((movie) => movie.genre);
+    genresList.unshift(`All genres`);
 
     return genresList;
   }
@@ -50,15 +41,13 @@ App.propTypes = {
   onGenreChange: PropTypes.func
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state) => ({
   moviesList: state.moviesList,
   activeGenre: state.activeGenre
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreChange: (evt, genre) => {
-    evt.preventDefault();
-
+  onGenreChange: (genre) => {
     dispatch(ActionCreators.changeGenre(genre));
     dispatch(ActionCreators.getMoviesList(genre));
   }

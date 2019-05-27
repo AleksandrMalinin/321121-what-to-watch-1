@@ -7,7 +7,7 @@ it(`App correctly renders`, () => {
   const tree = renderer
   .create(<App
     moviesList={films}
-    activeGenre={films[1].genre}
+    activeGenre={films[0].genre}
   />)
   .toJSON();
 

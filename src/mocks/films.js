@@ -1,11 +1,5 @@
 export const films = [
   {
-    title: ``,
-    poster: ``,
-    preview: ``,
-    genre: `All genres`
-  },
-  {
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
     poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
