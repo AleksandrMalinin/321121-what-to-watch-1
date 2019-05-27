@@ -10,11 +10,11 @@ exports[`MovieCard correctly renders 1`] = `
     className="small-movie-card__image"
     height="175"
     muted={true}
-    poster=""
+    poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
     width="280"
   >
     <source
-      src=""
+      src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
       type="video/mp4"
     />
   </video>
@@ -25,7 +25,7 @@ exports[`MovieCard correctly renders 1`] = `
       className="small-movie-card__link"
       href="movie-page.html"
     >
-      
+      Fantastic Beasts: The Crimes of Grindelwald
     </a>
   </h3>
 </article>
