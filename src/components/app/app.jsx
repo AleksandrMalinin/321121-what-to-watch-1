@@ -1,19 +1,57 @@
-import React from 'react';
-import MainScreen from '../main-screen/main-screen.jsx';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreators} from '../../reducer.js';
+import MainScreen from '../main-screen/main-screen.jsx';
 
-const App = (props) => {
-  const {movies} = props;
+class App extends PureComponent {
+  constructor(props) {
+    super();
 
-  return <MainScreen
-    movies={movies}
-  />;
-};
+    this.genresList = this.fillGenres(props.moviesList);
+  }
+
+  render() {
+    const {activeGenre, moviesList, onGenreChange} = this.props;
+
+    return <MainScreen
+      genres={this.genresList}
+      moviesList={moviesList}
+      activeGenre={activeGenre}
+      onGenreChange={onGenreChange}
+    />;
+  }
+
+  fillGenres(movies) {
+    const genresList = movies.map((movie) => movie.genre);
+    genresList.unshift(`All genres`);
+
+    return genresList;
+  }
+}
 
 App.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string
-  })).isRequired
+  moviesList: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    poster: PropTypes.string,
+    preview: PropTypes.string,
+    genre: PropTypes.string
+  })).isRequired,
+  activeGenre: PropTypes.string,
+  onGenreChange: PropTypes.func
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  moviesList: state.moviesList,
+  activeGenre: state.activeGenre
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreChange: (genre) => {
+    dispatch(ActionCreators.changeGenre(genre));
+    dispatch(ActionCreators.getMoviesList(genre));
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

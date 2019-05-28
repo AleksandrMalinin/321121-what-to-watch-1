@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import VideoPlayer from '../video-player/video-player.jsx';
+import {constants} from '../../constants.js';
 
 class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.TIMEOUT = 1000;
     this.state = {
       isPlaying: false,
       timeoutId: null
@@ -36,9 +36,9 @@ class MovieCard extends PureComponent {
 
     const id = setTimeout(() => {
       this.setState({
-        isPlaying: true
+        isPlaying: !this.state.isPlaying,
       });
-    }, this.TIMEOUT);
+    }, constants.TIMEOUT);
 
     this.setState({
       timeoutId: id
@@ -51,7 +51,7 @@ class MovieCard extends PureComponent {
     clearTimeout(this.setState.timeoutId);
 
     this.setState({
-      isPlaying: false,
+      isPlaying: !this.state.isPlaying,
       timeoutId: null
     });
   }

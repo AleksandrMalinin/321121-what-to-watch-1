@@ -1,12 +1,14 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {App} from './app.jsx';
+import GenresList from './genres-list.jsx';
 import {films} from '../../mocks/films.js';
 
-it(`App correctly renders`, () => {
+const mockGenres = films.map((film) => film.genre);
+
+it(`Filters correctly renders`, () => {
   const tree = renderer
-  .create(<App
-    moviesList={films}
+  .create(<GenresList
+    genres={mockGenres}
     activeGenre={films[0].genre}
   />)
   .toJSON();
