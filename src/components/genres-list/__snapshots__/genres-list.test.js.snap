@@ -10,7 +10,6 @@ exports[`Filters correctly renders 1`] = `
     <a
       className="catalog__genres-link"
       href="#"
-      onClick={[Function]}
     >
       Comedies
     </a>
@@ -21,7 +20,6 @@ exports[`Filters correctly renders 1`] = `
     <a
       className="catalog__genres-link"
       href="#"
-      onClick={[Function]}
     >
       Crime
     </a>
@@ -32,7 +30,6 @@ exports[`Filters correctly renders 1`] = `
     <a
       className="catalog__genres-link"
       href="#"
-      onClick={[Function]}
     >
       Documentary
     </a>
@@ -43,7 +40,6 @@ exports[`Filters correctly renders 1`] = `
     <a
       className="catalog__genres-link"
       href="#"
-      onClick={[Function]}
     >
       Dramas
     </a>
@@ -54,7 +50,6 @@ exports[`Filters correctly renders 1`] = `
     <a
       className="catalog__genres-link"
       href="#"
-      onClick={[Function]}
     >
       Horror
     </a>
