@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
+import withActiveItem from '../../hocs/with-active-item.js';
+
+const GenresListWrapped = withActiveItem(GenresList);
+const MovieListWrapped = withActiveItem(MovieList);
 
 const MainScreen = (props) => {
   const {genres, moviesList, activeGenre, onGenreChange} = props;
@@ -93,13 +97,13 @@ const MainScreen = (props) => {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <GenresList
+        <GenresListWrapped
           genres={genres}
-          activeGenre={activeGenre}
-          onGenreChange={onGenreChange}
+          activeItem={activeGenre}
+          onChange={onGenreChange}
         />
 
-        <MovieList
+        <MovieListWrapped
           movies={moviesList}
         />
 
