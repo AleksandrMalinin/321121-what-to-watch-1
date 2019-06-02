@@ -12,12 +12,11 @@ class App extends PureComponent {
   }
 
   render() {
-    const {activeGenre, moviesList, onGenreChange} = this.props;
+    const {moviesList, onGenreChange} = this.props;
 
     return <MainScreen
       genres={this.genresList}
       moviesList={moviesList}
-      activeGenre={activeGenre}
       onGenreChange={onGenreChange}
     />;
   }
@@ -37,7 +36,6 @@ App.propTypes = {
     preview: PropTypes.string,
     genre: PropTypes.string
   })).isRequired,
-  activeGenre: PropTypes.string,
   onGenreChange: PropTypes.func
 };
 

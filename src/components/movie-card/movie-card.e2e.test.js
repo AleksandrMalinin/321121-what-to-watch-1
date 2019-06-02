@@ -7,7 +7,7 @@ import {films} from '../../mocks/films.js';
 // React 16 Enzyme adapter
 Enzyme.configure({adapter: new Adapter()});
 
-it(`On movie card click handler is being called`, () => {
+it(`On movie-card click handler is being called`, () => {
   const handleClick = jest.fn();
   const app = shallow(<MovieCard
     movie={films[0]}

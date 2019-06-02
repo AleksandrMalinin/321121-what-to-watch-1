@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import withActiveItem from '../../hocs/with-active-item.js';
+import {constants} from '../../constants.js';
 
 class GenresList extends PureComponent {
   constructor() {
@@ -9,10 +11,10 @@ class GenresList extends PureComponent {
   }
 
   render() {
-    const {genres, activeGenre} = this.props;
+    const {genres, activeItem} = this.props;
 
     return <ul className="catalog__genres-list">
-      {genres.map((genre, i) => <li className={`catalog__genres-item ` + (activeGenre === genre ? `catalog__genres-item--active` : ``)} key={i}>
+      {genres.map((genre, i) => <li className={`catalog__genres-item ` + (activeItem === genre ? `catalog__genres-item--active` : ``)} key={i}>
         <a href="#" className="catalog__genres-link" onClick={this.onGenreChange(genre)}>{genre}</a>
       </li>)}
     </ul>;
@@ -20,14 +22,16 @@ class GenresList extends PureComponent {
 
   _onGenreChange(genre, event) {
     event.preventDefault();
+    this.props.onChange(genre);
     this.props.onGenreChange(genre);
   }
 }
 
 GenresList.propTypes = {
   genres: PropTypes.array.isRequired,
-  activeGenre: PropTypes.string.isRequired,
+  activeItem: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
   onGenreChange: PropTypes.func
 };
 
-export default GenresList;
+export default withActiveItem(constants.DEFAULT_GENRE)(GenresList);

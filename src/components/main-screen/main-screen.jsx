@@ -4,7 +4,7 @@ import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 
 const MainScreen = (props) => {
-  const {genres, moviesList, activeGenre, onGenreChange} = props;
+  const {genres, moviesList, onGenreChange} = props;
 
   return <React.Fragment>
     <div className="visually-hidden">
@@ -95,7 +95,6 @@ const MainScreen = (props) => {
 
         <GenresList
           genres={genres}
-          activeGenre={activeGenre}
           onGenreChange={onGenreChange}
         />
 
@@ -133,7 +132,6 @@ MainScreen.propTypes = {
     preview: PropTypes.string,
     genre: PropTypes.string
   })).isRequired,
-  activeGenre: PropTypes.string,
   onGenreChange: PropTypes.func
 };
 
