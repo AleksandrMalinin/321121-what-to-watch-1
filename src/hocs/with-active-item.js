@@ -25,10 +25,6 @@ const withActiveItem = (initialItem) => (Component) => {
       this.setState({
         activeItem: item
       });
-
-      if (this.props.onChange) {
-        this.props.onChange(item);
-      }
     }
   }
 
