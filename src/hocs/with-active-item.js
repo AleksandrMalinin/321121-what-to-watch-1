@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 const withActiveItem = (initialItem) => (Component) => {
   class WithActiveItem extends PureComponent {
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
 
       this.state = {
         activeItem: initialItem
@@ -25,6 +25,10 @@ const withActiveItem = (initialItem) => (Component) => {
       this.setState({
         activeItem: item
       });
+
+      if (this.props.onChange) {
+        this.props.onChange(item);
+      }
     }
   }
 

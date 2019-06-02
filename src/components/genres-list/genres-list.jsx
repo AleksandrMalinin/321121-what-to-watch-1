@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import withActiveItem from '../../hocs/with-active-item.js';
+import {constants} from '../../constants.js';
 
 class GenresList extends PureComponent {
   constructor() {
@@ -31,4 +32,4 @@ GenresList.propTypes = {
   onChange: PropTypes.func
 };
 
-export default withActiveItem(`All genres`)(GenresList);
+export default withActiveItem(constants.DEFAULT_GENRE)(GenresList);
