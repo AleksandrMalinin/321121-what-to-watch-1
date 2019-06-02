@@ -55,6 +55,10 @@ class MovieCard extends PureComponent {
       timeoutId: null
     });
   }
+
+  componentWillUnmount() {
+    clearTimeout(this.setState.timeoutId);
+  }
 }
 
 MovieCard.propTypes = {

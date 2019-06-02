@@ -1,13 +1,13 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-const withActiveItem = (Component) => {
+const withActiveItem = (initialItem) => (Component) => {
   class WithActiveItem extends PureComponent {
-    constructor(props) {
-      super(props);
+    constructor() {
+      super();
 
       this.state = {
-        activeItem: props.activeItem || null
+        activeItem: initialItem
       };
 
       this.onItemChange = this.onItemChange.bind(this);
@@ -22,18 +22,9 @@ const withActiveItem = (Component) => {
     }
 
     onItemChange(item) {
-      const changeState = (evt) => {
-        this.setState({
-          activeItem: item
-        });
-
-        if (this.props.onChange) {
-          evt.preventDefault();
-          this.props.onChange(item);
-        }
-      };
-
-      return changeState;
+      this.setState({
+        activeItem: item
+      });
     }
   }
 
