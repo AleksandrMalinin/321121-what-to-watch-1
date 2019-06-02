@@ -95,7 +95,6 @@ const MainScreen = (props) => {
 
         <GenresList
           genres={genres}
-          onChange={onGenreChange}
           onGenreChange={onGenreChange}
         />
 

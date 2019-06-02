@@ -48,7 +48,7 @@ class MovieCard extends PureComponent {
   _onMouseLeave() {
     this.props.onMouseLeave(null);
 
-    clearTimeout(this.setState.timeoutId);
+    clearTimeout(this.state.timeoutId);
 
     this.setState({
       isPlaying: !this.state.isPlaying,
@@ -57,7 +57,7 @@ class MovieCard extends PureComponent {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.setState.timeoutId);
+    clearTimeout(this.state.timeoutId);
   }
 }
 
