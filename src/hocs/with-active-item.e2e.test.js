@@ -8,13 +8,11 @@ import {films} from '../mocks/films.js';
 Enzyme.configure({adapter: new Adapter()});
 
 const MockComponent = () => <div/>;
-const MockComponentWrapped = withActiveItem(MockComponent);
+const MockComponentWrapped = withActiveItem(films[0].genre)(MockComponent);
 
 it(`Should change activeItem when callback is being called`, () => {
-  const wrapper = shallow(<MockComponentWrapped
-    activeItem={films[0].genre}
-  />);
+  const wrapper = shallow(<MockComponentWrapped/>);
 
-  wrapper.instance().onItemChange(films[0].genre);
-  expect(wrapper.state().activeItem).toEqual(films[0].genre);
+  wrapper.instance().onItemChange(films[2].genre);
+  expect(wrapper.state().activeItem).toEqual(films[2].genre);
 });
