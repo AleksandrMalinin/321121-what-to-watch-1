@@ -21,12 +21,12 @@ class MovieCard extends PureComponent {
 
     return <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
       <VideoPlayer
-        poster={movie.poster}
-        preview={movie.preview}
+        poster={movie.preview_image}
+        link={movie.preview_video_link}
         isPlaying={this.state.isPlaying}
       />
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html" onClick={onClick}>{movie.title}</a>
+        <a className="small-movie-card__link" href="movie-page.html" onClick={onClick}>{movie.name}</a>
       </h3>
     </article>;
   }
@@ -63,9 +63,9 @@ class MovieCard extends PureComponent {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    title: PropTypes.string,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired
+    name: PropTypes.string,
+    preview_image: PropTypes.string.isRequired,
+    preview_video_link: PropTypes.string.isRequired
   }),
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,

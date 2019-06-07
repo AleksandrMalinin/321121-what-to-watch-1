@@ -127,9 +127,9 @@ const MainScreen = (props) => {
 MainScreen.propTypes = {
   genres: PropTypes.array.isRequired,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
+    name: PropTypes.string,
+    posterImage: PropTypes.string,
+    previewImage: PropTypes.string,
     genre: PropTypes.string
   })).isRequired,
   onGenreChange: PropTypes.func

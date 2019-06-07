@@ -9,7 +9,7 @@ class VideoPlayer extends PureComponent {
   }
 
   render() {
-    const {poster, preview, isMuted = true, format = `video/mp4`} = this.props;
+    const {poster, link, isMuted = true, format = `video/mp4`} = this.props;
 
     return <video className="small-movie-card__image" width="280" height="175"
       poster={poster}
@@ -17,7 +17,7 @@ class VideoPlayer extends PureComponent {
       ref={this._videoRef}
     >
       <source
-        src={preview}
+        src={link}
         type={format}
       />
     </video>;
@@ -36,7 +36,7 @@ class VideoPlayer extends PureComponent {
 
 VideoPlayer.propTypes = {
   poster: PropTypes.string.isRequired,
-  preview: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   isMuted: PropTypes.bool,
   format: PropTypes.string
