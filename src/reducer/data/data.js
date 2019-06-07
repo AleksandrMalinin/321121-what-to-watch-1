@@ -1,9 +1,13 @@
+import {constants} from '../../constants.js';
+
 const initialState = {
-  moviesList: []
+  moviesList: [],
+  activeGenre: constants.DEFAULT_GENRE
 };
 
 const ACTION_TYPE = {
-  loadFilms: `LOAD_FILMS`
+  loadFilms: `LOAD_FILMS`,
+  changeFilterGenre: `CHANGE_FILTER_GENRE`
 };
 
 const ActionCreators = {
@@ -11,6 +15,13 @@ const ActionCreators = {
     return {
       type: ACTION_TYPE.loadFilms,
       payload: films
+    };
+  },
+
+  changeGenre: (genre) => {
+    return {
+      type: ACTION_TYPE.changeFilterGenre,
+      payload: genre
     };
   }
 };
@@ -28,6 +39,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTION_TYPE.loadFilms: return Object.assign({}, state, {
       moviesList: action.payload,
+    });
+
+    case ACTION_TYPE.changeFilterGenre: return Object.assign({}, state, {
+      activeGenre: action.payload
     });
   }
 
