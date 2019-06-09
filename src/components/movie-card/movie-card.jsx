@@ -64,8 +64,10 @@ class MovieCard extends PureComponent {
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     name: PropTypes.string,
+    /* eslint-disable */
     preview_image: PropTypes.string.isRequired,
     preview_video_link: PropTypes.string.isRequired
+    /* eslint-enable */
   }),
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,

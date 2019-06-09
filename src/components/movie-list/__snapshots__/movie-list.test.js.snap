@@ -27,9 +27,7 @@ exports[`MovieList correctly renders 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-      >
-        Fantastic Beasts: The Crimes of Grindelwald
-      </a>
+      />
     </h3>
   </article>
   <article
@@ -55,9 +53,7 @@ exports[`MovieList correctly renders 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-      >
-        Bohemian Rhapsody
-      </a>
+      />
     </h3>
   </article>
   <article
@@ -83,9 +79,7 @@ exports[`MovieList correctly renders 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-      >
-        Macbeth
-      </a>
+      />
     </h3>
   </article>
   <article
@@ -111,9 +105,7 @@ exports[`MovieList correctly renders 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-      >
-        Aviator
-      </a>
+      />
     </h3>
   </article>
   <article
@@ -139,9 +131,7 @@ exports[`MovieList correctly renders 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-      >
-        We need to talk about Kevin
-      </a>
+      />
     </h3>
   </article>
 </div>

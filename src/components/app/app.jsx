@@ -3,17 +3,42 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreators} from '../../reducer/data/data.js';
 import {getFilteredFilms, getGenre, getGenres} from '../../reducer/data/selectors.js';
+import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
+import SignIn from '../sign-in/sign-in.jsx';
 
 class App extends PureComponent {
+  constructor() {
+    super();
+
+    this.state = ({
+      isLoggedIn: false
+    });
+
+    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
+  }
+
   render() {
     const {moviesList, onGenreChange, genres} = this.props;
 
-    return <MainScreen
-      genres={genres}
-      moviesList={moviesList}
-      onGenreChange={onGenreChange}
-    />;
+    if (this.state.isLoggedIn !== !this.props.isAuthorizationRequired) {
+      return <MainScreen
+        isloggedIn={this.onLoginButtonClick}
+        genres={genres}
+        moviesList={moviesList}
+        onGenreChange={onGenreChange}
+        isAuthorizationRequired={this.props.isAuthorizationRequired}
+      />;
+    } else {
+      return <SignIn/>;
+    }
+  }
+
+  onLoginButtonClick(evt) {
+    evt.preventDefault();
+    this.setState({
+      isLoggedIn: !this.state.isLoggedIn
+    });
   }
 }
 
@@ -25,13 +50,15 @@ App.propTypes = {
     genre: PropTypes.string
   })).isRequired,
   onGenreChange: PropTypes.func,
-  genres: PropTypes.array.isRequired
+  genres: PropTypes.array.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
   moviesList: getFilteredFilms(state),
   activeGenre: getGenre(state),
-  genres: getGenres(state)
+  genres: getGenres(state),
+  isAuthorizationRequired: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -10,7 +10,7 @@ class MovieList extends PureComponent {
     return <div className="catalog__movies-list">
       {movies.map((movie) => <MovieCard
         movie={movie}
-        key={movie.name}
+        key={movie.title}
         onMouseEnter={onChange}
         onMouseLeave={onChange}
       />)}

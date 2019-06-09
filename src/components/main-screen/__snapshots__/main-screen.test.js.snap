@@ -153,16 +153,12 @@ Array [
       <div
         className="user-block"
       >
-        <div
-          className="user-block__avatar"
+        <a
+          className="user-block__link"
+          href="#"
         >
-          <img
-            alt="User avatar"
-            height="63"
-            src="img/avatar.jpg"
-            width="63"
-          />
-        </div>
+          Sign in
+        </a>
       </div>
     </header>
     <div
@@ -341,9 +337,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Fantastic Beasts: The Crimes of Grindelwald
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -369,9 +363,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Bohemian Rhapsody
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -397,9 +389,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Macbeth
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -425,9 +415,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Aviator
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -453,9 +441,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              We need to talk about Kevin
-            </a>
+            />
           </h3>
         </article>
       </div>
