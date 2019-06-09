@@ -260,17 +260,6 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            All genres
-          </a>
-        </li>
-        <li
           className="catalog__genres-item "
         >
           <a
@@ -352,9 +341,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Fantastic Beasts: The Crimes of Grindelwald
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -380,9 +367,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Bohemian Rhapsody
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -408,9 +393,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Macbeth
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -436,9 +419,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Aviator
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -464,9 +445,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              We need to talk about Kevin
-            </a>
+            />
           </h3>
         </article>
       </div>
