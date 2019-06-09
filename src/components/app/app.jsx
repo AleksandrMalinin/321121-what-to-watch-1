@@ -8,18 +8,37 @@ import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 
 class App extends PureComponent {
-  render() {
-    const {moviesList, onGenreChange, genres, isAuthorizationRequired} = this.props;
+  constructor() {
+    super();
 
-    if (isAuthorizationRequired) {
-      return <SignIn/>;
-    } else {
+    this.state = ({
+      isLoggedIn: false
+    });
+
+    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
+  }
+
+  render() {
+    const {moviesList, onGenreChange, genres} = this.props;
+
+    if (this.state.isLoggedIn !== !this.props.isAuthorizationRequired) {
       return <MainScreen
+        isloggedIn={this.onLoginButtonClick}
         genres={genres}
         moviesList={moviesList}
         onGenreChange={onGenreChange}
+        isAuthorizationRequired={this.props.isAuthorizationRequired}
       />;
+    } else {
+      return <SignIn/>;
     }
+  }
+
+  onLoginButtonClick(evt) {
+    evt.preventDefault();
+    this.setState({
+      isLoggedIn: !this.state.isLoggedIn
+    });
   }
 }
 

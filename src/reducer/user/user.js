@@ -1,30 +1,51 @@
 const initialState = {
-  isAuthorizationRequired: true
+  isAuthorizationRequired: false,
+  user: {}
 };
 
 const ACTION_TYPE = {
-  requiredAuthorization: `REQUIRED_AUTHORIZATION`,
+  requireAuthorization: `REQUIRED_AUTHORIZATION`,
+  loginUser: `LOGIN_USER`
 };
 
 const ActionCreator = {
   requireAuthorization: (status) => {
     return {
-      type: ACTION_TYPE.requiredAuthorization,
-      payload: status,
+      type: ACTION_TYPE.requireAuthorization,
+      payload: status
     };
   },
+
+  authorizeUser: (user) => {
+    return {
+      type: ACTION_TYPE.loginUser,
+      payload: user
+    };
+  }
 };
 
+const Operation = {
+  loginUser: (email, password) => (dispatch, _getState, api) => {
+    return api.post(`/login`, {email, password})
+      .then((response) => {
+        dispatch(ActionCreator.authorizeUser(response.data));
+      });
+  }
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION_TYPE.requireAuthorization:
-      return Object.assign({}, state, {
-        isAuthorizationRequired: action.payload,
-      });
+    case ACTION_TYPE.requireAuthorization: return Object.assign({}, state, {
+      isAuthorizationRequired: action.payload
+    });
+
+    case ACTION_TYPE.loginUser: return Object.assign({}, state, {
+      isAuthorizationRequired: true,
+      user: action.payload
+    });
   }
 
   return state;
 };
 
-export {reducer, ACTION_TYPE, ActionCreator};
+export {reducer, ACTION_TYPE, Operation, ActionCreator};
