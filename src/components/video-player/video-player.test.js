@@ -9,8 +9,8 @@ it(`VideoPlayer correctly renders`, () => {
 
   const tree = renderer
   .create(<VideoPlayer
-    poster={films[0].poster}
-    preview={films[0].preview}
+    poster={films[0].preview_image}
+    link={films[0].preview_video_link}
     isPlaying={isPlaying}
   />)
   .toJSON();

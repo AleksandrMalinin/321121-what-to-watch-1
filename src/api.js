@@ -10,7 +10,7 @@ export const createAPI = (dispatch) => {
   const onSuccess = (response) => response;
   const onFail = (err) => {
     if (err.response.status === 403) {
-      console.log('meow');
+      console.log(err);
     }
     return err;
   };
