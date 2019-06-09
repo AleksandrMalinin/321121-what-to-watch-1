@@ -11,6 +11,7 @@ it(`App correctly renders`, () => {
     moviesList={films}
     activeGenre={films[0].genre}
     genres={mockGenres}
+    isAuthorizationRequired={false}
   />)
   .toJSON();
 
