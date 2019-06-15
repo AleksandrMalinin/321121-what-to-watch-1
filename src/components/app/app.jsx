@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreators} from '../../reducer/data/data.js';
+import {Switch, Route} from "react-router-dom";
 import {getFilteredFilms, getGenre, getGenres} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
@@ -21,17 +22,16 @@ class App extends PureComponent {
   render() {
     const {moviesList, onGenreChange, genres} = this.props;
 
-    if (this.state.isLoggedIn !== !this.props.isAuthorizationRequired) {
-      return <MainScreen
+    return <Switch>
+      <Route path="/" exact render={() => <MainScreen
         onLoginButtonClick={this.onLoginButtonClick}
         genres={genres}
         moviesList={moviesList}
         onGenreChange={onGenreChange}
         isAuthorizationRequired={this.props.isAuthorizationRequired}
-      />;
-    } else {
-      return <SignIn/>;
-    }
+      />}/>
+      <Route path="/login" component={SignIn}/>
+    </Switch>;
   }
 
   onLoginButtonClick(evt) {

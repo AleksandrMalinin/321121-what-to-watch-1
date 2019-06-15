@@ -8,6 +8,7 @@ import reducer from './reducer';
 import App from './components/app/app.jsx';
 import {createAPI} from './api';
 import {Operation} from "./reducer/data/data.js";
+import {BrowserRouter} from "react-router-dom";
 
 const api = createAPI((...args) => store.dispatch(...args));
 
@@ -23,7 +24,9 @@ store.dispatch(Operation.loadFilms());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App/>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
     </Provider>,
     document.getElementById(`root`)
 );
