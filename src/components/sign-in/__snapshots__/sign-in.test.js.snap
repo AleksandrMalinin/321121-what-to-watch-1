@@ -164,6 +164,7 @@ Array [
               name="user-email"
               onChange={[Function]}
               placeholder="Email address"
+              required={true}
               type="email"
             />
             <label
@@ -182,6 +183,7 @@ Array [
               name="user-password"
               onChange={[Function]}
               placeholder="Password"
+              required={true}
               type="password"
             />
             <label
