@@ -23,7 +23,7 @@ class App extends PureComponent {
 
     if (this.state.isLoggedIn !== !this.props.isAuthorizationRequired) {
       return <MainScreen
-        isloggedIn={this.onLoginButtonClick}
+        onLoginButtonClick={this.onLoginButtonClick}
         genres={genres}
         moviesList={moviesList}
         onGenreChange={onGenreChange}
