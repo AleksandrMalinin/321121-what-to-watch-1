@@ -1,12 +1,16 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {SignIn} from './sign-in.jsx';
+import {BrowserRouter} from 'react-router-dom';
+import SignIn from './sign-in.jsx';
 
-it(`App correctly renders`, () => {
+it(`SignIn correctly renders`, () => {
   const tree = renderer
-  .create(<SignIn
-    loginUser={() => jest.fn()}
-  />)
+  .create(
+      <BrowserRouter>
+        <SignIn
+          onSubmit={() => jest.fn()}
+        />
+      </BrowserRouter>)
   .toJSON();
 
   expect(tree).toMatchSnapshot();
