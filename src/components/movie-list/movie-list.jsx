@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
-import withActiveItem from '../../hocs/with-active-item.js';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
 class MovieList extends PureComponent {
   render() {

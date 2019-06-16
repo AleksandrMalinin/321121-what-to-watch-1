@@ -9,7 +9,7 @@ import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import MyList from '../my-list/my-list.jsx';
-import withPrivateRoutes from '../../hocs/with-private-routes/with-private-routes.js';
+import withPrivateRoutes from '../../hocs/with-private-route/with-private-route.js';
 
 import {getUser} from '../../reducer/user/selectors.js';
 

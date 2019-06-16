@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import withActiveItem from './with-active-item.js';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import {films} from '../mocks/films.js';
 
 // React 16 Enzyme adapter
