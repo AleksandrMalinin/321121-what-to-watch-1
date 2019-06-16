@@ -1,44 +1,32 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Switch, Route, withRouter} from "react-router-dom";
 import {ActionCreators} from '../../reducer/data/data.js';
+import {Operation} from '../../reducer/user/user.js';
 import {getFilteredFilms, getGenre, getGenres} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
+import MyList from '../my-list/my-list.jsx';
+import withPrivateRoutes from '../../hocs/with-private-route/with-private-route.js';
+
+const WrappedSignIn = withRouter(SignIn);
 
 class App extends PureComponent {
-  constructor() {
-    super();
-
-    this.state = ({
-      isLoggedIn: false
-    });
-
-    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
-  }
-
   render() {
     const {moviesList, onGenreChange, genres} = this.props;
 
-    if (this.state.isLoggedIn !== !this.props.isAuthorizationRequired) {
-      return <MainScreen
-        isloggedIn={this.onLoginButtonClick}
+    return <Switch>
+      <Route path="/" exact render={() => <MainScreen
         genres={genres}
         moviesList={moviesList}
         onGenreChange={onGenreChange}
         isAuthorizationRequired={this.props.isAuthorizationRequired}
-      />;
-    } else {
-      return <SignIn/>;
-    }
-  }
-
-  onLoginButtonClick(evt) {
-    evt.preventDefault();
-    this.setState({
-      isLoggedIn: !this.state.isLoggedIn
-    });
+      />}/>
+      <Route path="/login" exact render={() => <WrappedSignIn onSubmit={this.props.onSubmit}/>}/>
+      <Route path="/favourites" exact component={withPrivateRoutes(MyList)}/>
+    </Switch>;
   }
 }
 
@@ -49,9 +37,10 @@ App.propTypes = {
     previewImage: PropTypes.string,
     genre: PropTypes.string
   })).isRequired,
-  onGenreChange: PropTypes.func,
   genres: PropTypes.array.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  onGenreChange: PropTypes.func,
+  onSubmit: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -64,6 +53,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange: (genre) => {
     dispatch(ActionCreators.changeGenre(genre));
+  },
+
+  onSubmit: (email, password) => {
+    dispatch(Operation.loginUser(email, password));
   }
 });
 

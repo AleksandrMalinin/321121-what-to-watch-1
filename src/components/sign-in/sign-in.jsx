@@ -1,8 +1,6 @@
 import React, {PureComponent} from 'react';
+import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Operation} from '../../reducer/user/user.js';
-import {getUser} from '../../reducer/user/selectors.js';
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -51,11 +49,11 @@ class SignIn extends PureComponent {
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <Link className="logo__link" to="/">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <h1 className="page-title user-page__title">Sign in</h1>
@@ -65,11 +63,11 @@ class SignIn extends PureComponent {
           <form action="#" className="sign-in__form" onSubmit={this.onSubmit}>
             <div className="sign-in__fields">
               <div className="sign-in__field">
-                <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={this.onEmailChange}/>
+                <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={this.onEmailChange} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
               <div className="sign-in__field">
-                <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" onChange={this.onPasswordChange}/>
+                <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" onChange={this.onPasswordChange} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>
@@ -81,11 +79,11 @@ class SignIn extends PureComponent {
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
+            <Link className="logo__link logo__link--light" to="/">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">
@@ -99,13 +97,11 @@ class SignIn extends PureComponent {
   onSubmit(evt) {
     evt.preventDefault();
 
-    const {loginUser} = this.props;
     const {email, password} = this.state;
 
     if (email && password) {
-      loginUser(email, password);
-    } else {
-      throw new Error(`Для входа в аккаунт неободимо заполнить оба поля`);
+      this.props.onSubmit(email, password);
+      this.props.history.push(`/`);
     }
   }
 
@@ -131,20 +127,10 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  loginUser: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  })
 };
 
-
-const mapStateToProps = (state) => ({
-  user: getUser(state)
-});
-
-const mapDispachToProps = (dispatch) => ({
-  loginUser: (email, password) => {
-    dispatch(Operation.loginUser(email, password));
-  }
-});
-
-export {SignIn};
-
-export default connect(mapStateToProps, mapDispachToProps)(SignIn);
+export default SignIn;

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
-import withActiveItem from '../../hocs/with-active-item.js';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
 class MovieList extends PureComponent {
   render() {
@@ -10,7 +10,7 @@ class MovieList extends PureComponent {
     return <div className="catalog__movies-list">
       {movies.map((movie) => <MovieCard
         movie={movie}
-        key={movie.title}
+        key={movie.name}
         onMouseEnter={onChange}
         onMouseLeave={onChange}
       />)}

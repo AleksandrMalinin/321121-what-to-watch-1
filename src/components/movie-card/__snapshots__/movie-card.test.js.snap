@@ -24,7 +24,9 @@ exports[`MovieCard correctly renders 1`] = `
     <a
       className="small-movie-card__link"
       href="movie-page.html"
-    />
+    >
+      Fantastic Beasts: The Crimes of Grindelwald
+    </a>
   </h3>
 </article>
 `;

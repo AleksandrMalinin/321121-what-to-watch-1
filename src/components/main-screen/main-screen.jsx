@@ -1,11 +1,12 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 
 class MainScreen extends PureComponent {
   render() {
-    const {genres, moviesList, onGenreChange, isloggedIn, isAuthorizationRequired} = this.props;
+    const {genres, moviesList, onGenreChange, onLoginButtonClick, isAuthorizationRequired} = this.props;
 
     return <React.Fragment>
       <div className="visually-hidden">
@@ -51,11 +52,11 @@ class MainScreen extends PureComponent {
             </a>
           </div>
           <div className="user-block">
-            {isAuthorizationRequired ?
+            {!isAuthorizationRequired ?
               <div className="user-block__avatar">
                 <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
               </div> :
-              <a className="user-block__link" href="#" onClick={isloggedIn}>Sign in</a>
+              <Link className="user-block__link" to="/login" onClick={onLoginButtonClick}>Sign in</Link>
             }
           </div>
         </header>
@@ -137,7 +138,7 @@ MainScreen.propTypes = {
     genre: PropTypes.string
   })).isRequired,
   onGenreChange: PropTypes.func,
-  isloggedIn: PropTypes.func,
+  onLoginButtonClick: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool
 };
 
