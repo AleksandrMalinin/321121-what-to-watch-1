@@ -1,44 +1,32 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreators} from '../../reducer/data/data.js';
 import {Switch, Route} from "react-router-dom";
+import {ActionCreators} from '../../reducer/data/data.js';
+import {Operation} from '../../reducer/user/user.js';
 import {getFilteredFilms, getGenre, getGenres} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
+import MyList from '../my-list/my-list.jsx';
+import withPrivateRoutes from '../../hocs/with-private-routes/with-private-routes.js';
+
+import {getUser} from '../../reducer/user/selectors.js';
 
 class App extends PureComponent {
-  constructor() {
-    super();
-
-    this.state = ({
-      isLoggedIn: false
-    });
-
-    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
-  }
-
   render() {
     const {moviesList, onGenreChange, genres} = this.props;
 
     return <Switch>
       <Route path="/" exact render={() => <MainScreen
-        onLoginButtonClick={this.onLoginButtonClick}
         genres={genres}
         moviesList={moviesList}
         onGenreChange={onGenreChange}
         isAuthorizationRequired={this.props.isAuthorizationRequired}
       />}/>
-      <Route path="/login" component={SignIn}/>
+      <Route path="/login" exact render={() => <SignIn onSubmit={this.props.onSubmit}/>}/>
+      <Route path="/favourites" exact component={withPrivateRoutes(MyList)}/>
     </Switch>;
-  }
-
-  onLoginButtonClick(evt) {
-    evt.preventDefault();
-    this.setState({
-      isLoggedIn: !this.state.isLoggedIn
-    });
   }
 }
 
@@ -49,21 +37,27 @@ App.propTypes = {
     previewImage: PropTypes.string,
     genre: PropTypes.string
   })).isRequired,
-  onGenreChange: PropTypes.func,
   genres: PropTypes.array.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  onGenreChange: PropTypes.func,
+  onSubmit: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
   moviesList: getFilteredFilms(state),
   activeGenre: getGenre(state),
   genres: getGenres(state),
-  isAuthorizationRequired: getAuthorizationStatus(state)
+  isAuthorizationRequired: getAuthorizationStatus(state),
+  user: getUser(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange: (genre) => {
     dispatch(ActionCreators.changeGenre(genre));
+  },
+
+  onSubmit: (email, password) => {
+    dispatch(Operation.loginUser(email, password));
   }
 });
 

@@ -1,6 +1,6 @@
 const initialState = {
-  isAuthorizationRequired: false,
-  user: {}
+  isAuthorizationRequired: true,
+  user: null
 };
 
 const ACTION_TYPE = {
@@ -28,7 +28,11 @@ const Operation = {
   loginUser: (email, password) => (dispatch, _getState, api) => {
     return api.post(`/login`, {email, password})
       .then((response) => {
-        dispatch(ActionCreator.authorizeUser(response.data));
+        if (response.status === 200) {
+          history.pushState(null, null, `/`);
+          dispatch(ActionCreator.setAuthorizationStatus(false));
+          dispatch(ActionCreator.authorizeUser(response.data));
+        }
       });
   }
 };
@@ -40,7 +44,6 @@ const reducer = (state = initialState, action) => {
     });
 
     case ACTION_TYPE.loginUser: return Object.assign({}, state, {
-      isAuthorizationRequired: true,
       user: action.payload
     });
   }

@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 
@@ -51,11 +52,11 @@ class MainScreen extends PureComponent {
             </a>
           </div>
           <div className="user-block">
-            {isAuthorizationRequired ?
+            {!isAuthorizationRequired ?
               <div className="user-block__avatar">
                 <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
               </div> :
-              <a className="user-block__link" href="#" onClick={onLoginButtonClick}>Sign in</a>
+              <Link className="user-block__link" to="/login" onClick={onLoginButtonClick}>Sign in</Link>
             }
           </div>
         </header>

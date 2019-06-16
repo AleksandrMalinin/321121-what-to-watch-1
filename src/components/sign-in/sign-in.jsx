@@ -1,8 +1,6 @@
 import React, {PureComponent} from 'react';
+import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Operation} from '../../reducer/user/user.js';
-import {getUser} from '../../reducer/user/selectors.js';
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -51,11 +49,11 @@ class SignIn extends PureComponent {
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <Link className="logo__link" to="/">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <h1 className="page-title user-page__title">Sign in</h1>
@@ -81,11 +79,11 @@ class SignIn extends PureComponent {
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
+            <Link className="logo__link logo__link--light" to="/">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">
@@ -99,11 +97,10 @@ class SignIn extends PureComponent {
   onSubmit(evt) {
     evt.preventDefault();
 
-    const {loginUser} = this.props;
     const {email, password} = this.state;
 
     if (email && password) {
-      loginUser(email, password);
+      this.props.onSubmit(email, password);
     }
   }
 
@@ -129,20 +126,7 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  loginUser: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired
 };
 
-
-const mapStateToProps = (state) => ({
-  user: getUser(state)
-});
-
-const mapDispachToProps = (dispatch) => ({
-  loginUser: (email, password) => {
-    dispatch(Operation.loginUser(email, password));
-  }
-});
-
-export {SignIn};
-
-export default connect(mapStateToProps, mapDispachToProps)(SignIn);
+export default SignIn;
