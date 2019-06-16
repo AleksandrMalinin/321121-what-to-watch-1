@@ -2,28 +2,28 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {getUser} from '../../reducer/user/selectors.js';
+import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 
-const withPrivateRoutes = (Component) => {
-  class WithPrivateRoutes extends PureComponent {
+const withPrivateRoute = (Component) => {
+  class WithPrivateRoute extends PureComponent {
     render() {
-      if (this.props.user === null) {
-        return <Redirect to="/login" />;
+      if (!this.props.isAuthorizationRequired) {
+        return <Redirect to="/login"/>;
       }
 
       return <Component {...this.props}/>;
     }
   }
 
-  WithPrivateRoutes.propTypes = {
-    user: PropTypes.array
+  WithPrivateRoute.propTypes = {
+    isAuthorizationRequired: PropTypes.bool
   };
 
   const mapStateToProps = (state) => ({
-    user: getUser(state)
+    isAuthorizationRequired: getAuthorizationStatus(state)
   });
 
-  return connect(mapStateToProps)(WithPrivateRoutes);
+  return connect(mapStateToProps)(WithPrivateRoute);
 };
 
-export default withPrivateRoutes;
+export default withPrivateRoute;

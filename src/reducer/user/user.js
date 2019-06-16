@@ -29,7 +29,6 @@ const Operation = {
     return api.post(`/login`, {email, password})
       .then((response) => {
         if (response.status === 200) {
-          history.pushState(null, null, `/`);
           dispatch(ActionCreator.setAuthorizationStatus(false));
           dispatch(ActionCreator.authorizeUser(response.data));
         }

@@ -101,6 +101,7 @@ class SignIn extends PureComponent {
 
     if (email && password) {
       this.props.onSubmit(email, password);
+      this.props.history.push(`/`);
     }
   }
 
@@ -126,7 +127,10 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  })
 };
 
 export default SignIn;

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, withRouter} from "react-router-dom";
 import {ActionCreators} from '../../reducer/data/data.js';
 import {Operation} from '../../reducer/user/user.js';
 import {getFilteredFilms, getGenre, getGenres} from '../../reducer/data/selectors.js';
@@ -11,7 +11,7 @@ import SignIn from '../sign-in/sign-in.jsx';
 import MyList from '../my-list/my-list.jsx';
 import withPrivateRoutes from '../../hocs/with-private-route/with-private-route.js';
 
-import {getUser} from '../../reducer/user/selectors.js';
+const WrappedSignIn = withRouter(SignIn);
 
 class App extends PureComponent {
   render() {
@@ -24,7 +24,7 @@ class App extends PureComponent {
         onGenreChange={onGenreChange}
         isAuthorizationRequired={this.props.isAuthorizationRequired}
       />}/>
-      <Route path="/login" exact render={() => <SignIn onSubmit={this.props.onSubmit}/>}/>
+      <Route path="/login" exact render={() => <WrappedSignIn onSubmit={this.props.onSubmit}/>}/>
       <Route path="/favourites" exact component={withPrivateRoutes(MyList)}/>
     </Switch>;
   }
@@ -47,8 +47,7 @@ const mapStateToProps = (state) => ({
   moviesList: getFilteredFilms(state),
   activeGenre: getGenre(state),
   genres: getGenres(state),
-  isAuthorizationRequired: getAuthorizationStatus(state),
-  user: getUser(state)
+  isAuthorizationRequired: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
