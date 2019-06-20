@@ -150,7 +150,7 @@ class MovieDetails extends PureComponent {
 }
 
 MovieDetails.propTypes = {
-  movie: PropTypes.arrayOf(PropTypes.shape({
+  movie: PropTypes.objectOf(PropTypes.shape({
     name: PropTypes.string,
     posterImage: PropTypes.string,
     previewImage: PropTypes.string,
@@ -162,4 +162,5 @@ const mapStateToProps = (state, ownProps) => ({
   movie: getFilmId(state, ownProps.match.params.id)
 });
 
+export {MovieDetails};
 export default connect(mapStateToProps)(MovieDetails);

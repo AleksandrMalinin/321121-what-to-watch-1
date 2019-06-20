@@ -1,16 +1,16 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
-import MovieList from './movie-list.jsx';
+import {MovieDetails} from './movie-details.jsx';
 import {films} from '../../mocks/films.js';
 
-it(`MovieList correctly renders`, () => {
+it(`MovieDetails correctly renders`, () => {
 
   const tree = renderer
   .create(
       <BrowserRouter>
-        <MovieList
-          movies={films}
+        <MovieDetails
+          movie={films[0]}
         />
       </BrowserRouter>)
   .toJSON();

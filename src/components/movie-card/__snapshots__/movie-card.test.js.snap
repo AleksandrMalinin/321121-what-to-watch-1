@@ -23,7 +23,8 @@ exports[`MovieCard correctly renders 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/film/undefined"
+      onClick={[Function]}
     >
       Fantastic Beasts: The Crimes of Grindelwald
     </a>
