@@ -340,7 +340,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/undefined"
+              onClick={[Function]}
             >
               Fantastic Beasts: The Crimes of Grindelwald
             </a>
@@ -368,7 +369,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/undefined"
+              onClick={[Function]}
             >
               Bohemian Rhapsody
             </a>
@@ -396,7 +398,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/undefined"
+              onClick={[Function]}
             >
               Macbeth
             </a>
@@ -424,7 +427,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/undefined"
+              onClick={[Function]}
             >
               Aviator
             </a>
@@ -452,7 +456,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/undefined"
+              onClick={[Function]}
             >
               We need to talk about Kevin
             </a>

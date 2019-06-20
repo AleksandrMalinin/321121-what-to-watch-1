@@ -30,3 +30,7 @@ export const getGenres = createSelector(
       return [constants.DEFAULT_GENRE, ...new Set(moviesList.map((movie) => movie.genre))];
     }
 );
+
+export const getFilmId = (state, id) => {
+  return state[NAME_SPACE].moviesList.find((movie) => movie.id === parseInt(id, 10));
+};

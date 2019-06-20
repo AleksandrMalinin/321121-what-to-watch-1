@@ -26,7 +26,8 @@ exports[`MovieList correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/undefined"
+        onClick={[Function]}
       >
         Fantastic Beasts: The Crimes of Grindelwald
       </a>
@@ -54,7 +55,8 @@ exports[`MovieList correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/undefined"
+        onClick={[Function]}
       >
         Bohemian Rhapsody
       </a>
@@ -82,7 +84,8 @@ exports[`MovieList correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/undefined"
+        onClick={[Function]}
       >
         Macbeth
       </a>
@@ -110,7 +113,8 @@ exports[`MovieList correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/undefined"
+        onClick={[Function]}
       >
         Aviator
       </a>
@@ -138,7 +142,8 @@ exports[`MovieList correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/undefined"
+        onClick={[Function]}
       >
         We need to talk about Kevin
       </a>
