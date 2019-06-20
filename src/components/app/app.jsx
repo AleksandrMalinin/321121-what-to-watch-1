@@ -9,6 +9,7 @@ import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import MyList from '../my-list/my-list.jsx';
+import MovieDetails from '../movie-details/movie-details.jsx';
 import withPrivateRoutes from '../../hocs/with-private-route/with-private-route.js';
 
 const WrappedSignIn = withRouter(SignIn);
@@ -26,6 +27,7 @@ class App extends PureComponent {
       />}/>
       <Route path="/login" exact render={() => <WrappedSignIn onSubmit={this.props.onSubmit}/>}/>
       <Route path="/favourites" exact component={withPrivateRoutes(MyList)}/>
+      <Route path="/film/:id" exact component={MovieDetails}/>
     </Switch>;
   }
 }
