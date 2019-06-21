@@ -6,18 +6,23 @@ exports[`MovieCard correctly renders 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <video
-    className="small-movie-card__image"
-    height="175"
-    muted={true}
-    poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-    width="280"
+  <a
+    href="/film/undefined"
+    onClick={[Function]}
   >
-    <source
-      src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-      type="video/mp4"
-    />
-  </video>
+    <video
+      className="small-movie-card__image"
+      height="175"
+      muted={true}
+      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      width="280"
+    >
+      <source
+        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+        type="video/mp4"
+      />
+    </video>
+  </a>
   <h3
     className="small-movie-card__title"
   >
