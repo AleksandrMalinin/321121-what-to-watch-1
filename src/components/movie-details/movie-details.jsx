@@ -2,8 +2,9 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {getFilmId} from '../../reducer/data/selectors.js';
-import {getRatingLevel} from '../../utils.js';
 import PropTypes from 'prop-types';
+import Tabs from '../tabs/tabs.jsx';
+
 
 class MovieDetails extends PureComponent {
   render() {
@@ -96,36 +97,11 @@ class MovieDetails extends PureComponent {
             </div>
 
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="movie-rating">
-                <div className="movie-rating__score">{movie ? movie.rating : ``}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{movie ? getRatingLevel(movie.rating) : ``}</span>
-                  <span className="movie-rating__count">{movie ? movie.scores_count : ``} ratings</span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                <p>{movie ? movie.description : ``}</p>
-
-                <p className="movie-card__director"><strong>{movie ? movie.director : ``}</strong></p>
-
-                <p className="movie-card__starring"><strong>{movie ? movie.starring.join(`, `) : ``} and other</strong></p>
-              </div>
+              <Tabs
+                movie={movie}
+              />
             </div>
+
           </div>
         </div>
       </section>

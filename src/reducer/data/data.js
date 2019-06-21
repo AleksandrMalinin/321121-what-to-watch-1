@@ -2,7 +2,8 @@ import {constants} from '../../constants.js';
 
 const initialState = {
   moviesList: [],
-  activeGenre: constants.DEFAULT_GENRE
+  activeGenre: constants.DEFAULT_GENRE,
+  activeTab: constants.DEFAULT_TAB
 };
 
 const ACTION_TYPE = {
