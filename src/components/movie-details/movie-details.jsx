@@ -1,14 +1,15 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {getFilmId} from '../../reducer/data/selectors.js';
+import {getFilmId, getFilmsAlike} from '../../reducer/data/selectors.js';
 import PropTypes from 'prop-types';
 import Tabs from '../tabs/tabs.jsx';
-
+import MovieList from '../movie-list/movie-list.jsx';
 
 class MovieDetails extends PureComponent {
   render() {
-    const movie = this.props.movie;
+    const {movie, moviesAlike} = this.props;
+    const moviesAlikeCut = moviesAlike.slice(0, 4);
 
     return <React.Fragment>
       <div className="visually-hidden">
@@ -107,6 +108,12 @@ class MovieDetails extends PureComponent {
       </section>
 
       <div className="page-content">
+        <section className="catalog catalog--like-this">
+          <h2 className="catalog__title">More like this</h2>
+
+          <MovieList movies={moviesAlikeCut}/>
+        </section>
+
         <footer className="page-footer">
           <div className="logo">
             <Link to="/" className="logo__link logo__link--light">
@@ -131,11 +138,13 @@ MovieDetails.propTypes = {
     posterImage: PropTypes.string,
     previewImage: PropTypes.string,
     genre: PropTypes.string
-  })).isRequired
+  })).isRequired,
+  moviesAlike: PropTypes.array
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  movie: getFilmId(state, ownProps.match.params.id)
+  movie: getFilmId(state, ownProps.match.params.id),
+  moviesAlike: getFilmsAlike(state, ownProps.match.params.id)
 });
 
 export {MovieDetails};
