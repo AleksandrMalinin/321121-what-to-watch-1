@@ -32,5 +32,13 @@ export const getGenres = createSelector(
 );
 
 export const getFilmId = (state, id) => {
-  return state[NAME_SPACE].moviesList.find((movie) => movie.id === parseInt(id, 10));
+  return state[NAME_SPACE].moviesList.find((film) => film.id === parseInt(id, 10));
 };
+
+export const getFilmsAlike = createSelector(
+    getFilms,
+    getFilmId,
+    (moviesList, movie) => moviesList.filter((film) => {
+      return film.genre === movie.genre && film.id !== movie.id;
+    })
+);

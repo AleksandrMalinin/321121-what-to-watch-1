@@ -21,11 +21,13 @@ class MovieCard extends PureComponent {
     const {movie, onClick} = this.props;
 
     return <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
-      <VideoPlayer
-        poster={movie.preview_image}
-        link={movie.preview_video_link}
-        isPlaying={this.state.isPlaying}
-      />
+      <Link to={`/film/${movie.id}`}>
+        <VideoPlayer
+          poster={movie.preview_image}
+          link={movie.preview_video_link}
+          isPlaying={this.state.isPlaying}
+        />
+      </Link>
       <h3 className="small-movie-card__title">
         <Link className="small-movie-card__link" to={`/film/${movie.id}`} onClick={onClick}>{movie.name}</Link>
       </h3>

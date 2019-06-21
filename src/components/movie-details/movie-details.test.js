@@ -11,6 +11,7 @@ it(`MovieDetails correctly renders`, () => {
       <BrowserRouter>
         <MovieDetails
           movie={films[0]}
+          moviesAlike={films}
         />
       </BrowserRouter>)
   .toJSON();

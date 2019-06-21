@@ -1,13 +1,15 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {getFilmId} from '../../reducer/data/selectors.js';
-import {getRatingLevel} from '../../utils.js';
+import {getFilmId, getFilmsAlike} from '../../reducer/data/selectors.js';
 import PropTypes from 'prop-types';
+import Tabs from '../tabs/tabs.jsx';
+import MovieList from '../movie-list/movie-list.jsx';
 
 class MovieDetails extends PureComponent {
   render() {
-    const movie = this.props.movie;
+    const {movie, moviesAlike} = this.props;
+    const moviesAlikeCut = moviesAlike.slice(0, 4);
 
     return <React.Fragment>
       <div className="visually-hidden">
@@ -96,41 +98,22 @@ class MovieDetails extends PureComponent {
             </div>
 
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="movie-rating">
-                <div className="movie-rating__score">{movie ? movie.rating : ``}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{movie ? getRatingLevel(movie.rating) : ``}</span>
-                  <span className="movie-rating__count">{movie ? movie.scores_count : ``} ratings</span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                <p>{movie ? movie.description : ``}</p>
-
-                <p className="movie-card__director"><strong>{movie ? movie.director : ``}</strong></p>
-
-                <p className="movie-card__starring"><strong>{movie ? movie.starring.join(`, `) : ``} and other</strong></p>
-              </div>
+              <Tabs
+                movie={movie}
+              />
             </div>
+
           </div>
         </div>
       </section>
 
       <div className="page-content">
+        <section className="catalog catalog--like-this">
+          <h2 className="catalog__title">More like this</h2>
+
+          <MovieList movies={moviesAlikeCut}/>
+        </section>
+
         <footer className="page-footer">
           <div className="logo">
             <Link to="/" className="logo__link logo__link--light">
@@ -155,11 +138,13 @@ MovieDetails.propTypes = {
     posterImage: PropTypes.string,
     previewImage: PropTypes.string,
     genre: PropTypes.string
-  })).isRequired
+  })).isRequired,
+  moviesAlike: PropTypes.array
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  movie: getFilmId(state, ownProps.match.params.id)
+  movie: getFilmId(state, ownProps.match.params.id),
+  moviesAlike: getFilmsAlike(state, ownProps.match.params.id)
 });
 
 export {MovieDetails};
