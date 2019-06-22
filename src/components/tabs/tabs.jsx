@@ -173,7 +173,7 @@ Tabs.propTypes = {
     posterImage: PropTypes.string,
     previewImage: PropTypes.string,
     genre: PropTypes.string
-  })).isRequired,
+  })),
   activeItem: PropTypes.string,
   onChange: PropTypes.func
 };

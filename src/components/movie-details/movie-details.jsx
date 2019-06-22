@@ -138,7 +138,7 @@ MovieDetails.propTypes = {
     posterImage: PropTypes.string,
     previewImage: PropTypes.string,
     genre: PropTypes.string
-  })).isRequired,
+  })),
   moviesAlike: PropTypes.array
 };
 
