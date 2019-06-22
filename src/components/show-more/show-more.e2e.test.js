@@ -11,7 +11,7 @@ Enzyme.configure({adapter: new Adapter()});
 const moviesLength = 60;
 const moviesShown = constants.LIMIT_QUANTITY;
 
-it(`On movie-card click handler is being called`, () => {
+it(`On more-button click handler is being called`, () => {
   const handleClick = jest.fn();
   const app = mount(
       <BrowserRouter>
@@ -28,7 +28,7 @@ it(`On movie-card click handler is being called`, () => {
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
 
-it(`On movie-card click handler is being called`, () => {
+it(`On more-button click returns correct film's quantity`, () => {
   const quantity = moviesLength >= moviesShown ? moviesShown : moviesLength;
   const handleClick = jest.fn(() => moviesShown + quantity);
   const app = mount(
