@@ -8,6 +8,14 @@ export const getFilms = (state) => {
   return state[NAME_SPACE].moviesList;
 };
 
+export const getFilmsLength = (state) => {
+  return state[NAME_SPACE].moviesLength;
+};
+
+export const getFilmsQuantity = (state) => {
+  return state[NAME_SPACE].moviesShown;
+};
+
 export const getGenre = (state) => {
   return state[NAME_SPACE].activeGenre;
 };

@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
+import ShowMore from '../show-more/show-more.jsx';
 
 class MainScreen extends PureComponent {
   render() {
-    const {genres, moviesList, onGenreChange, onLoginButtonClick, isAuthorizationRequired} = this.props;
+    const {moviesList, moviesLength, moviesShown, genres, onGenreChange, onLoginButtonClick, isAuthorizationRequired, onMoreButtonClick} = this.props;
 
     return <React.Fragment>
       <div className="visually-hidden">
@@ -104,11 +105,18 @@ class MainScreen extends PureComponent {
 
           <MovieList
             movies={moviesList}
+            moviesShown={moviesShown}
           />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {moviesLength > moviesShown ?
+            <ShowMore
+              movies={moviesList}
+              moviesLength={moviesLength}
+              moviesShown={moviesShown}
+              onMoreButtonClick={onMoreButtonClick}
+            /> : ``
+          }
+
         </section>
 
         <footer className="page-footer">
@@ -137,9 +145,12 @@ MainScreen.propTypes = {
     previewImage: PropTypes.string,
     genre: PropTypes.string
   })).isRequired,
+  moviesLength: PropTypes.number,
+  moviesShown: PropTypes.number,
   onGenreChange: PropTypes.func,
   onLoginButtonClick: PropTypes.func,
-  isAuthorizationRequired: PropTypes.bool
+  isAuthorizationRequired: PropTypes.bool,
+  onMoreButtonClick: PropTypes.func
 };
 
 export default MainScreen;
