@@ -7,7 +7,7 @@ import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 const withPrivateRoute = (Component) => {
   class WithPrivateRoute extends PureComponent {
     render() {
-      if (!this.props.isAuthorizationRequired) {
+      if (this.props.isAuthorizationRequired) {
         return <Redirect to="/login"/>;
       }
 

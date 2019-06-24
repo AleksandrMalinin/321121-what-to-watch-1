@@ -1,4 +1,4 @@
-export const getRatingLevel = function (rating) {
+export const getRatingLevel = (rating) => {
   const ratingRounded = Math.floor(rating);
 
   switch (true) {
@@ -20,4 +20,15 @@ export const getRatingLevel = function (rating) {
     default:
       return `no rank`;
   }
+};
+
+export const getElapsedTime = (time) => {
+  let totalSeconds = time;
+  let hours = Math.floor(totalSeconds / 3600);
+  totalSeconds %= 3600;
+  let minutes = Math.floor(totalSeconds / 60);
+  let seconds = Math.floor(totalSeconds % 60);
+  const formateTime = [hours, minutes, seconds].join(`:`);
+
+  return formateTime;
 };

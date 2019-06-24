@@ -20,6 +20,10 @@ export const getGenre = (state) => {
   return state[NAME_SPACE].activeGenre;
 };
 
+export const getFullVideoState = (state) => {
+  return state[NAME_SPACE].fullVideoShown;
+};
+
 export const getFilteredFilms = createSelector(
     getFilms,
     getGenre,

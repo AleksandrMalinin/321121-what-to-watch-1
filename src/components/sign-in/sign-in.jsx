@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import PropTypes from 'prop-types';
 
 class SignIn extends PureComponent {
@@ -133,4 +133,4 @@ SignIn.propTypes = {
   })
 };
 
-export default SignIn;
+export default withRouter(SignIn);
