@@ -168,12 +168,7 @@ class Tabs extends PureComponent {
 }
 
 Tabs.propTypes = {
-  movie: PropTypes.objectOf(PropTypes.shape({
-    name: PropTypes.string,
-    posterImage: PropTypes.string,
-    previewImage: PropTypes.string,
-    genre: PropTypes.string
-  })),
+  movie: PropTypes.object,
   activeItem: PropTypes.string,
   onChange: PropTypes.func
 };

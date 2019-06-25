@@ -12,7 +12,10 @@ const TabContent = (props) => {
 TabContent.propTypes = {
   activeItem: PropTypes.string,
   tabName: PropTypes.string,
-  children: PropTypes.func
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ])
 };
 
 export default TabContent;

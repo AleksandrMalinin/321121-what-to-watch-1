@@ -154,12 +154,7 @@ class MovieDetails extends PureComponent {
 }
 
 MovieDetails.propTypes = {
-  movie: PropTypes.objectOf(PropTypes.shape({
-    name: PropTypes.string,
-    posterImage: PropTypes.string,
-    previewImage: PropTypes.string,
-    genre: PropTypes.string
-  })),
+  movie: PropTypes.object,
   moviesAlike: PropTypes.array,
   fullVideoShown: PropTypes.bool,
   onPlayButtonClick: PropTypes.func
