@@ -28,7 +28,13 @@ export const getElapsedTime = (time) => {
   totalSeconds %= 3600;
   let minutes = Math.floor(totalSeconds / 60);
   let seconds = Math.floor(totalSeconds % 60);
-  const formateTime = [hours, minutes, seconds].join(`:`);
+  const formateTime = [hours, minutes, seconds].map((el) => {
+    if (el < 10) {
+      el = `0` + el;
+    }
+
+    return el;
+  }).join(`:`);
 
   return formateTime;
 };
