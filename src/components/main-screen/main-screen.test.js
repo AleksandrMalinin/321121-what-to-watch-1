@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 import MainScreen from './main-screen.jsx';
-import {films} from '../../mocks/films.js';
+import {films} from '../../mocks/mocks.js';
 
 const mockGenres = films.map((film) => film.genre);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import VideoPlayer from './video-player.jsx';
-import {films} from '../../mocks/films.js';
+import {films} from '../../mocks/mocks.js';
 
 const isPlaying = false;
 

@@ -4,10 +4,44 @@ import {Link} from "react-router-dom";
 import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
+import FullVideoPlayer from '../full-video-player/full-video-player.jsx';
 
 class MainScreen extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isPlaying: false
+    };
+
+    this.onPlayButtonClick = this._onPlayButtonClick.bind(this);
+  }
+
   render() {
-    const {moviesList, moviesLength, moviesShown, genres, onGenreChange, onLoginButtonClick, isAuthorizationRequired, onMoreButtonClick} = this.props;
+    const {moviesList, moviesLength, moviesShown, genres, onGenreChange, onLoginButtonClick, isAuthorizationRequired, onMoreButtonClick, fullVideoShown} = this.props;
+
+    /* для примера */
+    const defaulMovie = {
+      /* eslint-disable */
+      background_color: `#AD9F8B`,
+      background_image: `https://es31-server.appspot.com/wtw/static/film/background/Dardjeeling_Limited.jpg`,
+      description: `A year after their father's funeral, three brothers travel across India by train in an attempt to bond with each other.`,
+      director: `Wes Anderson`,
+      genre: `Adventure`,
+      id: 1,
+      is_favorite: false,
+      name: `Dardjeeling Limited`,
+      poster_image: `https://es31-server.appspot.com/wtw/static/film/poster/Dardjeeling_Limited.jpg`,
+      preview_image: `https://es31-server.appspot.com/wtw/static/film/preview/dardjeeling_limited.jpg`,
+      preview_video_link: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+      rating: 3.6,
+      released: 2007,
+      run_time: 91,
+      scores_count: 165106,
+      starring: [`Owen Wilson`, `Adrien Brody`, `Jason Schwartzman`],
+      video_link: `http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4`
+      /* eslint-enable */
+    };
 
     return <React.Fragment>
       <div className="visually-hidden">
@@ -55,7 +89,10 @@ class MainScreen extends PureComponent {
           <div className="user-block">
             {!isAuthorizationRequired ?
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                {/* временно */}
+                <Link to="/favourites">
+                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                </Link>
               </div> :
               <Link className="user-block__link" to="/login" onClick={onLoginButtonClick}>Sign in</Link>
             }
@@ -76,7 +113,7 @@ class MainScreen extends PureComponent {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button" onClick={this.onPlayButtonClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -133,7 +170,17 @@ class MainScreen extends PureComponent {
           </div>
         </footer>
       </div>
+
+      {fullVideoShown ? <FullVideoPlayer onPlayButtonClick={this.onPlayButtonClick} movie={defaulMovie} isPlaying={this.state.isPlaying}/> : ``}
     </React.Fragment>;
+  }
+
+  _onPlayButtonClick() {
+    this.props.onPlayButtonClick(!this.props.fullVideoShown);
+
+    this.setState({
+      isPlaying: !this.state.isPlaying,
+    });
   }
 }
 
@@ -150,7 +197,9 @@ MainScreen.propTypes = {
   onGenreChange: PropTypes.func,
   onLoginButtonClick: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
-  onMoreButtonClick: PropTypes.func
+  onMoreButtonClick: PropTypes.func,
+  fullVideoShown: PropTypes.bool,
+  onPlayButtonClick: PropTypes.func
 };
 
 export default MainScreen;

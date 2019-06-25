@@ -5,13 +5,15 @@ const initialState = {
   moviesLength: null,
   moviesShown: constants.LIMIT_QUANTITY,
   activeGenre: constants.DEFAULT_GENRE,
-  activeTab: constants.DEFAULT_TAB
+  activeTab: constants.DEFAULT_TAB,
+  fullVideoShown: false
 };
 
 const ACTION_TYPE = {
   loadFilms: `LOAD_FILMS`,
   changeFilterGenre: `CHANGE_FILTER_GENRE`,
-  getRestFilms: `GET_REST_FILMS`
+  getRestFilms: `GET_REST_FILMS`,
+  changeFullVideoState: `CHANFE_FULL_VIDEO_STATE`
 };
 
 const ActionCreators = {
@@ -33,6 +35,13 @@ const ActionCreators = {
     return {
       type: ACTION_TYPE.getRestFilms,
       payload: count
+    };
+  },
+
+  changeFullVideoState: (state) => {
+    return {
+      type: ACTION_TYPE.changeFullVideoState,
+      payload: state
     };
   }
 };
@@ -59,6 +68,10 @@ const reducer = (state = initialState, action) => {
 
     case ACTION_TYPE.getRestFilms: return Object.assign({}, state, {
       moviesShown: action.payload
+    });
+
+    case ACTION_TYPE.changeFullVideoState: return Object.assign({}, state, {
+      fullVideoShown: action.payload
     });
   }
 

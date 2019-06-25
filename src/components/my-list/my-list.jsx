@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Link} from "react-router-dom";
+import withPrivateRoute from '../../hocs/with-private-route/with-private-route.js';
 
 class MyList extends PureComponent {
   render() {
@@ -167,4 +168,4 @@ class MyList extends PureComponent {
   }
 }
 
-export default MyList;
+export default withPrivateRoute(MyList);

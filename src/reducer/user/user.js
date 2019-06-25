@@ -5,7 +5,8 @@ const initialState = {
 
 const ACTION_TYPE = {
   setAuthorizationStatus: `REQUIRED_AUTHORIZATION`,
-  loginUser: `LOGIN_USER`
+  loginUser: `LOGIN_USER`,
+  authorizeUser: `AUTHORIZE_USER`
 };
 
 const ActionCreator = {
@@ -18,7 +19,7 @@ const ActionCreator = {
 
   authorizeUser: (user) => {
     return {
-      type: ACTION_TYPE.loginUser,
+      type: ACTION_TYPE.authorizeUser,
       payload: user
     };
   }
@@ -42,7 +43,7 @@ const reducer = (state = initialState, action) => {
       isAuthorizationRequired: action.payload
     });
 
-    case ACTION_TYPE.loginUser: return Object.assign({}, state, {
+    case ACTION_TYPE.authorizeUser: return Object.assign({}, state, {
       user: action.payload
     });
   }

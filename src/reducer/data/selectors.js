@@ -8,16 +8,16 @@ export const getFilms = (state) => {
   return state[NAME_SPACE].moviesList;
 };
 
-export const getFilmsLength = (state) => {
-  return state[NAME_SPACE].moviesLength;
-};
-
 export const getFilmsQuantity = (state) => {
   return state[NAME_SPACE].moviesShown;
 };
 
 export const getGenre = (state) => {
   return state[NAME_SPACE].activeGenre;
+};
+
+export const getFullVideoState = (state) => {
+  return state[NAME_SPACE].fullVideoShown;
 };
 
 export const getFilteredFilms = createSelector(
@@ -30,6 +30,13 @@ export const getFilteredFilms = createSelector(
 
       return true;
     })
+);
+
+export const getFilmsLength = createSelector(
+    getFilteredFilms,
+    (moviesList) => {
+      return moviesList.length;
+    }
 );
 
 export const getGenres = createSelector(

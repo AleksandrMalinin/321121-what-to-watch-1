@@ -5,10 +5,21 @@ import {getFilmId, getFilmsAlike} from '../../reducer/data/selectors.js';
 import PropTypes from 'prop-types';
 import Tabs from '../tabs/tabs.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
+import FullVideoPlayer from '../full-video-player/full-video-player.jsx';
 
 class MovieDetails extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isPlaying: false
+    };
+
+    this.onPlayButtonClick = this._onPlayButtonClick.bind(this);
+  }
+
   render() {
-    const {movie, moviesAlike} = this.props;
+    const {movie, moviesAlike, fullVideoShown} = this.props;
     const moviesAlikeCut = moviesAlike.slice(0, 4);
 
     return <React.Fragment>
@@ -73,7 +84,7 @@ class MovieDetails extends PureComponent {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button" onClick={this.onPlayButtonClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -128,18 +139,25 @@ class MovieDetails extends PureComponent {
           </div>
         </footer>
       </div>
+
+      {fullVideoShown ? <FullVideoPlayer onPlayButtonClick={this.onPlayButtonClick} movie={movie} isPlaying={this.state.isPlaying}/> : ``}
     </React.Fragment>;
+  }
+
+  _onPlayButtonClick() {
+    this.props.onPlayButtonClick(!this.props.fullVideoShown);
+
+    this.setState({
+      isPlaying: !this.state.isPlaying,
+    });
   }
 }
 
 MovieDetails.propTypes = {
-  movie: PropTypes.objectOf(PropTypes.shape({
-    name: PropTypes.string,
-    posterImage: PropTypes.string,
-    previewImage: PropTypes.string,
-    genre: PropTypes.string
-  })),
-  moviesAlike: PropTypes.array
+  movie: PropTypes.object,
+  moviesAlike: PropTypes.array,
+  fullVideoShown: PropTypes.bool,
+  onPlayButtonClick: PropTypes.func
 };
 
 const mapStateToProps = (state, ownProps) => ({

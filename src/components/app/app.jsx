@@ -1,22 +1,19 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route, withRouter} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 import {ActionCreators} from '../../reducer/data/data.js';
 import {Operation} from '../../reducer/user/user.js';
-import {getFilteredFilms, getGenre, getGenres, getFilmsLength, getFilmsQuantity} from '../../reducer/data/selectors.js';
+import {getFilteredFilms, getGenre, getGenres, getFilmsLength, getFilmsQuantity, getFullVideoState} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import MyList from '../my-list/my-list.jsx';
 import MovieDetails from '../movie-details/movie-details.jsx';
-import withPrivateRoutes from '../../hocs/with-private-route/with-private-route.js';
-
-const WrappedSignIn = withRouter(SignIn);
 
 class App extends PureComponent {
   render() {
-    const {moviesList, moviesLength, moviesShown, onGenreChange, genres, onMoreButtonClick} = this.props;
+    const {moviesList, moviesLength, moviesShown, onGenreChange, genres, onMoreButtonClick, fullVideoShown, onPlayButtonClick} = this.props;
 
     return <Switch>
       <Route path="/" exact render={() => <MainScreen
@@ -27,10 +24,12 @@ class App extends PureComponent {
         onGenreChange={onGenreChange}
         isAuthorizationRequired={this.props.isAuthorizationRequired}
         onMoreButtonClick={onMoreButtonClick}
+        fullVideoShown={fullVideoShown}
+        onPlayButtonClick={onPlayButtonClick}
       />}/>
-      <Route path="/login" exact render={() => <WrappedSignIn onSubmit={this.props.onSubmit}/>}/>
-      <Route path="/favourites" exact component={withPrivateRoutes(MyList)}/>
-      <Route path="/film/:id" exact component={MovieDetails}/>
+      <Route path="/login" exact render={() => <SignIn onSubmit={this.props.onSubmit}/>}/>
+      <Route path="/favourites" exact component={MyList}/>
+      <Route path="/film/:id" exact render={(props) => <MovieDetails {...props} moviesShown={moviesShown} fullVideoShown={fullVideoShown} onPlayButtonClick={onPlayButtonClick}/>}/>
     </Switch>;
   }
 }
@@ -48,7 +47,9 @@ App.propTypes = {
   isAuthorizationRequired: PropTypes.bool.isRequired,
   onGenreChange: PropTypes.func,
   onSubmit: PropTypes.func,
-  onMoreButtonClick: PropTypes.func
+  onMoreButtonClick: PropTypes.func,
+  fullVideoShown: PropTypes.bool,
+  onPlayButtonClick: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -57,7 +58,8 @@ const mapStateToProps = (state) => ({
   moviesShown: getFilmsQuantity(state),
   activeGenre: getGenre(state),
   genres: getGenres(state),
-  isAuthorizationRequired: getAuthorizationStatus(state)
+  isAuthorizationRequired: getAuthorizationStatus(state),
+  fullVideoShown: getFullVideoState(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -71,6 +73,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   onMoreButtonClick: (count) => {
     dispatch(ActionCreators.getRestFilms(count));
+  },
+
+  onPlayButtonClick: (state) => {
+    dispatch(ActionCreators.changeFullVideoState(state));
   }
 });
 

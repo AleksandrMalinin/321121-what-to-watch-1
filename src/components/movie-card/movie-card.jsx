@@ -39,7 +39,7 @@ class MovieCard extends PureComponent {
 
     const id = setTimeout(() => {
       this.setState({
-        isPlaying: !this.state.isPlaying,
+        isPlaying: true,
       });
     }, constants.TIMEOUT);
 
@@ -54,7 +54,7 @@ class MovieCard extends PureComponent {
     clearTimeout(this.state.timeoutId);
 
     this.setState({
-      isPlaying: !this.state.isPlaying,
+      isPlaying: false,
       timeoutId: null
     });
   }
