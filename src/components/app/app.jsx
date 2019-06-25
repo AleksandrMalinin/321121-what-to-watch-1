@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Switch, Route} from "react-router-dom";
 import {ActionCreators} from '../../reducer/data/data.js';
 import {Operation} from '../../reducer/user/user.js';
-import {getFilteredFilms, getGenre, getGenres, getFilmsLength, getFilmsQuantity, getFullVideoState, meow} from '../../reducer/data/selectors.js';
+import {getFilteredFilms, getGenre, getGenres, getFilmsLength, getFilmsQuantity, getFullVideoState} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
@@ -14,9 +14,6 @@ import MovieDetails from '../movie-details/movie-details.jsx';
 class App extends PureComponent {
   render() {
     const {moviesList, moviesLength, moviesShown, onGenreChange, genres, onMoreButtonClick, fullVideoShown, onPlayButtonClick} = this.props;
-
-    console.log(this.props.meow);
-    console.log(this.props.moviesLength);
 
     return <Switch>
       <Route path="/" exact render={() => <MainScreen
