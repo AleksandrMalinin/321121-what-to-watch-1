@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import GenresList from './genres-list.jsx';
-import {films} from '../../mocks/films.js';
+import {films} from '../../mocks/mocks.js';
 
 const mockGenres = films.map((film) => film.genre);
 

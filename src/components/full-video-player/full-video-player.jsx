@@ -78,11 +78,13 @@ class FullVideoPlayer extends PureComponent {
       video.play();
     }
 
-    video.addEventListener(`loadedmetadata`, () => {
-      this.setState({
-        time: video.duration
+    if (video) {
+      video.addEventListener(`loadedmetadata`, () => {
+        this.setState({
+          time: video.duration
+        });
       });
-    });
+    }
 
     this.setState({
       isPlaying: this.props.isPlaying
@@ -154,13 +156,13 @@ FullVideoPlayer.propTypes = {
   movie: PropTypes.shape({
     name: PropTypes.string,
     /* eslint-disable */
-    background_image: PropTypes.string.isRequired,
-    preview_video_link: PropTypes.string.isRequired,
-    video_link: PropTypes.string.isRequired
+    background_image: PropTypes.string,
+    preview_video_link: PropTypes.string,
+    video_link: PropTypes.string
     /* eslint-enable */
   }),
   onPlayButtonClick: PropTypes.func,
-  isPlaying: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.bool,
   format: PropTypes.string
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 import {MovieDetails} from './movie-details.jsx';
-import {films} from '../../mocks/films.js';
+import {films, defaultMovie} from '../../mocks/mocks.js';
 
 it(`MovieDetails correctly renders`, () => {
 
@@ -10,7 +10,7 @@ it(`MovieDetails correctly renders`, () => {
   .create(
       <BrowserRouter>
         <MovieDetails
-          movie={films[0]}
+          movie={defaultMovie}
           moviesAlike={films}
         />
       </BrowserRouter>)

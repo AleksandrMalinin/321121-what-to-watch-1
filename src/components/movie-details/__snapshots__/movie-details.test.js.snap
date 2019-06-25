@@ -117,7 +117,10 @@ Array [
       <div
         className="movie-card__bg"
       >
-        <img />
+        <img
+          alt="https://es31-server.appspot.com/wtw/static/film/background/Dardjeeling_Limited.jpg"
+          src="https://es31-server.appspot.com/wtw/static/film/background/Dardjeeling_Limited.jpg"
+        />
       </div>
       <h1
         className="visually-hidden"
@@ -176,7 +179,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            Fantastic Beasts: The Crimes of Grindelwald
+            Dardjeeling Limited
           </h2>
           <p
             className="movie-card__meta"
@@ -184,7 +187,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Comedies
+              Adventure
             </span>
             <span
               className="movie-card__year"
@@ -197,6 +200,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -249,9 +253,9 @@ Array [
           className="movie-card__poster movie-card__poster--big"
         >
           <img
-            alt="https://es31-server.appspot.com/wtw/static/film/poster/No_Country_for_Old_Men.jpg"
+            alt="https://es31-server.appspot.com/wtw/static/film/poster/Dardjeeling_Limited.jpg"
             height="327"
-            src="https://es31-server.appspot.com/wtw/static/film/poster/No_Country_for_Old_Men.jpg"
+            src="https://es31-server.appspot.com/wtw/static/film/poster/Dardjeeling_Limited.jpg"
             width="218"
           />
         </div>
@@ -306,7 +310,7 @@ Array [
               <div
                 className="movie-rating__score"
               >
-                4.1
+                3.6
               </div>
               <p
                 className="movie-rating__meta"
@@ -319,7 +323,7 @@ Array [
                 <span
                   className="movie-rating__count"
                 >
-                  764976
+                  165106
                    ratings
                 </span>
               </p>
@@ -327,19 +331,21 @@ Array [
             <div
               className="movie-card__text"
             >
-              <p />
+              <p>
+                A year after their father's funeral, three brothers travel across India by train in an attempt to bond with each other.
+              </p>
               <p
                 className="movie-card__director"
               >
                 <strong>
-                  Ethan Coen
+                  Wes Anderson
                 </strong>
               </p>
               <p
                 className="movie-card__starring"
               >
                 <strong>
-                  Tommy Lee Jones, Javier Bardem
+                  Owen Wilson, Adrien Brody, Jason Schwartzman
                    and other
                 </strong>
               </p>
@@ -540,5 +546,6 @@ Array [
       </div>
     </footer>
   </div>,
+  "",
 ]
 `;
