@@ -29,7 +29,7 @@ const ActionCreator = {
   addReview: (review) => {
     return {
       type: ACTION_TYPE.addReview,
-      reviews: review
+      payload: review
     };
   }
 };
@@ -46,7 +46,7 @@ const Operation = {
   },
 
   addReview: (id, review, rating) => (dispatch, _getState, api) => {
-    return api.post(`/comments/${id}`, {review, rating})
+    return api.post(`/comments/${id}`, review, rating)
       .then((response) => {
         if (response.status === 200) {
           dispatch(ActionCreator.addReview(response.data));

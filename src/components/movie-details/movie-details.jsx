@@ -104,7 +104,7 @@ class MovieDetails extends PureComponent {
                   <span>My list</span>
                 </button>
                 {!isAuthorizationRequired ?
-                  <Link to={`/reviews/add/${movie ? movie.id : ``}`} className="btn movie-card__button">Add review</Link>
+                  <Link to={`/comments/${movie ? movie.id : ``}`} className="btn movie-card__button">Add review</Link>
                   :
                   ``
                 }
