@@ -1,8 +1,9 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {getFilmId, getFilmsAlike} from '../../reducer/data/selectors.js';
 import PropTypes from 'prop-types';
+import {getFilmId, getFilmsAlike} from '../../reducer/data/selectors.js';
+import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import Tabs from '../tabs/tabs.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import FullVideoPlayer from '../full-video-player/full-video-player.jsx';
@@ -19,7 +20,7 @@ class MovieDetails extends PureComponent {
   }
 
   render() {
-    const {movie, moviesAlike, fullVideoShown} = this.props;
+    const {movie, moviesAlike, fullVideoShown, isAuthorizationRequired} = this.props;
     const moviesAlikeCut = moviesAlike.slice(0, 4);
 
     return <React.Fragment>
@@ -69,9 +70,15 @@ class MovieDetails extends PureComponent {
             </div>
 
             <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
+              {!isAuthorizationRequired ?
+                <div className="user-block__avatar">
+                  {/* временно */}
+                  <Link to="/favourites">
+                    <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                  </Link>
+                </div> :
+                <Link className="user-block__link" to="/login">Sign in</Link>
+              }
             </div>
           </header>
 
@@ -96,7 +103,11 @@ class MovieDetails extends PureComponent {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                {!isAuthorizationRequired ?
+                  <Link to={`/reviews/add/${movie ? movie.id : ``}`} className="btn movie-card__button">Add review</Link>
+                  :
+                  ``
+                }
               </div>
             </div>
           </div>
@@ -157,10 +168,12 @@ MovieDetails.propTypes = {
   movie: PropTypes.object,
   moviesAlike: PropTypes.array,
   fullVideoShown: PropTypes.bool,
-  onPlayButtonClick: PropTypes.func
+  onPlayButtonClick: PropTypes.func,
+  isAuthorizationRequired: PropTypes.bool
 };
 
 const mapStateToProps = (state, ownProps) => ({
+  isAuthorizationRequired: getAuthorizationStatus(state),
   movie: getFilmId(state, ownProps.match.params.id),
   moviesAlike: getFilmsAlike(state, ownProps.match.params.id)
 });

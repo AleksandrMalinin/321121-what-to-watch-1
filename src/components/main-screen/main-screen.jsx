@@ -18,7 +18,7 @@ class MainScreen extends PureComponent {
   }
 
   render() {
-    const {moviesList, moviesLength, moviesShown, genres, onGenreChange, onLoginButtonClick, isAuthorizationRequired, onMoreButtonClick, fullVideoShown} = this.props;
+    const {moviesList, moviesLength, moviesShown, genres, onGenreChange, isAuthorizationRequired, onMoreButtonClick, fullVideoShown} = this.props;
 
     /* для примера */
     const defaulMovie = {
@@ -94,7 +94,7 @@ class MainScreen extends PureComponent {
                   <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
                 </Link>
               </div> :
-              <Link className="user-block__link" to="/login" onClick={onLoginButtonClick}>Sign in</Link>
+              <Link className="user-block__link" to="/login">Sign in</Link>
             }
           </div>
         </header>
@@ -195,7 +195,6 @@ MainScreen.propTypes = {
   moviesLength: PropTypes.number,
   moviesShown: PropTypes.number,
   onGenreChange: PropTypes.func,
-  onLoginButtonClick: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
   onMoreButtonClick: PropTypes.func,
   fullVideoShown: PropTypes.bool,
