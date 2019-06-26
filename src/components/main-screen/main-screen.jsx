@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
+import {getPromoFilm} from '../../reducer/data/selectors.js';
 import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
@@ -18,30 +20,7 @@ class MainScreen extends PureComponent {
   }
 
   render() {
-    const {moviesList, moviesLength, moviesShown, genres, onGenreChange, isAuthorizationRequired, onMoreButtonClick, fullVideoShown} = this.props;
-
-    /* для примера */
-    const defaulMovie = {
-      /* eslint-disable */
-      background_color: `#AD9F8B`,
-      background_image: `https://es31-server.appspot.com/wtw/static/film/background/Dardjeeling_Limited.jpg`,
-      description: `A year after their father's funeral, three brothers travel across India by train in an attempt to bond with each other.`,
-      director: `Wes Anderson`,
-      genre: `Adventure`,
-      id: 1,
-      is_favorite: false,
-      name: `Dardjeeling Limited`,
-      poster_image: `https://es31-server.appspot.com/wtw/static/film/poster/Dardjeeling_Limited.jpg`,
-      preview_image: `https://es31-server.appspot.com/wtw/static/film/preview/dardjeeling_limited.jpg`,
-      preview_video_link: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-      rating: 3.6,
-      released: 2007,
-      run_time: 91,
-      scores_count: 165106,
-      starring: [`Owen Wilson`, `Adrien Brody`, `Jason Schwartzman`],
-      video_link: `http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4`
-      /* eslint-enable */
-    };
+    const {moviePromo, moviesList, moviesLength, moviesShown, genres, onGenreChange, isAuthorizationRequired, onMoreButtonClick, fullVideoShown} = this.props;
 
     return <React.Fragment>
       <div className="visually-hidden">
@@ -73,7 +52,7 @@ class MainScreen extends PureComponent {
       </div>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={moviePromo ? moviePromo.background_image : ``} alt={moviePromo ? moviePromo.background_image : ``} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -102,14 +81,14 @@ class MainScreen extends PureComponent {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={moviePromo ? moviePromo.poster_image : ``} alt={moviePromo ? moviePromo.poster_image : ``} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{moviePromo ? moviePromo.name : ``}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{moviePromo ? moviePromo.genre : ``}</span>
+                <span className="movie-card__year">{moviePromo ? moviePromo.released : ``}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -125,6 +104,11 @@ class MainScreen extends PureComponent {
                   </svg>
                   <span>My list</span>
                 </button>
+                {!isAuthorizationRequired ?
+                  <Link to={`/comments/${moviePromo ? moviePromo.id : ``}`} className="btn movie-card__button">Add review</Link>
+                  :
+                  ``
+                }
               </div>
             </div>
           </div>
@@ -171,7 +155,7 @@ class MainScreen extends PureComponent {
         </footer>
       </div>
 
-      {fullVideoShown ? <FullVideoPlayer onPlayButtonClick={this.onPlayButtonClick} movie={defaulMovie} isPlaying={this.state.isPlaying}/> : ``}
+      {fullVideoShown ? <FullVideoPlayer onPlayButtonClick={this.onPlayButtonClick} movie={moviePromo} isPlaying={this.state.isPlaying}/> : ``}
     </React.Fragment>;
   }
 
@@ -186,6 +170,7 @@ class MainScreen extends PureComponent {
 
 MainScreen.propTypes = {
   genres: PropTypes.array.isRequired,
+  moviePromo: PropTypes.object,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     posterImage: PropTypes.string,
@@ -201,4 +186,9 @@ MainScreen.propTypes = {
   onPlayButtonClick: PropTypes.func
 };
 
-export default MainScreen;
+const mapStateToProps = (state) => ({
+  moviePromo: getPromoFilm(state)
+});
+
+export {MainScreen};
+export default connect(mapStateToProps)(MainScreen);

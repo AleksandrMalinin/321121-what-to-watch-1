@@ -37,6 +37,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  moviePromo: PropTypes.object,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     posterImage: PropTypes.string,

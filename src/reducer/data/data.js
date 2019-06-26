@@ -1,6 +1,7 @@
 import {constants} from '../../constants.js';
 
 const initialState = {
+  moviePromo: null,
   moviesList: [],
   moviesLength: null,
   moviesShown: constants.LIMIT_QUANTITY,
@@ -10,13 +11,21 @@ const initialState = {
 };
 
 const ACTION_TYPE = {
+  loadPromoFilm: `LOAD_PROMO_FILM`,
   loadFilms: `LOAD_FILMS`,
   changeFilterGenre: `CHANGE_FILTER_GENRE`,
   getRestFilms: `GET_REST_FILMS`,
-  changeFullVideoState: `CHANFE_FULL_VIDEO_STATE`
+  changeFullVideoState: `CHANFE_FULL_VIDEO_STATE`,
 };
 
 const ActionCreators = {
+  loadPromoFilm: (film) => {
+    return {
+      type: ACTION_TYPE.loadPromoFilm,
+      payload: film
+    };
+  },
+
   loadFilms: (films) => {
     return {
       type: ACTION_TYPE.loadFilms,
@@ -53,6 +62,13 @@ const Operation = {
         dispatch(ActionCreators.loadFilms(response.data));
       });
   },
+
+  loadPromoFilm: () => (dispatch, _getState, api) => {
+    return api.get(`/films/promo`)
+      .then((response) => {
+        dispatch(ActionCreators.loadPromoFilm(response.data));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -72,6 +88,10 @@ const reducer = (state = initialState, action) => {
 
     case ACTION_TYPE.changeFullVideoState: return Object.assign({}, state, {
       fullVideoShown: action.payload
+    });
+
+    case ACTION_TYPE.loadPromoFilm: return Object.assign({}, state, {
+      moviePromo: action.payload
     });
   }
 

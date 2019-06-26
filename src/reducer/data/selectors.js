@@ -8,6 +8,10 @@ export const getFilms = (state) => {
   return state[NAME_SPACE].moviesList;
 };
 
+export const getPromoFilm = (state) => {
+  return state[NAME_SPACE].moviePromo;
+};
+
 export const getFilmsQuantity = (state) => {
   return state[NAME_SPACE].moviesShown;
 };
