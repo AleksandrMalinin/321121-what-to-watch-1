@@ -3,8 +3,34 @@ import {createAPI} from '../../api.js';
 import {ACTION_TYPE, Operation} from "./user.js";
 import {defaultMovie} from '../../mocks/mocks.js';
 
+const email = `meow@gmail.com`;
+const password = `meowmeow`;
 const rating = 1;
 const review = `shit!`;
+
+it(`Should make a correct API call to /login`, function () {
+  const dispatch = jest.fn();
+  const api = createAPI(dispatch);
+  const apiMock = new MockAdapter(api);
+  const dataSender = Operation.loginUser(email, password);
+
+  apiMock
+    .onPost(`/login`)
+    .reply(200, [{fake: true}]);
+
+  return dataSender(dispatch, jest.fn(), api)
+    .then(() => {
+      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ACTION_TYPE.setAuthorizationStatus,
+        payload: false,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: ACTION_TYPE.authorizeUser,
+        payload: [{fake: true}],
+      });
+    });
+});
 
 it(`Should make a correct API call to /comments/:id`, function () {
   const dispatch = jest.fn();

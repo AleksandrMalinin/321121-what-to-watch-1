@@ -6,7 +6,7 @@ import {ActionCreators} from '../../reducer/data/data.js';
 import {Operation} from '../../reducer/user/user.js';
 import {getFilteredFilms, getGenre, getGenres, getFilmsLength, getFilmsQuantity, getFullVideoState} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
-import MainScreen from '../main-screen/main-screen.jsx';
+import {MainScreen} from '../main-screen/main-screen.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import MyList from '../my-list/my-list.jsx';
 import MovieDetails from '../movie-details/movie-details.jsx';
