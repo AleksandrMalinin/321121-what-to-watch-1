@@ -1,15 +1,17 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
-import SignIn from './sign-in.jsx';
+import {AddReview} from './add-review.jsx';
+import {defaultMovie} from '../../mocks/mocks.js';
 
-it(`SignIn correctly renders`, () => {
+it(`AddReview correctly renders`, () => {
   const mockFunction = jest.fn();
   const tree = renderer
   .create(
       <BrowserRouter>
-        <SignIn
-          onSubmit={mockFunction}
+        <AddReview
+          movie={defaultMovie}
+          onPostReview={mockFunction}
         />
       </BrowserRouter>)
   .toJSON();
