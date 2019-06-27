@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
-import {Link} from "react-router-dom";
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route.js';
+import Logo from '../logo/logo.jsx';
+import UserBlock from '../user-block/user-block.jsx';
 
 class MyList extends PureComponent {
   render() {
@@ -34,22 +35,10 @@ class MyList extends PureComponent {
       </div>
 
       <div className="user-page">
+
         <header className="page-header user-page__head">
-          <div className="logo">
-            <Link className="logo__link" to="/">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-
-          <h1 className="page-title user-page__title">My list</h1>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
+          <Logo/>
+          <UserBlock/>
         </header>
 
         <section className="catalog">

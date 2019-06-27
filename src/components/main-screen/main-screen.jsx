@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {getPromoFilm} from '../../reducer/data/selectors.js';
+import Logo from '../logo/logo.jsx';
+import UserBlock from '../user-block/user-block.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
@@ -58,24 +60,8 @@ class MainScreen extends PureComponent {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-          <div className="user-block">
-            {!isAuthorizationRequired ?
-              <div className="user-block__avatar">
-                {/* временно */}
-                <Link to="/favourites">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </Link>
-              </div> :
-              <Link className="user-block__link" to="/login">Sign in</Link>
-            }
-          </div>
+          <Logo/>
+          <UserBlock/>
         </header>
 
         <div className="movie-card__wrap">

@@ -2,8 +2,9 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Operation} from '../../reducer/user/user.js';
-import {Link} from "react-router-dom";
 import {getFilmId} from '../../reducer/data/selectors.js';
+import Logo from '../logo/logo.jsx';
+import UserBlock from '../user-block/user-block.jsx';
 
 class AddReview extends PureComponent {
   constructor(props) {
@@ -59,14 +60,8 @@ class AddReview extends PureComponent {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header">
-            <div className="logo">
-              <Link to="/" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
+          <header className="page-header movie-card__head">
+            <Logo/>
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
@@ -79,11 +74,7 @@ class AddReview extends PureComponent {
               </ul>
             </nav>
 
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </div>
+            <UserBlock/>
           </header>
 
           <div className="movie-card__poster movie-card__poster--small">
