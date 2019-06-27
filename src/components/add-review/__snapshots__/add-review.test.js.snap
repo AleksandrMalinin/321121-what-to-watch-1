@@ -226,7 +226,7 @@ Array [
               className="rating__input"
               id="star-1"
               name="rating"
-              onClick={[Function]}
+              onChange={[Function]}
               type="radio"
               value="1"
             />
@@ -240,7 +240,7 @@ Array [
               className="rating__input"
               id="star-2"
               name="rating"
-              onClick={[Function]}
+              onChange={[Function]}
               type="radio"
               value="2"
             />
@@ -254,7 +254,7 @@ Array [
               className="rating__input"
               id="star-3"
               name="rating"
-              onClick={[Function]}
+              onChange={[Function]}
               type="radio"
               value="3"
             />
@@ -268,7 +268,7 @@ Array [
               className="rating__input"
               id="star-4"
               name="rating"
-              onClick={[Function]}
+              onChange={[Function]}
               type="radio"
               value="4"
             />
@@ -282,7 +282,7 @@ Array [
               className="rating__input"
               id="star-5"
               name="rating"
-              onClick={[Function]}
+              onChange={[Function]}
               type="radio"
               value="5"
             />

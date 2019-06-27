@@ -1,7 +1,7 @@
 const initialState = {
   isAuthorizationRequired: true,
   user: null,
-  reviews: null
+  comments: null
 };
 
 const ACTION_TYPE = {
@@ -26,10 +26,10 @@ const ActionCreator = {
     };
   },
 
-  addReview: (review) => {
+  addReview: (comments) => {
     return {
       type: ACTION_TYPE.addReview,
-      payload: review
+      payload: comments
     };
   }
 };
@@ -45,8 +45,8 @@ const Operation = {
       });
   },
 
-  addReview: (id, review, rating) => (dispatch, _getState, api) => {
-    return api.post(`/comments/${id}`, review, rating)
+  addReview: (id, comment, rating) => (dispatch, _getState, api) => {
+    return api.post(`/comments/${id}`, {comment, rating})
       .then((response) => {
         if (response.status === 200) {
           dispatch(ActionCreator.addReview(response.data));
@@ -66,7 +66,7 @@ const reducer = (state = initialState, action) => {
     });
 
     case ACTION_TYPE.addReview: return Object.assign({}, state, {
-      reviews: action.payload
+      comments: action.payload
     });
   }
 

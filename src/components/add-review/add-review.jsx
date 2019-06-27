@@ -11,7 +11,7 @@ class AddReview extends PureComponent {
 
     this.state = {
       rating: 0,
-      review: ``
+      comment: ``
     };
 
     this.onRatingCheck = this._onRatingCheck.bind(this);
@@ -95,19 +95,19 @@ class AddReview extends PureComponent {
           <form action="#" className="add-review__form" onSubmit={this.onSubmit}>
             <div className="rating">
               <div className="rating__stars">
-                <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onClick={this.onRatingCheck}/>
+                <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={this.onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
-                <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onClick={this.onRatingCheck}/>
+                <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onChange={this.onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onClick={this.onRatingCheck}/>
+                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onChange={this.onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
-                <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onClick={this.onRatingCheck}/>
+                <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onChange={this.onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-4">Rating 4</label>
 
-                <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onClick={this.onRatingCheck}/>
+                <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onChange={this.onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-5">Rating 5</label>
               </div>
             </div>
@@ -128,8 +128,8 @@ class AddReview extends PureComponent {
   _onSubmit(evt) {
     evt.preventDefault();
 
-    const {review, rating} = this.state;
-    this.props.onPostReview(this.props.movie.id, review, rating);
+    const {comment, rating} = this.state;
+    this.props.onPostReview(this.props.movie.id, comment, parseInt(rating, 10));
 
     evt.target.reset();
   }
@@ -149,7 +149,7 @@ class AddReview extends PureComponent {
 
     if (evt) {
       this.setState({
-        review: target.value,
+        comment: target.value,
       });
     }
   }
@@ -165,8 +165,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onPostReview: (id, reviews, rating) => {
-    dispatch(Operation.addReview(id, reviews, rating));
+  onPostReview: (id, comment, rating) => {
+    dispatch(Operation.addReview(id, comment, rating));
   }
 });
 

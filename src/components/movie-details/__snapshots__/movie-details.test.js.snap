@@ -240,7 +240,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="/comments/1"
+              href="/reviews/add/1"
               onClick={[Function]}
             >
               Add review

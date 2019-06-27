@@ -105,7 +105,7 @@ class MainScreen extends PureComponent {
                   <span>My list</span>
                 </button>
                 {!isAuthorizationRequired ?
-                  <Link to={`/comments/${moviePromo ? moviePromo.id : ``}`} className="btn movie-card__button">Add review</Link>
+                  <Link to={`/reviews/add/${moviePromo ? moviePromo.id : ``}`} className="btn movie-card__button">Add review</Link>
                   :
                   ``
                 }
