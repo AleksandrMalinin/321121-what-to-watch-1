@@ -1,8 +1,11 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {getFilmId, getFilmsAlike} from '../../reducer/data/selectors.js';
 import PropTypes from 'prop-types';
+import {getFilmId, getFilmsAlike} from '../../reducer/data/selectors.js';
+import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
+import Logo from '../logo/logo.jsx';
+import UserBlock from '../user-block/user-block.jsx';
 import Tabs from '../tabs/tabs.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import FullVideoPlayer from '../full-video-player/full-video-player.jsx';
@@ -19,7 +22,7 @@ class MovieDetails extends PureComponent {
   }
 
   render() {
-    const {movie, moviesAlike, fullVideoShown} = this.props;
+    const {movie, moviesAlike, fullVideoShown, isAuthorizationRequired} = this.props;
     const moviesAlikeCut = moviesAlike.slice(0, 4);
 
     return <React.Fragment>
@@ -60,19 +63,8 @@ class MovieDetails extends PureComponent {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header movie-card__head">
-            <div className="logo">
-              <Link to="/" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </div>
+            <Logo/>
+            <UserBlock/>
           </header>
 
           <div className="movie-card__wrap">
@@ -96,7 +88,11 @@ class MovieDetails extends PureComponent {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                {!isAuthorizationRequired ?
+                  <Link to={`/reviews/add/${movie ? movie.id : ``}`} className="btn movie-card__button">Add review</Link>
+                  :
+                  ``
+                }
               </div>
             </div>
           </div>
@@ -157,10 +153,12 @@ MovieDetails.propTypes = {
   movie: PropTypes.object,
   moviesAlike: PropTypes.array,
   fullVideoShown: PropTypes.bool,
-  onPlayButtonClick: PropTypes.func
+  onPlayButtonClick: PropTypes.func,
+  isAuthorizationRequired: PropTypes.bool
 };
 
 const mapStateToProps = (state, ownProps) => ({
+  isAuthorizationRequired: getAuthorizationStatus(state),
   movie: getFilmId(state, ownProps.match.params.id),
   moviesAlike: getFilmsAlike(state, ownProps.match.params.id)
 });

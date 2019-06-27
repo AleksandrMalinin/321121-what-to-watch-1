@@ -4,11 +4,12 @@ import {BrowserRouter} from 'react-router-dom';
 import SignIn from './sign-in.jsx';
 
 it(`SignIn correctly renders`, () => {
+  const mockFunction = jest.fn();
   const tree = renderer
   .create(
       <BrowserRouter>
         <SignIn
-          onSubmit={() => jest.fn()}
+          onSubmit={mockFunction}
         />
       </BrowserRouter>)
   .toJSON();

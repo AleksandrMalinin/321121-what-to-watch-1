@@ -10,6 +10,7 @@ import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import MyList from '../my-list/my-list.jsx';
 import MovieDetails from '../movie-details/movie-details.jsx';
+import AddReview from '../add-review/add-review.jsx';
 
 class App extends PureComponent {
   render() {
@@ -30,11 +31,13 @@ class App extends PureComponent {
       <Route path="/login" exact render={() => <SignIn onSubmit={this.props.onSubmit}/>}/>
       <Route path="/favourites" exact component={MyList}/>
       <Route path="/film/:id" exact render={(props) => <MovieDetails {...props} moviesShown={moviesShown} fullVideoShown={fullVideoShown} onPlayButtonClick={onPlayButtonClick}/>}/>
+      <Route path="/reviews/add/:id" exact render={(props) => <AddReview {...props}/>}/>
     </Switch>;
   }
 }
 
 App.propTypes = {
+  moviePromo: PropTypes.object,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     posterImage: PropTypes.string,

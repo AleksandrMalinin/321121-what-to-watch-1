@@ -10,7 +10,6 @@ import {createAPI} from './api';
 import {Operation} from "./reducer/data/data.js";
 import App from './components/app/app.jsx';
 
-
 const api = createAPI(() => history.pushState(null, null, `/login`));
 
 const store = createStore(
@@ -22,6 +21,7 @@ const store = createStore(
 );
 
 store.dispatch(Operation.loadFilms());
+store.dispatch(Operation.loadPromoFilm());
 
 ReactDOM.render(
     <Provider store={store}>
