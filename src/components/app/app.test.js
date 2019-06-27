@@ -3,9 +3,9 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import {createStore} from 'redux';
+import reducer from '../../reducer';
 import {App} from './app.jsx';
 import {films} from '../../mocks/mocks.js';
-import reducer from '../../reducer';
 
 const mockGenres = films.map((film) => film.genre);
 const mockStore = createStore(reducer);

@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Operation} from '../../reducer/user/user.js';
+import withPrivateRoute from '../../hocs/with-private-route/with-private-route.js';
 import {getFilmId} from '../../reducer/data/selectors.js';
 import Logo from '../logo/logo.jsx';
 import UserBlock from '../user-block/user-block.jsx';
@@ -162,4 +163,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {AddReview};
-export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
+export default withPrivateRoute(connect(mapStateToProps, mapDispatchToProps)(AddReview));
