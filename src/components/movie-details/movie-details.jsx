@@ -156,8 +156,9 @@ class MovieDetails extends PureComponent {
   }
 
   _onChangeFavouriteStatus() {
-    const movie = this.props.movie;
-    this.props.onChangeFavouriteStatus(movie);
+    const id = this.props.movie.id;
+    const status = this.props.movie.is_favorite;
+    this.props.onChangeFavouriteStatus(id, status);
   }
 }
 

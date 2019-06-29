@@ -2,8 +2,8 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route} from "react-router-dom";
-import {ActionCreators} from '../../reducer/data/data.js';
-import {Operation} from '../../reducer/user/user.js';
+import {Operation as DataOperation, ActionCreators} from '../../reducer/data/data.js';
+import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {getFilteredFilms, getGenre, getGenres, getFilmsLength, getFilmsQuantity, getFullVideoState} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   onSubmit: (email, password) => {
-    dispatch(Operation.loginUser(email, password));
+    dispatch(UserOperation.loginUser(email, password));
   },
 
   onMoreButtonClick: (count) => {
@@ -84,8 +84,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreators.changeFullVideoState(state));
   },
 
-  onChangeFavouriteStatus: (film) => {
-    dispatch(ActionCreators.changeMyList(film));
+  onChangeFavouriteStatus: (id, status) => {
+    dispatch(DataOperation.changeFavouriteStatus(id, status));
   }
 });
 

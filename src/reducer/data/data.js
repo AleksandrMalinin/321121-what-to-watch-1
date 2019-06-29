@@ -17,7 +17,7 @@ const ACTION_TYPE = {
   changeFilterGenre: `CHANGE_FILTER_GENRE`,
   getRestFilms: `GET_REST_FILMS`,
   changeFullVideoState: `CHANFE_FULL_VIDEO_STATE`,
-  changeMyList: `CHANGE_MY_LIST`
+  changeFavouriteStatus: `CHANGE_FAVOURITE_STATUS`
 };
 
 const ActionCreators = {
@@ -56,9 +56,9 @@ const ActionCreators = {
     };
   },
 
-  changeMyList: (film) => {
+  changeFavouriteStatus: (film) => {
     return {
-      type: ACTION_TYPE.changeMyList,
+      type: ACTION_TYPE.changeFavouriteStatus,
       payload: film
     };
   }
@@ -79,11 +79,11 @@ const Operation = {
       });
   },
 
-  changeMyList: (id, status) => (dispatch, _getState, api) => {
+  changeFavouriteStatus: (id, status) => (dispatch, _getState, api) => {
     return api.post(`/favorite/${id}/${status ? 0 : 1}`, {id, status})
       .then((response) => {
         if (response.status === 200) {
-          dispatch(ActionCreators.changeMyList(response.data));
+          dispatch(ActionCreators.changeFavouriteStatus(response.data));
         }
       });
   }
@@ -112,7 +112,7 @@ const reducer = (state = initialState, action) => {
       moviePromo: action.payload
     });
 
-    case ACTION_TYPE.changeMyList:
+    case ACTION_TYPE.changeFavouriteStatus:
       const movieListUpdated = changeFavouriteStatus(state, action.payload);
 
       return Object.assign({}, state, {

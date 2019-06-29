@@ -161,7 +161,9 @@ class MainScreen extends PureComponent {
   }
 
   _onChangeFavouriteStatus() {
-    this.props.onChangeFavouriteStatus(this.props.moviePromo);
+    const id = this.props.moviePromo.id;
+    const status = this.props.moviePromo.is_favorite;
+    this.props.onChangeFavouriteStatus(id, status);
   }
 }
 
