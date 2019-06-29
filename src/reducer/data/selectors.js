@@ -8,6 +8,10 @@ export const getFilms = (state) => {
   return state[NAME_SPACE].moviesList;
 };
 
+export const getFavouriteFilms = (state) => {
+  return state[NAME_SPACE].moviesFavourite;
+};
+
 export const getPromoFilm = (state) => {
   return state[NAME_SPACE].moviePromo;
 };
