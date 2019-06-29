@@ -5,7 +5,8 @@ const constants = {
   TAB_NAMES: [`Overview`, `Details`, `Reviews`],
   LIMIT_QUANTITY: 20,
   MIN_FIELD_LENGTH: 50,
-  MAX_FIELD_LENGTH: 400
+  MAX_FIELD_LENGTH: 400,
+  URL: `https://es31-server.appspot.com`
 };
 
 export {constants};
