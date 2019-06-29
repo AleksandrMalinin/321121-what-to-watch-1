@@ -48,3 +48,7 @@ export const changeFavouriteStatus = (state, movie) => {
 
   return movieListUpdated;
 };
+
+export const isCorrectLength = (length, min, max) => {
+  return length > min && length <= max;
+};

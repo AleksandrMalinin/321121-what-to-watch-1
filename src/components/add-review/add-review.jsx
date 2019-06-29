@@ -2,10 +2,13 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Operation} from '../../reducer/user/user.js';
+import {withRouter} from "react-router-dom";
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route.js';
 import {getFilmId} from '../../reducer/data/selectors.js';
 import Logo from '../logo/logo.jsx';
 import UserBlock from '../user-block/user-block.jsx';
+import {isCorrectLength} from '../../utils.js';
+import {constants} from '../../constants.js';
 
 class AddReview extends PureComponent {
   constructor(props) {
@@ -107,7 +110,7 @@ class AddReview extends PureComponent {
             <div className="add-review__text">
               <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" required onChange={this.onReviewChange}></textarea>
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit">Post</button>
+                <button className="add-review__btn" type="submit" disabled={this.state.comment.length < constants.MIN_FIELD_LENGTH}>Post</button>
               </div>
 
             </div>
@@ -121,7 +124,10 @@ class AddReview extends PureComponent {
     evt.preventDefault();
 
     const {comment, rating} = this.state;
-    this.props.onPostReview(this.props.movie.id, comment, parseInt(rating, 10));
+
+    if (this.isValidForm) {
+      this.props.onPostReview(this.props.movie.id, comment, parseInt(rating, 10), this.props.history);
+    }
 
     evt.target.reset();
   }
@@ -145,11 +151,18 @@ class AddReview extends PureComponent {
       });
     }
   }
+
+  get isValidForm() {
+    return this.state.rating !== 0 && isCorrectLength(this.state.comment.length, constants.MIN_FIELD_LENGTH, constants.MAX_FIELD_LENGTH);
+  }
 }
 
 AddReview.propTypes = {
   movie: PropTypes.object,
   onPostReview: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  })
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -157,10 +170,10 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onPostReview: (id, comment, rating) => {
-    dispatch(Operation.addReview(id, comment, rating));
+  onPostReview: (id, comment, rating, history) => {
+    dispatch(Operation.addReview(id, comment, rating, history));
   }
 });
 
 export {AddReview};
-export default withPrivateRoute(connect(mapStateToProps, mapDispatchToProps)(AddReview));
+export default withRouter(withPrivateRoute(connect(mapStateToProps, mapDispatchToProps)(AddReview)));
