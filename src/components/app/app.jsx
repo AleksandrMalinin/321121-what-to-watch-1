@@ -30,7 +30,7 @@ class App extends PureComponent {
         onChangeFavouriteStatus={onChangeFavouriteStatus}
       />}/>
       <Route path="/login" exact render={() => <SignIn onSubmit={this.props.onSubmit}/>}/>
-      <Route path="/favourites" exact component={MyList}/>
+      <Route path="/mylist" exact component={MyList}/>
       <Route path="/film/:id" exact render={(props) => <MovieDetails {...props} moviesShown={moviesShown} fullVideoShown={fullVideoShown} onPlayButtonClick={onPlayButtonClick} onChangeFavouriteStatus={onChangeFavouriteStatus}/>}/>
       <Route path="/reviews/add/:id" exact render={(props) => <AddReview {...props}/>}/>
     </Switch>;

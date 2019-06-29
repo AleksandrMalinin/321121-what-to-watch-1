@@ -12,7 +12,7 @@ class UserBlock extends PureComponent {
       {!isAuthorizationRequired ?
         <div className="user-block__avatar">
           {/* временно */}
-          <Link to="/favourites">
+          <Link to="/mylist">
             <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
           </Link>
         </div> :
