@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {getPromoFilm} from '../../reducer/data/selectors.js';
 import Logo from '../logo/logo.jsx';
 import UserBlock from '../user-block/user-block.jsx';
@@ -163,7 +163,12 @@ class MainScreen extends PureComponent {
   _onChangeFavouriteStatus() {
     const id = this.props.moviePromo.id;
     const status = this.props.moviePromo.is_favorite;
-    this.props.onChangeFavouriteStatus(id, status);
+
+    if (this.props.isAuthorizationRequired) {
+      return this.props.history.push(`/login`);
+    }
+
+    return this.props.onChangeFavouriteStatus(id, status);
   }
 }
 
@@ -183,7 +188,10 @@ MainScreen.propTypes = {
   onMoreButtonClick: PropTypes.func,
   fullVideoShown: PropTypes.bool,
   onPlayButtonClick: PropTypes.func,
-  onChangeFavouriteStatus: PropTypes.func
+  onChangeFavouriteStatus: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  })
 };
 
 const mapStateToProps = (state) => ({
@@ -191,4 +199,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {MainScreen};
-export default connect(mapStateToProps)(MainScreen);
+export default withRouter(connect(mapStateToProps)(MainScreen));
