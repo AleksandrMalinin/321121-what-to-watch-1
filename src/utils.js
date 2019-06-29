@@ -38,3 +38,13 @@ export const getElapsedTime = (time) => {
 
   return formateTime;
 };
+
+export const changeFavouriteStatus = (state, movie) => {
+  const movieListUpdated = state.moviesList.filter((film) => film.id !== movie.id);
+
+  if (state.moviePromo.id === movie.id) {
+    state.moviePromo[`is_favorite`] = !state.moviePromo[`is_favorite`];
+  }
+
+  return movieListUpdated;
+};

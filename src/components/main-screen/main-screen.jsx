@@ -19,6 +19,7 @@ class MainScreen extends PureComponent {
     };
 
     this.onPlayButtonClick = this._onPlayButtonClick.bind(this);
+    this.onChangeFavouriteStatus = this._onChangeFavouriteStatus.bind(this);
   }
 
   render() {
@@ -84,10 +85,16 @@ class MainScreen extends PureComponent {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                <button className="btn btn--list movie-card__button" type="button" onClick={this.onChangeFavouriteStatus}>
+                  {moviePromo && !moviePromo.is_favorite ?
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg> :
+
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>
+                  }
                   <span>My list</span>
                 </button>
                 {!isAuthorizationRequired ?
@@ -152,6 +159,12 @@ class MainScreen extends PureComponent {
       isPlaying: !this.state.isPlaying,
     });
   }
+
+  _onChangeFavouriteStatus() {
+    const id = this.props.moviePromo.id;
+    const status = this.props.moviePromo.is_favorite;
+    this.props.onChangeFavouriteStatus(id, status);
+  }
 }
 
 MainScreen.propTypes = {
@@ -169,7 +182,8 @@ MainScreen.propTypes = {
   isAuthorizationRequired: PropTypes.bool,
   onMoreButtonClick: PropTypes.func,
   fullVideoShown: PropTypes.bool,
-  onPlayButtonClick: PropTypes.func
+  onPlayButtonClick: PropTypes.func,
+  onChangeFavouriteStatus: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({

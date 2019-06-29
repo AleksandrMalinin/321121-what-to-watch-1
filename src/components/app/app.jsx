@@ -2,8 +2,8 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route} from "react-router-dom";
-import {ActionCreators} from '../../reducer/data/data.js';
-import {Operation} from '../../reducer/user/user.js';
+import {Operation as DataOperation, ActionCreators} from '../../reducer/data/data.js';
+import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {getFilteredFilms, getGenre, getGenres, getFilmsLength, getFilmsQuantity, getFullVideoState} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
@@ -14,7 +14,7 @@ import AddReview from '../add-review/add-review.jsx';
 
 class App extends PureComponent {
   render() {
-    const {moviesList, moviesLength, moviesShown, onGenreChange, genres, onMoreButtonClick, fullVideoShown, onPlayButtonClick} = this.props;
+    const {moviesList, moviesLength, moviesShown, onGenreChange, genres, onMoreButtonClick, fullVideoShown, onPlayButtonClick, onChangeFavouriteStatus} = this.props;
 
     return <Switch>
       <Route path="/" exact render={() => <MainScreen
@@ -27,10 +27,11 @@ class App extends PureComponent {
         onMoreButtonClick={onMoreButtonClick}
         fullVideoShown={fullVideoShown}
         onPlayButtonClick={onPlayButtonClick}
+        onChangeFavouriteStatus={onChangeFavouriteStatus}
       />}/>
       <Route path="/login" exact render={() => <SignIn onSubmit={this.props.onSubmit}/>}/>
       <Route path="/favourites" exact component={MyList}/>
-      <Route path="/film/:id" exact render={(props) => <MovieDetails {...props} moviesShown={moviesShown} fullVideoShown={fullVideoShown} onPlayButtonClick={onPlayButtonClick}/>}/>
+      <Route path="/film/:id" exact render={(props) => <MovieDetails {...props} moviesShown={moviesShown} fullVideoShown={fullVideoShown} onPlayButtonClick={onPlayButtonClick} onChangeFavouriteStatus={onChangeFavouriteStatus}/>}/>
       <Route path="/reviews/add/:id" exact render={(props) => <AddReview {...props}/>}/>
     </Switch>;
   }
@@ -52,7 +53,8 @@ App.propTypes = {
   onSubmit: PropTypes.func,
   onMoreButtonClick: PropTypes.func,
   fullVideoShown: PropTypes.bool,
-  onPlayButtonClick: PropTypes.func
+  onPlayButtonClick: PropTypes.func,
+  onChangeFavouriteStatus: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -71,7 +73,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   onSubmit: (email, password) => {
-    dispatch(Operation.loginUser(email, password));
+    dispatch(UserOperation.loginUser(email, password));
   },
 
   onMoreButtonClick: (count) => {
@@ -80,6 +82,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   onPlayButtonClick: (state) => {
     dispatch(ActionCreators.changeFullVideoState(state));
+  },
+
+  onChangeFavouriteStatus: (id, status) => {
+    dispatch(DataOperation.changeFavouriteStatus(id, status));
   }
 });
 
