@@ -23,7 +23,17 @@ class MainScreen extends PureComponent {
   }
 
   render() {
-    const {moviePromo, moviesList, moviesLength, moviesShown, genres, onGenreChange, isAuthorizationRequired, onMoreButtonClick, fullVideoShown} = this.props;
+    const {
+      moviePromo,
+      moviesList,
+      moviesLength,
+      moviesShown,
+      genres,
+      onGenreChange,
+      isAuthorizationRequired,
+      onMoreButtonClick,
+      fullVideoShown
+    } = this.props;
 
     return <React.Fragment>
       <div className="visually-hidden">
@@ -148,7 +158,11 @@ class MainScreen extends PureComponent {
         </footer>
       </div>
 
-      {fullVideoShown ? <FullVideoPlayer onPlayButtonClick={this.onPlayButtonClick} movie={moviePromo} isPlaying={this.state.isPlaying}/> : ``}
+      {fullVideoShown ? <FullVideoPlayer
+        onPlayButtonClick={this.onPlayButtonClick}
+        movie={moviePromo}
+        isPlaying={this.state.isPlaying}/> : ``
+      }
     </React.Fragment>;
   }
 

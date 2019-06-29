@@ -14,7 +14,17 @@ import AddReview from '../add-review/add-review.jsx';
 
 class App extends PureComponent {
   render() {
-    const {moviesList, moviesLength, moviesShown, onGenreChange, genres, onMoreButtonClick, fullVideoShown, onPlayButtonClick, onChangeFavouriteStatus} = this.props;
+    const {
+      moviesList,
+      moviesLength,
+      moviesShown,
+      onGenreChange,
+      genres,
+      onMoreButtonClick,
+      fullVideoShown,
+      onPlayButtonClick,
+      onChangeFavouriteStatus
+    } = this.props;
 
     return <Switch>
       <Route path="/" exact render={() => <MainScreen
@@ -29,9 +39,17 @@ class App extends PureComponent {
         onPlayButtonClick={onPlayButtonClick}
         onChangeFavouriteStatus={onChangeFavouriteStatus}
       />}/>
-      <Route path="/login" exact render={() => <SignIn onSubmit={this.props.onSubmit}/>}/>
+      <Route path="/login" exact render={() => <SignIn
+        onSubmit={this.props.onSubmit}/>
+      }/>
       <Route path="/mylist" exact component={MyList}/>
-      <Route path="/film/:id" exact render={(props) => <MovieDetails {...props} moviesShown={moviesShown} fullVideoShown={fullVideoShown} onPlayButtonClick={onPlayButtonClick} onChangeFavouriteStatus={onChangeFavouriteStatus}/>}/>
+      <Route path="/film/:id" exact render={(props) => <MovieDetails
+        {...props}
+        moviesShown={moviesShown}
+        fullVideoShown={fullVideoShown}
+        onPlayButtonClick={onPlayButtonClick}
+        onChangeFavouriteStatus={onChangeFavouriteStatus}/>
+      }/>
       <Route path="/reviews/add/:id" exact render={(props) => <AddReview {...props}/>}/>
     </Switch>;
   }
