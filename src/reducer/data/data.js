@@ -113,14 +113,13 @@ const reducer = (state = initialState, action) => {
     });
 
     case ACTION_TYPE.changeMyList:
-      const movieListUpdated = changeFavouriteStatus(state.moviesList, action.payload.id);
-
-      if (state.moviePromo.id === action.payload.id) {
-        state.moviePromo[`is_favorite`] = !state.moviePromo[`is_favorite`];
-      }
+      const movieListUpdated = changeFavouriteStatus(state, action.payload);
 
       return Object.assign({}, state, {
-        moviesList: movieListUpdated
+        moviesList: [
+          ...movieListUpdated,
+          ...[action.payload]
+        ]
       });
   }
 
