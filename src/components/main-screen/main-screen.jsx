@@ -19,7 +19,7 @@ class MainScreen extends PureComponent {
     };
 
     this.onPlayButtonClick = this._onPlayButtonClick.bind(this);
-    this.changeFavouriteStatus = this._changeFavouriteStatus.bind(this);
+    this.onChangeFavouriteStatus = this._onChangeFavouriteStatus.bind(this);
   }
 
   render() {
@@ -85,7 +85,7 @@ class MainScreen extends PureComponent {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button" onClick={this.changeFavouriteStatus}>
+                <button className="btn btn--list movie-card__button" type="button" onClick={this.onChangeFavouriteStatus}>
                   {moviePromo && !moviePromo.is_favorite ?
                     <svg viewBox="0 0 19 20" width="19" height="20">
                       <use xlinkHref="#add"></use>
@@ -160,8 +160,8 @@ class MainScreen extends PureComponent {
     });
   }
 
-  _changeFavouriteStatus() {
-    this.props.changeFavouriteStatus(this.props.moviePromo);
+  _onChangeFavouriteStatus() {
+    this.props.onChangeFavouriteStatus(this.props.moviePromo);
   }
 }
 
@@ -181,7 +181,7 @@ MainScreen.propTypes = {
   onMoreButtonClick: PropTypes.func,
   fullVideoShown: PropTypes.bool,
   onPlayButtonClick: PropTypes.func,
-  changeFavouriteStatus: PropTypes.func
+  onChangeFavouriteStatus: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
