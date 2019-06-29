@@ -1,4 +1,5 @@
 import {constants} from '../../constants.js';
+import {changeFavouriteStatus} from '../../utils.js';
 
 const initialState = {
   moviePromo: null,
@@ -16,6 +17,7 @@ const ACTION_TYPE = {
   changeFilterGenre: `CHANGE_FILTER_GENRE`,
   getRestFilms: `GET_REST_FILMS`,
   changeFullVideoState: `CHANFE_FULL_VIDEO_STATE`,
+  changeMyList: `CHANGE_MY_LIST`
 };
 
 const ActionCreators = {
@@ -52,6 +54,13 @@ const ActionCreators = {
       type: ACTION_TYPE.changeFullVideoState,
       payload: state
     };
+  },
+
+  changeMyList: (film) => {
+    return {
+      type: ACTION_TYPE.changeMyList,
+      payload: film
+    };
   }
 };
 
@@ -69,6 +78,15 @@ const Operation = {
         dispatch(ActionCreators.loadPromoFilm(response.data));
       });
   },
+
+  changeMyList: (id, status) => (dispatch, _getState, api) => {
+    return api.post(`/favorite/${id}/${status ? 0 : 1}`, {id, status})
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreators.changeMyList(response.data));
+        }
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -93,6 +111,17 @@ const reducer = (state = initialState, action) => {
     case ACTION_TYPE.loadPromoFilm: return Object.assign({}, state, {
       moviePromo: action.payload
     });
+
+    case ACTION_TYPE.changeMyList:
+      const movieListUpdated = changeFavouriteStatus(state.moviesList, action.payload.id);
+
+      if (state.moviePromo.id === action.payload.id) {
+        state.moviePromo[`is_favorite`] = !state.moviePromo[`is_favorite`];
+      }
+
+      return Object.assign({}, state, {
+        moviesList: movieListUpdated
+      });
   }
 
   return state;

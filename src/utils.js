@@ -38,3 +38,9 @@ export const getElapsedTime = (time) => {
 
   return formateTime;
 };
+
+export const changeFavouriteStatus = (movieList, movieId) => {
+  const movieListUpdated = movieList.filter((movie) => movie.id !== movieId);
+  console.log(movieListUpdated);
+  return movieListUpdated;
+};
