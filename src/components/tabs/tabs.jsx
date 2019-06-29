@@ -14,11 +14,12 @@ class Tabs extends PureComponent {
 
   render() {
     const {movie, activeItem} = this.props;
+    const tabNames = constants.TAB_NAMES;
 
     return <React.Fragment>
       <nav className="movie-nav movie-card__nav">
         <ul className="movie-nav__list">
-          {constants.TAB_NAMES.map((tabName, i) => <li className={`movie-nav__item ` + (activeItem === tabName ? `movie-nav__item--active` : ``)} key={i}>
+          {tabNames.map((tabName, i) => <li className={`movie-nav__item ` + (activeItem === tabName ? `movie-nav__item--active` : ``)} key={i}>
             <a href="#" className="movie-nav__link" onClick={this.onTabSwitch(tabName)}>{tabName}</a>
           </li>)}
         </ul>
