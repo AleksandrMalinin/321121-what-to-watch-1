@@ -7,7 +7,8 @@ import {compose} from 'recompose';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
 import {createAPI} from './api';
-import {Operation} from "./reducer/data/data.js";
+import {Operation as DataOperation} from "./reducer/data/data.js";
+import {Operation as UserOperation} from "./reducer/user/user.js";
 import App from './components/app/app.jsx';
 
 const api = createAPI(() => history.pushState(null, null, `/login`));
@@ -20,9 +21,10 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.loadFilms());
-store.dispatch(Operation.loadPromoFilm());
-store.dispatch(Operation.loadFavouriteFilms());
+store.dispatch(UserOperation.setUser());
+store.dispatch(DataOperation.loadFilms());
+store.dispatch(DataOperation.loadPromoFilm());
+store.dispatch(DataOperation.loadFavouriteFilms());
 
 ReactDOM.render(
     <Provider store={store}>

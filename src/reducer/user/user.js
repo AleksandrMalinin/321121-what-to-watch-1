@@ -1,5 +1,5 @@
 const initialState = {
-  isAuthorizationRequired: true,
+  isAuthorizationRequired: false,
   user: null,
   comments: null
 };
@@ -7,6 +7,7 @@ const initialState = {
 const ACTION_TYPE = {
   setAuthorizationStatus: `REQUIRED_AUTHORIZATION`,
   loginUser: `LOGIN_USER`,
+  setUser: `SET_USER`,
   authorizeUser: `AUTHORIZE_USER`,
   addReview: `ADD_REVIEW`,
   loadComments: `LOAD_COMMENTS`
@@ -23,6 +24,13 @@ const ActionCreator = {
   authorizeUser: (user) => {
     return {
       type: ACTION_TYPE.authorizeUser,
+      payload: user
+    };
+  },
+
+  setUser: (user) => {
+    return {
+      type: ACTION_TYPE.setUser,
       payload: user
     };
   },
@@ -49,6 +57,16 @@ const Operation = {
         if (response.status === 200) {
           dispatch(ActionCreator.setAuthorizationStatus(false));
           dispatch(ActionCreator.authorizeUser(response.data));
+        }
+      });
+  },
+
+  setUser: () => (dispatch, _getState, api) => {
+    return api.get(`/login`)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.setAuthorizationStatus(false));
+          dispatch(ActionCreator.setUser(response.data));
         }
       });
   },
@@ -80,6 +98,10 @@ const reducer = (state = initialState, action) => {
     });
 
     case ACTION_TYPE.authorizeUser: return Object.assign({}, state, {
+      user: action.payload
+    });
+
+    case ACTION_TYPE.setUser: return Object.assign({}, state, {
       user: action.payload
     });
 
