@@ -158,13 +158,21 @@ Array [
         <div
           className="user-block"
         >
-          <a
-            className="user-block__link"
-            href="/login"
-            onClick={[Function]}
+          <div
+            className="user-block__avatar"
           >
-            Sign in
-          </a>
+            <a
+              href="/mylist"
+              onClick={[Function]}
+            >
+              <img
+                alt=""
+                height="63"
+                src=""
+                width="63"
+              />
+            </a>
+          </div>
         </div>
       </header>
       <div
@@ -197,7 +205,6 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
-              onClick={[Function]}
               type="button"
             >
               <svg

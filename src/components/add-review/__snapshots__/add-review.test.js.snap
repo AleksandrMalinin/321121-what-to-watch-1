@@ -185,13 +185,21 @@ Array [
         <div
           className="user-block"
         >
-          <a
-            className="user-block__link"
-            href="/login"
-            onClick={[Function]}
+          <div
+            className="user-block__avatar"
           >
-            Sign in
-          </a>
+            <a
+              href="/mylist"
+              onClick={[Function]}
+            >
+              <img
+                alt=""
+                height="63"
+                src=""
+                width="63"
+              />
+            </a>
+          </div>
         </div>
       </header>
       <div
@@ -211,7 +219,6 @@ Array [
       <form
         action="#"
         className="add-review__form"
-        onSubmit={[Function]}
       >
         <div
           className="rating"
@@ -223,7 +230,6 @@ Array [
               className="rating__input"
               id="star-1"
               name="rating"
-              onChange={[Function]}
               type="radio"
               value="1"
             />
@@ -237,7 +243,6 @@ Array [
               className="rating__input"
               id="star-2"
               name="rating"
-              onChange={[Function]}
               type="radio"
               value="2"
             />
@@ -251,7 +256,6 @@ Array [
               className="rating__input"
               id="star-3"
               name="rating"
-              onChange={[Function]}
               type="radio"
               value="3"
             />
@@ -265,7 +269,6 @@ Array [
               className="rating__input"
               id="star-4"
               name="rating"
-              onChange={[Function]}
               type="radio"
               value="4"
             />
@@ -279,7 +282,6 @@ Array [
               className="rating__input"
               id="star-5"
               name="rating"
-              onChange={[Function]}
               type="radio"
               value="5"
             />
@@ -298,7 +300,6 @@ Array [
             className="add-review__textarea"
             id="review-text"
             name="review-text"
-            onChange={[Function]}
             placeholder="Review text"
             required={true}
           />
@@ -307,7 +308,7 @@ Array [
           >
             <button
               className="add-review__btn"
-              disabled={true}
+              disabled={false}
               type="submit"
             >
               Post
