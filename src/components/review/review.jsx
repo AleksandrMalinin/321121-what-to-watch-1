@@ -25,5 +25,4 @@ Review.propTypes = {
   comment: PropTypes.object
 };
 
-
 export default Review;
