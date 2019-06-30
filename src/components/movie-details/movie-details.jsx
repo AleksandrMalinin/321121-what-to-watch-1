@@ -9,21 +9,17 @@ import UserBlock from '../user-block/user-block.jsx';
 import Tabs from '../tabs/tabs.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import FullVideoPlayer from '../full-video-player/full-video-player.jsx';
+import withFullVideoPlayer from '../../hocs/with-full-video-player/with-full-video-player.js';
 
 class MovieDetails extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isPlaying: false
-    };
-
-    this.onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this.onChangeFavouriteStatus = this._onChangeFavouriteStatus.bind(this);
   }
 
   render() {
-    const {movie, moviesAlike, fullVideoShown, isAuthorizationRequired} = this.props;
+    const {movie, moviesAlike, isPlaying, fullVideoShown, isAuthorizationRequired, onPlayButtonClick} = this.props;
     const moviesAlikeCut = moviesAlike.slice(0, 4);
 
     return <React.Fragment>
@@ -77,7 +73,7 @@ class MovieDetails extends PureComponent {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={this.onPlayButtonClick}>
+                <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -143,16 +139,8 @@ class MovieDetails extends PureComponent {
         </footer>
       </div>
 
-      {fullVideoShown ? <FullVideoPlayer onPlayButtonClick={this.onPlayButtonClick} movie={movie} isPlaying={this.state.isPlaying}/> : ``}
+      {fullVideoShown ? <FullVideoPlayer onPlayButtonClick={onPlayButtonClick} movie={movie} isPlaying={isPlaying}/> : ``}
     </React.Fragment>;
-  }
-
-  _onPlayButtonClick() {
-    this.props.onPlayButtonClick(!this.props.fullVideoShown);
-
-    this.setState({
-      isPlaying: !this.state.isPlaying,
-    });
   }
 
   _onChangeFavouriteStatus() {
@@ -170,6 +158,7 @@ class MovieDetails extends PureComponent {
 MovieDetails.propTypes = {
   movie: PropTypes.object,
   moviesAlike: PropTypes.array,
+  isPlaying: PropTypes.bool,
   fullVideoShown: PropTypes.bool,
   onPlayButtonClick: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
@@ -186,4 +175,4 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export {MovieDetails};
-export default withRouter(connect(mapStateToProps)(MovieDetails));
+export default connect(mapStateToProps)(withRouter(withFullVideoPlayer(MovieDetails)));

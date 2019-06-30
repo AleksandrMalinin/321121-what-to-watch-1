@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {getElapsedTime} from '../../utils.js';
-import withFullVideoPlayer from '../../hocs/with-full-video-player/with-full-video-player.js';
+import withPlayerDevice from '../../hocs/with-player-device/with-player-device.js';
 
 class FullVideoPlayer extends PureComponent {
   render() {
@@ -87,4 +87,4 @@ FullVideoPlayer.propTypes = {
   onFullModeButtonClick: PropTypes.func
 };
 
-export default withFullVideoPlayer(FullVideoPlayer);
+export default withPlayerDevice(FullVideoPlayer);

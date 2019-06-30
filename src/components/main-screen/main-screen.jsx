@@ -9,16 +9,12 @@ import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
 import FullVideoPlayer from '../full-video-player/full-video-player.jsx';
+import withFullVideoPlayer from '../../hocs/with-full-video-player/with-full-video-player.js';
 
 class MainScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isPlaying: false
-    };
-
-    this.onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this.onChangeFavouriteStatus = this._onChangeFavouriteStatus.bind(this);
   }
 
@@ -32,7 +28,9 @@ class MainScreen extends PureComponent {
       onGenreChange,
       isAuthorizationRequired,
       onMoreButtonClick,
-      fullVideoShown
+      isPlaying,
+      fullVideoShown,
+      onPlayButtonClick
     } = this.props;
 
     return <React.Fragment>
@@ -89,7 +87,7 @@ class MainScreen extends PureComponent {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={this.onPlayButtonClick}>
+                <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -159,19 +157,11 @@ class MainScreen extends PureComponent {
       </div>
 
       {fullVideoShown ? <FullVideoPlayer
-        onPlayButtonClick={this.onPlayButtonClick}
+        onPlayButtonClick={onPlayButtonClick}
         movie={moviePromo}
-        isPlaying={this.state.isPlaying}/> : ``
+        isPlaying={isPlaying}/> : ``
       }
     </React.Fragment>;
-  }
-
-  _onPlayButtonClick() {
-    this.props.onPlayButtonClick(!this.props.fullVideoShown);
-
-    this.setState({
-      isPlaying: !this.state.isPlaying,
-    });
   }
 
   _onChangeFavouriteStatus() {
@@ -197,11 +187,12 @@ MainScreen.propTypes = {
   })).isRequired,
   moviesLength: PropTypes.number,
   moviesShown: PropTypes.number,
+  isPlaying: PropTypes.bool,
+  fullVideoShown: PropTypes.bool,
+  onPlayButtonClick: PropTypes.func,
   onGenreChange: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
   onMoreButtonClick: PropTypes.func,
-  fullVideoShown: PropTypes.bool,
-  onPlayButtonClick: PropTypes.func,
   onChangeFavouriteStatus: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
@@ -213,4 +204,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {MainScreen};
-export default withRouter(connect(mapStateToProps)(MainScreen));
+export default connect(mapStateToProps)(withRouter(withFullVideoPlayer(MainScreen)));
