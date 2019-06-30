@@ -2,22 +2,12 @@ import React, {PureComponent} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import PropTypes from 'prop-types';
 import Logo from '../logo/logo.jsx';
+import withSignIn from '../../hocs/with-sign-in/with-sign-in.js';
 
 class SignIn extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: null,
-      password: null
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onEmailChange = this.onEmailChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
-  }
-
   render() {
+    const {onSubmit, onEmailChange, onPasswordChange} = this.props;
+
     return <React.Fragment>
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg">
@@ -55,14 +45,14 @@ class SignIn extends PureComponent {
         </header>
 
         <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form" onSubmit={this.onSubmit}>
+          <form action="#" className="sign-in__form" onSubmit={onSubmit}>
             <div className="sign-in__fields">
               <div className="sign-in__field">
-                <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={this.onEmailChange} required/>
+                <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={onEmailChange} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
               <div className="sign-in__field">
-                <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" onChange={this.onPasswordChange} required/>
+                <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" onChange={onPasswordChange} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>
@@ -88,44 +78,15 @@ class SignIn extends PureComponent {
       </div>
     </React.Fragment>;
   }
-
-  onSubmit(evt) {
-    evt.preventDefault();
-
-    const {email, password} = this.state;
-
-    if (email && password) {
-      this.props.onSubmit(email, password);
-      this.props.history.push(`/`);
-    }
-  }
-
-  onEmailChange(evt) {
-    const target = evt.target;
-
-    if (evt) {
-      this.setState({
-        email: target.value,
-      });
-    }
-  }
-
-  onPasswordChange(evt) {
-    const target = evt.target;
-
-    if (evt) {
-      this.setState({
-        password: target.value,
-      });
-    }
-  }
 }
 
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
-  })
+  }),
+  onEmailChange: PropTypes.func,
+  onPasswordChange: PropTypes.func
 };
 
-export default withRouter(SignIn);
+export default withRouter(withSignIn(SignIn));
