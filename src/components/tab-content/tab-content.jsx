@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const TabContent = (props) => {
   const {activeItem, tabName, children} = props;
 
-  return <div>
+  return <div className="movie-card__reviews movie-card__row">
     {activeItem === tabName ? children : null}
   </div>;
 };

@@ -48,3 +48,22 @@ export const changeFavouriteStatus = (state, movie) => {
 
   return movieListUpdated;
 };
+
+export const isCorrectLength = (length, min, max) => {
+  return length > min && length <= max;
+};
+
+export const formateDate = (date) => {
+  const monthNames = [
+    `January`, `February`, `March`,
+    `April`, `May`, `June`, `July`,
+    `August`, `September`, `October`,
+    `November`, `December`
+  ];
+
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${monthNames[monthIndex]} ${day}, ${year}`;
+};

@@ -2,18 +2,18 @@ import React, {PureComponent} from 'react';
 import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
+import {getAuthorizationStatus, getUser} from '../../reducer/user/selectors.js';
+import {constants} from '../../constants.js';
 
 class UserBlock extends PureComponent {
   render() {
-    const {isAuthorizationRequired} = this.props;
+    const {isAuthorizationRequired, user} = this.props;
 
     return <div className="user-block">
       {!isAuthorizationRequired ?
         <div className="user-block__avatar">
-          {/* временно */}
-          <Link to="/favourites">
-            <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
+          <Link to="/mylist">
+            <img src={user ? `${constants.URL}${user.avatar_url}` : ``} alt={user ? user.name : ``} width="63" height="63" />
           </Link>
         </div> :
         <Link className="user-block__link" to="/login">Sign in</Link>
@@ -23,11 +23,13 @@ class UserBlock extends PureComponent {
 }
 
 UserBlock.propTypes = {
-  isAuthorizationRequired: PropTypes.bool
+  isAuthorizationRequired: PropTypes.bool,
+  user: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
-  isAuthorizationRequired: getAuthorizationStatus(state)
+  isAuthorizationRequired: getAuthorizationStatus(state),
+  user: getUser(state)
 });
 
 export {UserBlock};

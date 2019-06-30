@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from "react-router-dom";
 import PropTypes from 'prop-types';
 import {getFilmId, getFilmsAlike} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
@@ -158,7 +158,12 @@ class MovieDetails extends PureComponent {
   _onChangeFavouriteStatus() {
     const id = this.props.movie.id;
     const status = this.props.movie.is_favorite;
-    this.props.onChangeFavouriteStatus(id, status);
+
+    if (this.props.isAuthorizationRequired) {
+      return this.props.history.push(`/login`);
+    }
+
+    return this.props.onChangeFavouriteStatus(id, status);
   }
 }
 
@@ -168,7 +173,10 @@ MovieDetails.propTypes = {
   fullVideoShown: PropTypes.bool,
   onPlayButtonClick: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
-  onChangeFavouriteStatus: PropTypes.func
+  onChangeFavouriteStatus: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  })
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -178,4 +186,4 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export {MovieDetails};
-export default connect(mapStateToProps)(MovieDetails);
+export default withRouter(connect(mapStateToProps)(MovieDetails));

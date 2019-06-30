@@ -4,20 +4,20 @@ import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import {createStore} from 'redux';
 import reducer from '../../reducer';
-import Tabs from './tabs.jsx';
-import {defaultMovie} from '../../mocks/mocks.js';
+import MyList from './my-list.jsx';
+import {films} from '../../mocks/mocks.js';
 
 const mockStore = createStore(reducer);
 
-it(`Tabs correctly renders`, () => {
+it(`MyList correctly renders`, () => {
   const mockFunction = jest.fn();
   const tree = renderer
   .create(
       <Provider store={mockStore}>
         <BrowserRouter>
-          <Tabs
-            movie={defaultMovie}
-            onChange={mockFunction}
+          <MyList
+            movies={films}
+            onGenreChange={mockFunction}
           />
         </BrowserRouter>
       </Provider>

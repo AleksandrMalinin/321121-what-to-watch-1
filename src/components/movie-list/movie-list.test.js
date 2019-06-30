@@ -5,12 +5,13 @@ import MovieList from './movie-list.jsx';
 import {films} from '../../mocks/mocks.js';
 
 it(`MovieList correctly renders`, () => {
-
+  const mockFunction = jest.fn();
   const tree = renderer
   .create(
       <BrowserRouter>
         <MovieList
           movies={films}
+          onGenreChange={mockFunction}
         />
       </BrowserRouter>)
   .toJSON();

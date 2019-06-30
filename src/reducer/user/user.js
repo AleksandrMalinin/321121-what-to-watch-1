@@ -1,5 +1,5 @@
 const initialState = {
-  isAuthorizationRequired: true,
+  isAuthorizationRequired: false,
   user: null,
   comments: null
 };
@@ -7,8 +7,10 @@ const initialState = {
 const ACTION_TYPE = {
   setAuthorizationStatus: `REQUIRED_AUTHORIZATION`,
   loginUser: `LOGIN_USER`,
+  setUser: `SET_USER`,
   authorizeUser: `AUTHORIZE_USER`,
-  addReview: `ADD_REVIEW`
+  addReview: `ADD_REVIEW`,
+  loadComments: `LOAD_COMMENTS`
 };
 
 const ActionCreator = {
@@ -26,9 +28,23 @@ const ActionCreator = {
     };
   },
 
+  setUser: (user) => {
+    return {
+      type: ACTION_TYPE.setUser,
+      payload: user
+    };
+  },
+
   addReview: (comments) => {
     return {
       type: ACTION_TYPE.addReview,
+      payload: comments
+    };
+  },
+
+  loadComments: (comments) => {
+    return {
+      type: ACTION_TYPE.loadComments,
       payload: comments
     };
   }
@@ -45,11 +61,31 @@ const Operation = {
       });
   },
 
-  addReview: (id, comment, rating) => (dispatch, _getState, api) => {
+  setUser: () => (dispatch, _getState, api) => {
+    return api.get(`/login`)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.setAuthorizationStatus(false));
+          dispatch(ActionCreator.setUser(response.data));
+        }
+      });
+  },
+
+  addReview: (id, comment, rating, history) => (dispatch, _getState, api) => {
     return api.post(`/comments/${id}`, {comment, rating})
       .then((response) => {
         if (response.status === 200) {
           dispatch(ActionCreator.addReview(response.data));
+          history.push(`/film/${id}`);
+        }
+      });
+  },
+
+  loadComments: (id) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${id}`, {id})
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.loadComments(response.data));
         }
       });
   }
@@ -65,7 +101,15 @@ const reducer = (state = initialState, action) => {
       user: action.payload
     });
 
+    case ACTION_TYPE.setUser: return Object.assign({}, state, {
+      user: action.payload
+    });
+
     case ACTION_TYPE.addReview: return Object.assign({}, state, {
+      comments: action.payload
+    });
+
+    case ACTION_TYPE.loadComments: return Object.assign({}, state, {
       comments: action.payload
     });
   }

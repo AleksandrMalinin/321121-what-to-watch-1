@@ -307,6 +307,7 @@ Array [
           >
             <button
               className="add-review__btn"
+              disabled={true}
               type="submit"
             >
               Post
