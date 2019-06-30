@@ -9,3 +9,7 @@ export const getAuthorizationStatus = (state) => {
 export const getUser = (state) => {
   return state[NAME_SPACE].user;
 };
+
+export const getComments = (state) => {
+  return state[NAME_SPACE].comments;
+};

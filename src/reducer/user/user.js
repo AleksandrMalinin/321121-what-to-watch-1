@@ -8,7 +8,8 @@ const ACTION_TYPE = {
   setAuthorizationStatus: `REQUIRED_AUTHORIZATION`,
   loginUser: `LOGIN_USER`,
   authorizeUser: `AUTHORIZE_USER`,
-  addReview: `ADD_REVIEW`
+  addReview: `ADD_REVIEW`,
+  loadComments: `LOAD_COMMENTS`
 };
 
 const ActionCreator = {
@@ -29,6 +30,13 @@ const ActionCreator = {
   addReview: (comments) => {
     return {
       type: ACTION_TYPE.addReview,
+      payload: comments
+    };
+  },
+
+  loadComments: (comments) => {
+    return {
+      type: ACTION_TYPE.loadComments,
       payload: comments
     };
   }
@@ -53,6 +61,15 @@ const Operation = {
           history.push(`/film/${id}`);
         }
       });
+  },
+
+  loadComments: (id) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${id}`, {id})
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.loadComments(response.data));
+        }
+      });
   }
 };
 
@@ -67,6 +84,10 @@ const reducer = (state = initialState, action) => {
     });
 
     case ACTION_TYPE.addReview: return Object.assign({}, state, {
+      comments: action.payload
+    });
+
+    case ACTION_TYPE.loadComments: return Object.assign({}, state, {
       comments: action.payload
     });
   }
