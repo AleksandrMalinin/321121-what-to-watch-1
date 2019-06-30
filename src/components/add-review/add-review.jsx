@@ -1,31 +1,21 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Operation} from '../../reducer/user/user.js';
 import {withRouter} from "react-router-dom";
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route.js';
-import {getFilmId} from '../../reducer/data/selectors.js';
 import Logo from '../logo/logo.jsx';
 import UserBlock from '../user-block/user-block.jsx';
-import {isCorrectLength} from '../../utils.js';
 import {constants} from '../../constants.js';
+import withAddReview from '../../hocs/with-add-review/with-add-review.js';
 
 class AddReview extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      rating: 0,
-      comment: ``
-    };
-
-    this.onRatingCheck = this._onRatingCheck.bind(this);
-    this.onReviewChange = this._onReviewChange.bind(this);
-    this.onSubmit = this._onSubmit.bind(this);
-  }
-
   render() {
-    const {movie} = this.props;
+    const {
+      movie,
+      comment,
+      onRatingCheck,
+      onReviewChange,
+      onSubmit
+    } = this.props;
 
     return <React.Fragment>
       <div className="visually-hidden">
@@ -87,30 +77,30 @@ class AddReview extends PureComponent {
         </div>
 
         <div className="add-review">
-          <form action="#" className="add-review__form" onSubmit={this.onSubmit}>
+          <form action="#" className="add-review__form" onSubmit={onSubmit}>
             <div className="rating">
               <div className="rating__stars">
-                <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={this.onRatingCheck}/>
+                <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
-                <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onChange={this.onRatingCheck}/>
+                <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onChange={onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onChange={this.onRatingCheck}/>
+                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onChange={onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
-                <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onChange={this.onRatingCheck}/>
+                <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onChange={onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-4">Rating 4</label>
 
-                <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onChange={this.onRatingCheck}/>
+                <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onChange={onRatingCheck}/>
                 <label className="rating__label" htmlFor="star-5">Rating 5</label>
               </div>
             </div>
 
             <div className="add-review__text">
-              <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" required onChange={this.onReviewChange}></textarea>
+              <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" required onChange={onReviewChange}></textarea>
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit" disabled={this.state.comment.length < constants.MIN_FIELD_LENGTH}>Post</button>
+                <button className="add-review__btn" type="submit" disabled={comment.length < constants.MIN_FIELD_LENGTH}>Post</button>
               </div>
 
             </div>
@@ -119,61 +109,19 @@ class AddReview extends PureComponent {
       </section>
     </React.Fragment>;
   }
-
-  _onSubmit(evt) {
-    evt.preventDefault();
-
-    const {comment, rating} = this.state;
-
-    if (this.isValidForm) {
-      this.props.onPostReview(this.props.movie.id, comment, parseInt(rating, 10), this.props.history);
-    }
-
-    evt.target.reset();
-  }
-
-  _onRatingCheck(evt) {
-    const target = evt.target;
-
-    if (evt) {
-      this.setState({
-        rating: target.value
-      });
-    }
-  }
-
-  _onReviewChange(evt) {
-    const target = evt.target;
-
-    if (evt) {
-      this.setState({
-        comment: target.value,
-      });
-    }
-  }
-
-  get isValidForm() {
-    return this.state.rating !== 0 && isCorrectLength(this.state.comment.length, constants.MIN_FIELD_LENGTH, constants.MAX_FIELD_LENGTH);
-  }
 }
 
 AddReview.propTypes = {
   movie: PropTypes.object,
+  comment: PropTypes.string,
+  onRatingCheck: PropTypes.func,
+  onReviewChange: PropTypes.func,
   onPostReview: PropTypes.func,
+  onSubmit: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   })
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  movie: getFilmId(state, ownProps.match.params.id)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onPostReview: (id, comment, rating, history) => {
-    dispatch(Operation.addReview(id, comment, rating, history));
-  }
-});
-
 export {AddReview};
-export default withRouter(withPrivateRoute(connect(mapStateToProps, mapDispatchToProps)(AddReview)));
+export default withRouter(withPrivateRoute(withAddReview(AddReview)));
