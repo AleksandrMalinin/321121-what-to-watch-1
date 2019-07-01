@@ -40,7 +40,14 @@ const withAddReview = (Component) => {
       const {comment, rating} = this.state;
 
       if (this.isValidForm) {
-        this.props.onPostReview(this.props.movie.id, comment, parseInt(rating, 10), this.props.history);
+        this.props.onPostReview(this.props.movie.id, comment, parseInt(rating, 10))
+        .then((response) => {
+          if (!response.error) {
+            return this.props.history.push(`/film/${this.props.movie.id}`);
+          }
+
+          throw new Error(`Something went wrong :/`);
+        });
       }
 
       evt.target.reset();
@@ -84,8 +91,8 @@ const withAddReview = (Component) => {
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    onPostReview: (id, comment, rating, history) => {
-      dispatch(Operation.addReview(id, comment, rating, history));
+    onPostReview: (id, comment, rating) => {
+      return dispatch(Operation.addReview(id, comment, rating));
     }
   });
 

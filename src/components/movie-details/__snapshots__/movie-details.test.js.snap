@@ -158,21 +158,13 @@ Array [
         <div
           className="user-block"
         >
-          <div
-            className="user-block__avatar"
+          <a
+            className="user-block__link"
+            href="/login"
+            onClick={[Function]}
           >
-            <a
-              href="/mylist"
-              onClick={[Function]}
-            >
-              <img
-                alt=""
-                height="63"
-                src=""
-                width="63"
-              />
-            </a>
-          </div>
+            Sign in
+          </a>
         </div>
       </header>
       <div

@@ -71,13 +71,17 @@ const Operation = {
       });
   },
 
-  addReview: (id, comment, rating, history) => (dispatch, _getState, api) => {
+  addReview: (id, comment, rating) => (dispatch, _getState, api) => {
     return api.post(`/comments/${id}`, {comment, rating})
       .then((response) => {
         if (response.status === 200) {
           dispatch(ActionCreator.addReview(response.data));
-          history.push(`/film/${id}`);
         }
+
+        return {error: false};
+      }).
+      catch(() => {
+        return {error: true};
       });
   },
 
