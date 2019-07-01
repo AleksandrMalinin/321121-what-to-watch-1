@@ -5,7 +5,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {createStore} from 'redux';
 import reducer from '../../reducer';
 import {AddReview} from './add-review.jsx';
-import {defaultMovie} from '../../mocks/mocks.js';
+import {defaultMovie, comment} from '../../mocks/mocks.js';
 
 const mockStore = createStore(reducer);
 
@@ -17,6 +17,7 @@ it(`AddReview correctly renders`, () => {
         <BrowserRouter>
           <AddReview
             movie={defaultMovie}
+            comment={comment.comment}
             onPostReview={mockFunction}
           />
         </BrowserRouter>

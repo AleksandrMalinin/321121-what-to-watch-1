@@ -1,28 +1,18 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
-import {createStore} from 'redux';
-import reducer from '../../reducer';
-import MyList from './my-list.jsx';
+import ShallowRenderer from 'react-test-renderer/shallow';
+import {MyList} from './my-list.jsx';
 import {films} from '../../mocks/mocks.js';
 
-const mockStore = createStore(reducer);
-
 it(`MyList correctly renders`, () => {
+  const renderer = new ShallowRenderer();
   const mockFunction = jest.fn();
   const tree = renderer
-  .create(
-      <Provider store={mockStore}>
-        <BrowserRouter>
-          <MyList
-            movies={films}
-            onGenreChange={mockFunction}
-          />
-        </BrowserRouter>
-      </Provider>
-  )
-  .toJSON();
+  .render(
+      <MyList
+        moviesFavourite={films}
+        onGenreChange={mockFunction}
+      />
+  );
 
   expect(tree).toMatchSnapshot();
 });

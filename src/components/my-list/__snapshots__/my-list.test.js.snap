@@ -1,3 +1,98 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MyList correctly renders 1`] = `null`;
+exports[`MyList correctly renders 1`] = `
+<React.Fragment>
+  <Sprite />
+  <div
+    className="user-page"
+  >
+    <header
+      className="page-header user-page__head"
+    >
+      <Logo />
+      <Memo(ConnectFunction) />
+    </header>
+    <section
+      className="catalog"
+    >
+      <h2
+        className="catalog__title visually-hidden"
+      >
+        Catalog
+      </h2>
+      <WithActiveItem
+        movies={
+          Array [
+            Object {
+              "genre": "Comedies",
+              "name": "Fantastic Beasts: The Crimes of Grindelwald",
+              "preview_image": "img/fantastic-beasts-the-crimes-of-grindelwald.jpg",
+              "preview_video_link": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+            },
+            Object {
+              "genre": "Crime",
+              "name": "Bohemian Rhapsody",
+              "preview_image": "img/bohemian-rhapsody.jpg",
+              "preview_video_link": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+            },
+            Object {
+              "genre": "Documentary",
+              "name": "Macbeth",
+              "preview_image": "img/macbeth.jpg",
+              "preview_video_link": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+            },
+            Object {
+              "genre": "Dramas",
+              "name": "Aviator",
+              "preview_image": "img/aviator.jpg",
+              "preview_video_link": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+            },
+            Object {
+              "genre": "Horror",
+              "name": "We need to talk about Kevin",
+              "preview_image": "img/we-need-to-talk-about-kevin.jpg",
+              "preview_video_link": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+            },
+          ]
+        }
+        onChange={[MockFunction]}
+      />
+    </section>
+    <footer
+      className="page-footer"
+    >
+      <div
+        className="logo"
+      >
+        <a
+          className="logo__link logo__link--light"
+          href="main.html"
+        >
+          <span
+            className="logo__letter logo__letter--1"
+          >
+            W
+          </span>
+          <span
+            className="logo__letter logo__letter--2"
+          >
+            T
+          </span>
+          <span
+            className="logo__letter logo__letter--3"
+          >
+            W
+          </span>
+        </a>
+      </div>
+      <div
+        className="copyright"
+      >
+        <p>
+          © 2019 What to watch Ltd.
+        </p>
+      </div>
+    </footer>
+  </div>
+</React.Fragment>
+`;

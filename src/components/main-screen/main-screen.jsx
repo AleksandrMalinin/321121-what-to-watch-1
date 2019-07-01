@@ -3,22 +3,19 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter} from "react-router-dom";
 import {getPromoFilm} from '../../reducer/data/selectors.js';
+import Sprite from '../sprite/sprite.jsx';
 import Logo from '../logo/logo.jsx';
 import UserBlock from '../user-block/user-block.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
 import FullVideoPlayer from '../full-video-player/full-video-player.jsx';
+import withFullVideoPlayer from '../../hocs/with-full-video-player/with-full-video-player.js';
 
 class MainScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isPlaying: false
-    };
-
-    this.onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this.onChangeFavouriteStatus = this._onChangeFavouriteStatus.bind(this);
   }
 
@@ -32,37 +29,14 @@ class MainScreen extends PureComponent {
       onGenreChange,
       isAuthorizationRequired,
       onMoreButtonClick,
-      fullVideoShown
+      isPlaying,
+      fullVideoShown,
+      onPlayButtonClick
     } = this.props;
 
     return <React.Fragment>
-      <div className="visually-hidden">
-        <svg xmlns="http://www.w3.org/2000/svg">
-          <symbol id="add" viewBox="0 0 19 20">
-            <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-              <polygon id="+" fill="#EEE5B5" points="10.777832 11.2880859 10.777832 19.5527344 8.41650391 19.5527344 8.41650391 11.2880859 0.627929688 11.2880859 0.627929688 8.92675781 8.41650391 8.92675781 8.41650391 0.662109375 10.777832 0.662109375 10.777832 8.92675781 18.5664062 8.92675781 18.5664062 11.2880859"/>
-            </g>
-          </symbol>
-          <symbol id="full-screen" viewBox="0 0 27 27">
-            <path fillRule="evenodd" clipRule="evenodd" d="M23.8571 0H16V3.14286H23.8571V11H27V3.14286V0H23.8571Z" fill="#FFF9D9" fillOpacity="0.7"/>
-            <path fillRule="evenodd" clipRule="evenodd" d="M27 23.8571V16H23.8571V23.8571H16V27H23.8571H27L27 23.8571Z" fill="#FFF9D9" fillOpacity="0.7"/>
-            <path fillRule="evenodd" clipRule="evenodd" d="M0 3.14286L0 11H3.14286L3.14286 3.14286L11 3.14286V0H3.14286H0L0 3.14286Z" fill="#FFF9D9" fillOpacity="0.7"/>
-            <path fillRule="evenodd" clipRule="evenodd" d="M3.14286 27H11V23.8571H3.14286L3.14286 16H0L0 23.8571V27H3.14286Z" fill="#FFF9D9" fillOpacity="0.7"/>
-          </symbol>
-          <symbol id="in-list" viewBox="0 0 18 14">
-            <path fillRule="evenodd" clipRule="evenodd" d="M2.40513 5.35353L6.1818 8.90902L15.5807 0L18 2.80485L6.18935 14L0 8.17346L2.40513 5.35353Z" fill="#EEE5B5"/>
-          </symbol>
-          <symbol id="pause" viewBox="0 0 14 21">
-            <g id="Artboard" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-              <polygon id="Line" fill="#EEE5B5" fillRule="nonzero" points="0 -1.11910481e-13 4 -1.11910481e-13 4 21 0 21"/>
-              <polygon id="Line" fill="#EEE5B5" fillRule="nonzero" points="10 -1.11910481e-13 14 -1.11910481e-13 14 21 10 21"/>
-            </g>
-          </symbol>
-          <symbol id="play-s" viewBox="0 0 19 19">
-            <path fillRule="evenodd" clipRule="evenodd" d="M0 0L19 9.5L0 19V0Z" fill="#EEE5B5"/>
-          </symbol>
-        </svg>
-      </div>
+      <Sprite/>
+
       <section className="movie-card">
         <div className="movie-card__bg">
           <img src={moviePromo ? moviePromo.background_image : ``} alt={moviePromo ? moviePromo.background_image : ``} />
@@ -89,7 +63,7 @@ class MainScreen extends PureComponent {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={this.onPlayButtonClick}>
+                <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -159,19 +133,11 @@ class MainScreen extends PureComponent {
       </div>
 
       {fullVideoShown ? <FullVideoPlayer
-        onPlayButtonClick={this.onPlayButtonClick}
+        onPlayButtonClick={onPlayButtonClick}
         movie={moviePromo}
-        isPlaying={this.state.isPlaying}/> : ``
+        isPlaying={isPlaying}/> : ``
       }
     </React.Fragment>;
-  }
-
-  _onPlayButtonClick() {
-    this.props.onPlayButtonClick(!this.props.fullVideoShown);
-
-    this.setState({
-      isPlaying: !this.state.isPlaying,
-    });
   }
 
   _onChangeFavouriteStatus() {
@@ -197,11 +163,12 @@ MainScreen.propTypes = {
   })).isRequired,
   moviesLength: PropTypes.number,
   moviesShown: PropTypes.number,
+  isPlaying: PropTypes.bool,
+  fullVideoShown: PropTypes.bool,
+  onPlayButtonClick: PropTypes.func,
   onGenreChange: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
   onMoreButtonClick: PropTypes.func,
-  fullVideoShown: PropTypes.bool,
-  onPlayButtonClick: PropTypes.func,
   onChangeFavouriteStatus: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
@@ -213,4 +180,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {MainScreen};
-export default withRouter(connect(mapStateToProps)(MainScreen));
+export default connect(mapStateToProps)(withRouter(withFullVideoPlayer(MainScreen)));

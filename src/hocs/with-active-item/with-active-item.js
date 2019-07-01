@@ -36,5 +36,4 @@ const withActiveItem = (initialItem) => (Component) => {
   return WithActiveItem;
 };
 
-
 export default withActiveItem;
