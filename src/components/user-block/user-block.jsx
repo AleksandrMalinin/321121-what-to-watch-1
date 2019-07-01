@@ -10,7 +10,7 @@ class UserBlock extends PureComponent {
     const {isAuthorizationRequired, user} = this.props;
 
     return <div className="user-block">
-      {!isAuthorizationRequired ?
+      {!isAuthorizationRequired && user ?
         <div className="user-block__avatar">
           <Link to="/mylist">
             <img src={user ? `${constants.URL}${user.avatar_url}` : ``} alt={user ? user.name : ``} width="63" height="63" />
