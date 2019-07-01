@@ -70,4 +70,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {MyList};
-export default withPrivateRoute(connect(mapStateToProps, mapDispatchToProps)(MyList));
+export default connect(mapStateToProps, mapDispatchToProps)(withPrivateRoute(MyList));
