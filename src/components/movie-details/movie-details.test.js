@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import ShallowRenderer from 'react-test-renderer/shallow';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import {createStore} from 'redux';
@@ -10,17 +10,19 @@ import {films, defaultMovie} from '../../mocks/mocks.js';
 const mockStore = createStore(reducer);
 
 it(`MovieDetails correctly renders`, () => {
+  const renderer = new ShallowRenderer();
   const tree = renderer
-  .create(
+  .render(
       <Provider store={mockStore}>
         <BrowserRouter>
           <MovieDetails
             movie={defaultMovie}
             moviesAlike={films}
-          />
+            onLoadComments={jest.fn()}
+          />)
         </BrowserRouter>
-      </Provider>)
-  .toJSON();
+      </Provider>
+  );
 
   expect(tree).toMatchSnapshot();
 });

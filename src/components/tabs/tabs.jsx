@@ -113,8 +113,14 @@ class Tabs extends PureComponent {
     this.props.onChange(name);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.movie) {
+      this.props.onLoadComments(this.props.movie.id);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie.id !== this.props.movie.id) {
       this.props.onLoadComments(this.props.movie.id);
     }
   }
@@ -138,4 +144,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default withActiveItem(constants.DEFAULT_TAB)(connect(mapStateToProps, mapDispatchToProps)(Tabs));
+export {Tabs};
+export default connect(mapStateToProps, mapDispatchToProps)(withActiveItem(constants.DEFAULT_TAB)(Tabs));

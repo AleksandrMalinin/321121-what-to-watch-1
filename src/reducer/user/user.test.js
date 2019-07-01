@@ -51,3 +51,23 @@ it(`Should make a correct API call to /comments/:id`, function () {
       });
     });
 });
+
+it(`Should make a correct API call to /comments/:id`, function () {
+  const dispatch = jest.fn();
+  const api = createAPI(dispatch);
+  const apiMock = new MockAdapter(api);
+  const commentsLoader = Operation.loadComments(defaultMovie.id);
+
+  apiMock
+    .onGet(`/comments/${defaultMovie.id}`)
+    .reply(200, [{fake: true}]);
+
+  return commentsLoader(dispatch, jest.fn(), api)
+    .then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ACTION_TYPE.loadComments,
+        payload: [{fake: true}],
+      });
+    });
+});
