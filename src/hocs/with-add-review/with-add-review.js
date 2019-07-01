@@ -22,7 +22,7 @@ const withAddReview = (Component) => {
     }
 
     render() {
-      const {movie} = this.props.movie;
+      const {movie} = this.props;
 
       return <Component
         {...this.props}
