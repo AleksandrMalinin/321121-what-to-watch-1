@@ -32,6 +32,30 @@ it(`Should make a correct API call to /login`, function () {
     });
 });
 
+it(`Should make a correct API call to /login`, function () {
+  const dispatch = jest.fn();
+  const api = createAPI(dispatch);
+  const apiMock = new MockAdapter(api);
+  const userLoader = Operation.setUser();
+
+  apiMock
+    .onGet(`/login`)
+    .reply(200, [{fake: true}]);
+
+  return userLoader(dispatch, jest.fn(), api)
+    .then(() => {
+      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ACTION_TYPE.setAuthorizationStatus,
+        payload: false,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: ACTION_TYPE.setUser,
+        payload: [{fake: true}],
+      });
+    });
+});
+
 it(`Should make a correct API call to /comments/:id`, function () {
   const dispatch = jest.fn();
   const api = createAPI(dispatch);

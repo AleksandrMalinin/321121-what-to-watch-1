@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreators} from '../../reducer/data/data.js';
+import {ActionCreators, Operation} from '../../reducer/data/data.js';
 import {getFavouriteFilms} from '../../reducer/data/selectors.js';
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route.js';
 import Sprite from '../sprite/sprite.jsx';
@@ -47,6 +47,10 @@ class MyList extends PureComponent {
       </div>
     </React.Fragment>;
   }
+
+  componentDidMount() {
+    this.props.loadFavouriteFilms();
+  }
 }
 
 MyList.propTypes = {
@@ -56,7 +60,8 @@ MyList.propTypes = {
     previewImage: PropTypes.string,
     genre: PropTypes.string
   })).isRequired,
-  onGenreChange: PropTypes.func
+  onGenreChange: PropTypes.func,
+  loadFavouriteFilms: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -66,6 +71,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange: (genre) => {
     dispatch(ActionCreators.changeGenre(genre));
+  },
+
+  loadFavouriteFilms: () => {
+    dispatch(Operation.loadFavouriteFilms());
   }
 });
 
