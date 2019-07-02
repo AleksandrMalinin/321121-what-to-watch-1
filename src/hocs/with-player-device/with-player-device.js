@@ -42,7 +42,7 @@ const withPlayerDevice = (Component) => {
         isPlaying: this.props.isPlaying
       });
 
-      this.runPlayer();
+      this._runPlayer();
     }
 
     componentDidUpdate() {
@@ -50,7 +50,7 @@ const withPlayerDevice = (Component) => {
 
       if (this.state.progress === MAX_PROGRESS) {
         video.load();
-        this.stopPlayer();
+        this._stopPlayer();
       }
     }
 
