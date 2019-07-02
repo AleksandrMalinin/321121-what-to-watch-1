@@ -8,6 +8,10 @@ import {constants} from '../../constants.js';
 
 const withAddReview = (Component) => {
   class WithAddReview extends PureComponent {
+    get isValidForm() {
+      return this.state.rating !== 0 && isCorrectLength(this.state.comment.length, constants.MIN_FIELD_LENGTH, constants.MAX_FIELD_LENGTH);
+    }
+
     constructor(props) {
       super(props);
 
@@ -71,10 +75,6 @@ const withAddReview = (Component) => {
           comment: target.value,
         });
       }
-    }
-
-    get isValidForm() {
-      return this.state.rating !== 0 && isCorrectLength(this.state.comment.length, constants.MIN_FIELD_LENGTH, constants.MAX_FIELD_LENGTH);
     }
   }
 

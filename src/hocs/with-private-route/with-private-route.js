@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
+import {getAuthorizationStatus, isDataLoading, getUser} from '../../reducer/user/selectors.js';
 
 const withPrivateRoute = (Component) => {
   const WithPrivateRoute = (props) => {
-    const {isAuthorizationRequired} = props;
+    const {isAuthorizationRequired, isLoading} = props;
 
-    if (isAuthorizationRequired) {
+    if (isAuthorizationRequired && !isLoading) {
       return <Redirect to="/login"/>;
     }
 
@@ -21,7 +21,9 @@ const withPrivateRoute = (Component) => {
   };
 
   const mapStateToProps = (state) => ({
-    isAuthorizationRequired: getAuthorizationStatus(state)
+    isAuthorizationRequired: getAuthorizationStatus(state),
+    isLoading: isDataLoading(state),
+    user: getUser(state)
   });
 
   return connect(mapStateToProps)(WithPrivateRoute);

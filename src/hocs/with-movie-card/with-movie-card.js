@@ -16,6 +16,10 @@ const withMovieCard = (Component) => {
       this.handleMouseLeave = this._handleMouseLeave.bind(this);
     }
 
+    componentWillUnmount() {
+      clearTimeout(this.state.timeoutId);
+    }
+
     render() {
       return <Component
         {...this.props}
@@ -48,10 +52,6 @@ const withMovieCard = (Component) => {
         isPlaying: false,
         timeoutId: null
       });
-    }
-
-    componentWillUnmount() {
-      clearTimeout(this.state.timeoutId);
     }
   }
 

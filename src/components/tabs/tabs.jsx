@@ -16,6 +16,18 @@ class Tabs extends PureComponent {
     this.handleTabSwitch = (genre) => this._handleTabSwitch.bind(this, genre);
   }
 
+  componentDidMount() {
+    if (this.props.movie) {
+      this.props.handleCommentsLoad(this.props.movie.id);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie.id !== this.props.movie.id) {
+      this.props.handleCommentsLoad(this.props.movie.id);
+    }
+  }
+
   render() {
     const {movie, activeItem, comments} = this.props;
     const tabNames = constants.TAB_NAMES;
@@ -111,18 +123,6 @@ class Tabs extends PureComponent {
   _handleTabSwitch(name, event) {
     event.preventDefault();
     this.props.handleChange(name);
-  }
-
-  componentDidMount() {
-    if (this.props.movie) {
-      this.props.handleCommentsLoad(this.props.movie.id);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.movie.id !== this.props.movie.id) {
-      this.props.handleCommentsLoad(this.props.movie.id);
-    }
   }
 }
 
