@@ -5,22 +5,28 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
 const MovieList = (props) => {
   const {movies, handleChange} = props;
-  const moviesCut = movies.slice(0, props.moviesShown);
+  let moviesCut;
+
+  if (movies) {
+    moviesCut = movies.slice(0, props.moviesShown);
+  }
 
   return <div className="catalog__movies-list">
-    {moviesCut.map((movie) => <MovieCard
+    {moviesCut ? moviesCut.map((movie) => <MovieCard
       movie={movie}
       key={movie.name}
       handleMouseEnter={handleChange}
       handleMouseLeave={handleChange}
-    />)}
+    />
+    ) :
+      ``}
   </div>;
 };
 
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string
-  })).isRequired,
+  })),
   moviesShown: PropTypes.number,
   handleChange: PropTypes.func
 };
