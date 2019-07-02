@@ -103,4 +103,4 @@ AddReview.propTypes = {
 };
 
 export {AddReview};
-export default withRouter(withPrivateRoute(withAddReview(AddReview)));
+export default withRouter(withAddReview(withPrivateRoute(AddReview)));

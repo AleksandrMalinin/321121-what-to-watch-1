@@ -1,5 +1,5 @@
 const initialState = {
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   user: null,
   comments: null
 };
@@ -57,7 +57,11 @@ const Operation = {
         if (response.status === 200) {
           dispatch(ActionCreator.setAuthorizationStatus(false));
           dispatch(ActionCreator.authorizeUser(response.data));
+
+          return {error: false};
         }
+
+        return {error: true};
       });
   },
 
@@ -76,11 +80,10 @@ const Operation = {
       .then((response) => {
         if (response.status === 200) {
           dispatch(ActionCreator.addReview(response.data));
+
+          return {error: false};
         }
 
-        return {error: false};
-      }).
-      catch(() => {
         return {error: true};
       });
   },

@@ -7,7 +7,7 @@ import withSignIn from '../../hocs/with-sign-in/with-sign-in.js';
 
 class SignIn extends PureComponent {
   render() {
-    const {onSubmit, onEmailChange, onPasswordChange} = this.props;
+    const {error, onSubmit, onEmailChange, onPasswordChange} = this.props;
 
     return <React.Fragment>
       <Sprite/>
@@ -21,6 +21,13 @@ class SignIn extends PureComponent {
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={onSubmit}>
+            {
+              error ?
+                <div className="sign-in__message">
+                  <p>Something went wrong ¯ \ _ (ツ) _ / ¯</p>
+                </div> :
+                ``
+            }
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={onEmailChange} required/>
@@ -56,6 +63,7 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
+  error: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired

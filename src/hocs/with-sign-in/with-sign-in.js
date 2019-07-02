@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Operation} from '../../reducer/user/user.js';
 
 const withSignIn = (Component) => {
   class WithSignIn extends PureComponent {
@@ -7,36 +9,46 @@ const withSignIn = (Component) => {
       super(props);
 
       this.state = {
+        error: false,
         email: null,
         password: null
       };
 
-      this.onSubmit = this.onSubmit.bind(this);
-      this.onEmailChange = this.onEmailChange.bind(this);
-      this.onPasswordChange = this.onPasswordChange.bind(this);
+      this.onSubmit = this._onSubmit.bind(this);
+      this.onEmailChange = this._onEmailChange.bind(this);
+      this.onPasswordChange = this._onPasswordChange.bind(this);
     }
 
     render() {
       return <Component
         {...this.props}
+        error={this.state.error}
         onSubmit={this.onSubmit}
         onEmailChange={this.onEmailChange}
         onPasswordChange={this.onPasswordChange}
       />;
     }
 
-    onSubmit(evt) {
+    _onSubmit(evt) {
       evt.preventDefault();
 
       const {email, password} = this.state;
 
       if (email && password) {
-        this.props.onSubmit(email, password);
-        this.props.history.push(`/`);
+        this.props.onSubmit(email, password)
+        .then((response) => {
+          if (!response.error) {
+            this.props.history.push(`/`);
+          } else {
+            this.setState({
+              error: response.error
+            });
+          }
+        });
       }
     }
 
-    onEmailChange(evt) {
+    _onEmailChange(evt) {
       const target = evt.target;
 
       if (evt) {
@@ -46,7 +58,7 @@ const withSignIn = (Component) => {
       }
     }
 
-    onPasswordChange(evt) {
+    _onPasswordChange(evt) {
       const target = evt.target;
 
       if (evt) {
@@ -64,7 +76,13 @@ const withSignIn = (Component) => {
     })
   };
 
-  return WithSignIn;
+  const mapDispatchToProps = (dispatch) => ({
+    onSubmit: (email, password) => {
+      return dispatch(Operation.loginUser(email, password));
+    }
+  });
+
+  return connect(undefined, mapDispatchToProps)(WithSignIn);
 };
 
 export default withSignIn;

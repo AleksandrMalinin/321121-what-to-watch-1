@@ -2,8 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route} from "react-router-dom";
-import {Operation as DataOperation, ActionCreators} from '../../reducer/data/data.js';
-import {Operation as UserOperation} from '../../reducer/user/user.js';
+import {Operation, ActionCreators} from '../../reducer/data/data.js';
 import {getFilteredFilms, getGenre, getGenres, getFilmsLength, getFilmsQuantity, getFullVideoState} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import MainScreen from '../main-screen/main-screen.jsx';
@@ -39,9 +38,7 @@ class App extends PureComponent {
         onPlayButtonClick={onPlayButtonClick}
         onChangeFavouriteStatus={onChangeFavouriteStatus}
       />}/>
-      <Route path="/login" exact render={() => <SignIn
-        onSubmit={this.props.onSubmit}/>
-      }/>
+      <Route path="/login" exact component={SignIn}/>
       <Route path="/mylist" exact component={MyList}/>
       <Route path="/film/:id" exact render={(props) => <MovieDetails
         {...props}
@@ -90,10 +87,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreators.changeGenre(genre));
   },
 
-  onSubmit: (email, password) => {
-    dispatch(UserOperation.loginUser(email, password));
-  },
-
   onMoreButtonClick: (count) => {
     dispatch(ActionCreators.getRestFilms(count));
   },
@@ -103,7 +96,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   onChangeFavouriteStatus: (id, status) => {
-    dispatch(DataOperation.changeFavouriteStatus(id, status));
+    dispatch(Operation.changeFavouriteStatus(id, status));
   }
 });
 
