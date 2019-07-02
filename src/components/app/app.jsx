@@ -17,12 +17,12 @@ class App extends PureComponent {
       moviesList,
       moviesLength,
       moviesShown,
-      onGenreChange,
+      handleGenreChange,
       genres,
-      onMoreButtonClick,
+      handleMoreButtonClick,
       fullVideoShown,
-      onPlayButtonClick,
-      onChangeFavouriteStatus
+      handlePlayButtonClick,
+      handleChangeFavouriteStatus
     } = this.props;
 
     return <Switch>
@@ -31,12 +31,12 @@ class App extends PureComponent {
         moviesList={moviesList}
         moviesLength={moviesLength}
         moviesShown={moviesShown}
-        onGenreChange={onGenreChange}
+        handleGenreChange={handleGenreChange}
         isAuthorizationRequired={this.props.isAuthorizationRequired}
-        onMoreButtonClick={onMoreButtonClick}
+        handleMoreButtonClick={handleMoreButtonClick}
         fullVideoShown={fullVideoShown}
-        onPlayButtonClick={onPlayButtonClick}
-        onChangeFavouriteStatus={onChangeFavouriteStatus}
+        handlePlayButtonClick={handlePlayButtonClick}
+        handleChangeFavouriteStatus={handleChangeFavouriteStatus}
       />}/>
       <Route path="/login" exact component={SignIn}/>
       <Route path="/mylist" exact component={MyList}/>
@@ -44,8 +44,8 @@ class App extends PureComponent {
         {...props}
         moviesShown={moviesShown}
         fullVideoShown={fullVideoShown}
-        onPlayButtonClick={onPlayButtonClick}
-        onChangeFavouriteStatus={onChangeFavouriteStatus}/>
+        handlePlayButtonClick={handlePlayButtonClick}
+        handleChangeFavouriteStatus={handleChangeFavouriteStatus}/>
       }/>
       <Route path="/reviews/add/:id" exact render={(props) => <AddReview {...props}/>}/>
     </Switch>;
@@ -64,12 +64,12 @@ App.propTypes = {
   moviesShown: PropTypes.number,
   genres: PropTypes.array.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
-  onGenreChange: PropTypes.func,
-  onSubmit: PropTypes.func,
-  onMoreButtonClick: PropTypes.func,
+  handleGenreChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  handleMoreButtonClick: PropTypes.func,
   fullVideoShown: PropTypes.bool,
-  onPlayButtonClick: PropTypes.func,
-  onChangeFavouriteStatus: PropTypes.func,
+  handlePlayButtonClick: PropTypes.func,
+  handleChangeFavouriteStatus: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -83,19 +83,19 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreChange: (genre) => {
+  handleGenreChange: (genre) => {
     dispatch(ActionCreators.changeGenre(genre));
   },
 
-  onMoreButtonClick: (count) => {
+  handleMoreButtonClick: (count) => {
     dispatch(ActionCreators.getRestFilms(count));
   },
 
-  onPlayButtonClick: (state) => {
+  handlePlayButtonClick: (state) => {
     dispatch(ActionCreators.changeFullVideoState(state));
   },
 
-  onChangeFavouriteStatus: (id, status) => {
+  handleChangeFavouriteStatus: (id, status) => {
     dispatch(Operation.changeFavouriteStatus(id, status));
   }
 });

@@ -18,7 +18,7 @@ it(`MovieDetails correctly renders`, () => {
           <MovieDetails
             movie={defaultMovie}
             moviesAlike={films}
-            onLoadComments={jest.fn()}
+            handleCommentsLoad={jest.fn()}
           />)
         </BrowserRouter>
       </Provider>

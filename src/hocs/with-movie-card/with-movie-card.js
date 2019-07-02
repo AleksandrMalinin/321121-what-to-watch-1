@@ -12,21 +12,21 @@ const withMovieCard = (Component) => {
         timeoutId: null
       };
 
-      this.onMouseEnter = this._onMouseEnter.bind(this);
-      this.onMouseLeave = this._onMouseLeave.bind(this);
+      this.handleMouseEnter = this._handleMouseEnter.bind(this);
+      this.handleMouseLeave = this._handleMouseLeave.bind(this);
     }
 
     render() {
       return <Component
         {...this.props}
         isPlaying={this.state.isPlaying}
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
+        handleMouseEnter={this.handleMouseEnter}
+        handleMouseLeave={this.handleMouseLeave}
       />;
     }
 
-    _onMouseEnter() {
-      this.props.onMouseEnter(this.props.movie);
+    _handleMouseEnter() {
+      this.props.handleMouseEnter(this.props.movie);
 
       const id = setTimeout(() => {
         this.setState({
@@ -39,8 +39,8 @@ const withMovieCard = (Component) => {
       });
     }
 
-    _onMouseLeave() {
-      this.props.onMouseLeave(null);
+    _handleMouseLeave() {
+      this.props.handleMouseLeave(null);
 
       clearTimeout(this.state.timeoutId);
 
@@ -64,9 +64,9 @@ const withMovieCard = (Component) => {
       /* eslint-enable */
     }),
     activeItem: PropTypes.string,
-    onChange: PropTypes.func,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func
+    handleChange: PropTypes.func,
+    handleMouseEnter: PropTypes.func,
+    handleMouseLeave: PropTypes.func
   };
 
   return WithMovieCard;

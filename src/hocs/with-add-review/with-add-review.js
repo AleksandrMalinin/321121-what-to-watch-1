@@ -16,9 +16,9 @@ const withAddReview = (Component) => {
         comment: ``
       };
 
-      this.onRatingCheck = this._onRatingCheck.bind(this);
-      this.onReviewChange = this._onReviewChange.bind(this);
-      this.onSubmit = this._onSubmit.bind(this);
+      this.handleRatingCheck = this._handleRatingCheck.bind(this);
+      this.handleReviewChange = this._handleReviewChange.bind(this);
+      this.handleSubmit = this._handleSubmit.bind(this);
     }
 
     render() {
@@ -28,9 +28,9 @@ const withAddReview = (Component) => {
         {...this.props}
         movie={movie}
         comment={this.state.comment}
-        onRatingCheck={this.onRatingCheck}
-        onReviewChange={this.onReviewChange}
-        onSubmit={this.onSubmit}
+        handleRatingCheck={this.handleRatingCheck}
+        handleReviewChange={this.handleReviewChange}
+        handleSubmit={this.handleSubmit}
       />;
     }
 
@@ -40,7 +40,7 @@ const withAddReview = (Component) => {
       const {comment, rating} = this.state;
 
       if (this.isValidForm) {
-        this.props.onPostReview(this.props.movie.id, comment, parseInt(rating, 10))
+        this.props.handlePostReview(this.props.movie.id, comment, parseInt(rating, 10))
         .then((response) => {
           if (!response.error) {
             return this.props.history.push(`/film/${this.props.movie.id}`);
@@ -53,7 +53,7 @@ const withAddReview = (Component) => {
       evt.target.reset();
     }
 
-    _onRatingCheck(evt) {
+    _handleRatingCheck(evt) {
       const target = evt.target;
 
       if (evt) {
@@ -63,7 +63,7 @@ const withAddReview = (Component) => {
       }
     }
 
-    _onReviewChange(evt) {
+    _handleReviewChange(evt) {
       const target = evt.target;
 
       if (evt) {
@@ -80,7 +80,7 @@ const withAddReview = (Component) => {
 
   WithAddReview.propTypes = {
     movie: PropTypes.object,
-    onPostReview: PropTypes.func,
+    handlePostReview: PropTypes.func,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired
     })
@@ -91,7 +91,7 @@ const withAddReview = (Component) => {
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    onPostReview: (id, comment, rating) => {
+    handlePostReview: (id, comment, rating) => {
       return dispatch(Operation.addReview(id, comment, rating));
     }
   });

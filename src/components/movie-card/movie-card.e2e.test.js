@@ -14,7 +14,7 @@ it(`On movie-card click handler is being called`, () => {
       <BrowserRouter>
         <MovieCard
           movie={films[0]}
-          onClick={handleClick}
+          handleClick={handleClick}
         />
       </BrowserRouter>
   );
@@ -31,7 +31,7 @@ it(`On movie-card mouseenter handler is being called`, () => {
       <BrowserRouter>
         <MovieCard
           movie={films[0]}
-          onMouseEnter={handleMouseEnter}
+          handleMouseEnter={handleMouseEnter}
         />
       </BrowserRouter>
   );
@@ -46,7 +46,7 @@ it(`On movie-card mouseleave handler is being called`, () => {
       <BrowserRouter>
         <MovieCard
           movie={films[0]}
-          onMouseLeave={handleMouseLeave}
+          handleMouseLeave={handleMouseLeave}
         />
       </BrowserRouter>
   );

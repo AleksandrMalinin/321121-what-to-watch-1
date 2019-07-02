@@ -5,24 +5,24 @@ class ShowMore extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onMoreButtonClick = this._onMoreButtonClick.bind(this);
+    this.handleMoreButtonClick = this._handleMoreButtonClick.bind(this);
     this.quantity = props.moviesLength >= props.moviesShown ? props.moviesShown : props.moviesLength;
   }
 
   render() {
     return <div className="catalog__more">
-      <button className="catalog__button" type="button" onClick={this.onMoreButtonClick}>Show more</button>
+      <button className="catalog__button" type="button" onClick={this.handleMoreButtonClick}>Show more</button>
     </div>;
   }
 
 
-  _onMoreButtonClick() {
-    this.props.onMoreButtonClick(this.quantity + this.props.moviesShown);
+  _handleMoreButtonClick() {
+    this.props.handleMoreButtonClick(this.quantity + this.props.moviesShown);
   }
 }
 
 ShowMore.propTypes = {
-  onMoreButtonClick: PropTypes.func,
+  handleMoreButtonClick: PropTypes.func,
   moviesLength: PropTypes.number,
   moviesShown: PropTypes.number
 };

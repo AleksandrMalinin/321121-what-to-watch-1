@@ -11,7 +11,7 @@ it(`Filters correctly renders`, () => {
   .create(<GenresList
     genres={mockGenres}
     activeItem={films[0].genre}
-    onChange={mockFunction}
+    handleChange={mockFunction}
   />)
   .toJSON();
 

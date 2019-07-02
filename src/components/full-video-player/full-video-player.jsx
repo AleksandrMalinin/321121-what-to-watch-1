@@ -14,9 +14,9 @@ class FullVideoPlayer extends PureComponent {
       seconds,
       time,
       videoRef,
-      onPlayButtonClick,
-      onControlButtonClick,
-      onFullModeButtonClick,
+      handlePlayButtonClick,
+      handleControlButtonClick,
+      handleFullModeButtonClick,
     } = this.props;
 
     return <div className="player">
@@ -27,7 +27,7 @@ class FullVideoPlayer extends PureComponent {
         />
       </video>
 
-      <button type="button" className="player__exit" onClick={onPlayButtonClick}>Exit</button>
+      <button type="button" className="player__exit" onClick={handlePlayButtonClick}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -39,7 +39,7 @@ class FullVideoPlayer extends PureComponent {
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play" onClick={onControlButtonClick}>
+          <button type="button" className="player__play" onClick={handleControlButtonClick}>
             {!isPlaying ?
               <svg viewBox="0 0 19 19" width="19" height="19">
                 <use xlinkHref="#play-s"></use>
@@ -53,7 +53,7 @@ class FullVideoPlayer extends PureComponent {
           </button>
           <div className="player__name">{movie.name}</div>
 
-          <button type="button" className="player__full-screen" onClick={onFullModeButtonClick}>
+          <button type="button" className="player__full-screen" onClick={handleFullModeButtonClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>
@@ -82,9 +82,9 @@ FullVideoPlayer.propTypes = {
   time: PropTypes.number,
   interval: PropTypes.number,
   videoRef: PropTypes.object,
-  onPlayButtonClick: PropTypes.func,
-  onControlButtonClick: PropTypes.func,
-  onFullModeButtonClick: PropTypes.func
+  handlePlayButtonClick: PropTypes.func,
+  handleControlButtonClick: PropTypes.func,
+  handleFullModeButtonClick: PropTypes.func
 };
 
 export default withPlayerDevice(FullVideoPlayer);

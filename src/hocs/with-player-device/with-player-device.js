@@ -19,8 +19,8 @@ const withPlayerDevice = (Component) => {
       };
 
       this._videoRef = React.createRef();
-      this.onControlButtonClick = this._onControlButtonClick.bind(this);
-      this.onFullModeButtonClick = this._onFullModeButtonClick.bind(this);
+      this.handleControlButtonClick = this._handleControlButtonClick.bind(this);
+      this.handleFullModeButtonClick = this._handleFullModeButtonClick.bind(this);
     }
 
     render() {
@@ -32,8 +32,8 @@ const withPlayerDevice = (Component) => {
         seconds={this.state.seconds}
         time={this.state.time}
         videoRef={this._videoRef}
-        onControlButtonClick={this.onControlButtonClick}
-        onFullModeButtonClick={this.onFullModeButtonClick}
+        handleControlButtonClick={this.handleControlButtonClick}
+        handleFullModeButtonClick={this.handleFullModeButtonClick}
       />;
     }
 
@@ -68,7 +68,7 @@ const withPlayerDevice = (Component) => {
       }
     }
 
-    _onControlButtonClick() {
+    _handleControlButtonClick() {
       const video = this._videoRef.current;
 
       this.setState({
@@ -84,7 +84,7 @@ const withPlayerDevice = (Component) => {
       }
     }
 
-    _onFullModeButtonClick() {
+    _handleFullModeButtonClick() {
       const video = this._videoRef.current;
 
       video.requestFullscreen();
@@ -135,9 +135,9 @@ const withPlayerDevice = (Component) => {
     time: PropTypes.number,
     interval: PropTypes.number,
     videoRef: PropTypes.object,
-    onPlayButtonClick: PropTypes.func,
-    onControlButtonClick: PropTypes.func,
-    onFullModeButtonClick: PropTypes.func
+    handlePlayButtonClick: PropTypes.func,
+    handleControlButtonClick: PropTypes.func,
+    handleFullModeButtonClick: PropTypes.func
   };
 
   return WithPlayerDevice;

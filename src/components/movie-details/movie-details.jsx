@@ -16,11 +16,11 @@ class MovieDetails extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onChangeFavouriteStatus = this._onChangeFavouriteStatus.bind(this);
+    this.handleChangeFavouriteStatus = this._handleChangeFavouriteStatus.bind(this);
   }
 
   render() {
-    const {movie, moviesAlike, isPlaying, fullVideoShown, isAuthorizationRequired, onPlayButtonClick} = this.props;
+    const {movie, moviesAlike, isPlaying, fullVideoShown, isAuthorizationRequired, handlePlayButtonClick} = this.props;
     const moviesAlikeCut = moviesAlike.slice(0, 4);
 
     if (!movie) {
@@ -51,13 +51,13 @@ class MovieDetails extends PureComponent {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
+                  <button className="btn btn--play movie-card__button" type="button" onClick={handlePlayButtonClick}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"></use>
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list movie-card__button" type="button" onClick={this.onChangeFavouriteStatus}>
+                  <button className="btn btn--list movie-card__button" type="button" onClick={this.handleChangeFavouriteStatus}>
                     {movie && !movie.is_favorite ?
                       <svg viewBox="0 0 19 20" width="19" height="20">
                         <use xlinkHref="#add"></use>
@@ -117,12 +117,12 @@ class MovieDetails extends PureComponent {
           </footer>
         </div>
 
-        {fullVideoShown ? <FullVideoPlayer onPlayButtonClick={onPlayButtonClick} movie={movie} isPlaying={isPlaying}/> : ``}
+        {fullVideoShown ? <FullVideoPlayer handlePlayButtonClick={handlePlayButtonClick} movie={movie} isPlaying={isPlaying}/> : ``}
       </React.Fragment>;
     }
   }
 
-  _onChangeFavouriteStatus() {
+  _handleChangeFavouriteStatus() {
     const id = this.props.movie.id;
     const status = this.props.movie.is_favorite;
 
@@ -130,7 +130,7 @@ class MovieDetails extends PureComponent {
       return this.props.history.push(`/login`);
     }
 
-    return this.props.onChangeFavouriteStatus(id, status);
+    return this.props.handleChangeFavouriteStatus(id, status);
   }
 }
 
@@ -139,9 +139,9 @@ MovieDetails.propTypes = {
   moviesAlike: PropTypes.array,
   isPlaying: PropTypes.bool,
   fullVideoShown: PropTypes.bool,
-  onPlayButtonClick: PropTypes.func,
+  handlePlayButtonClick: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
-  onChangeFavouriteStatus: PropTypes.func,
+  handleChangeFavouriteStatus: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   })

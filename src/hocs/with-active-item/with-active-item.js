@@ -10,18 +10,18 @@ const withActiveItem = (initialItem) => (Component) => {
         activeItem: initialItem
       };
 
-      this.onItemChange = this.onItemChange.bind(this);
+      this.handleItemChange = this._handleItemChange.bind(this);
     }
 
     render() {
       return <Component
         {...this.props}
         activeItem={this.state.activeItem}
-        onChange={this.onItemChange}
+        handleChange={this.handleItemChange}
       />;
     }
 
-    onItemChange(item) {
+    _handleItemChange(item) {
       this.setState({
         activeItem: item
       });
@@ -30,7 +30,7 @@ const withActiveItem = (initialItem) => (Component) => {
 
   WithActiveItem.propTypes = {
     activeItem: PropTypes.string,
-    onChange: PropTypes.func
+    handleChange: PropTypes.func
   };
 
   return WithActiveItem;

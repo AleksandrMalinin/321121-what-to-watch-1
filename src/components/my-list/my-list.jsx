@@ -11,7 +11,7 @@ import MovieList from '../movie-list/movie-list.jsx';
 
 class MyList extends PureComponent {
   render() {
-    const {moviesFavourite, onGenreChange} = this.props;
+    const {moviesFavourite, handleGenreChange} = this.props;
 
     return <React.Fragment>
       <Sprite/>
@@ -27,7 +27,7 @@ class MyList extends PureComponent {
 
           <MovieList
             movies={moviesFavourite}
-            onChange={onGenreChange}
+            handleChange={handleGenreChange}
           />
 
         </section>
@@ -49,7 +49,7 @@ class MyList extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.loadFavouriteFilms();
+    this.props.handleFavouriteFilmsLoad();
   }
 }
 
@@ -60,8 +60,8 @@ MyList.propTypes = {
     previewImage: PropTypes.string,
     genre: PropTypes.string
   })).isRequired,
-  onGenreChange: PropTypes.func,
-  loadFavouriteFilms: PropTypes.func
+  handleGenreChange: PropTypes.func,
+  handleFavouriteFilmsLoad: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -69,11 +69,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreChange: (genre) => {
+  handleGenreChange: (genre) => {
     dispatch(ActionCreators.changeGenre(genre));
   },
 
-  loadFavouriteFilms: () => {
+  handleFavouriteFilmsLoad: () => {
     dispatch(Operation.loadFavouriteFilms());
   }
 });
