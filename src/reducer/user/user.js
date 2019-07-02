@@ -1,7 +1,8 @@
 const initialState = {
   isAuthorizationRequired: true,
   user: null,
-  comments: null
+  comments: null,
+  isLoading: false
 };
 
 const ACTION_TYPE = {
@@ -10,7 +11,8 @@ const ACTION_TYPE = {
   setUser: `SET_USER`,
   authorizeUser: `AUTHORIZE_USER`,
   addReview: `ADD_REVIEW`,
-  loadComments: `LOAD_COMMENTS`
+  loadComments: `LOAD_COMMENTS`,
+  isDataLoading: `IS_DATA_LOADING`
 };
 
 const ActionCreator = {
@@ -47,6 +49,13 @@ const ActionCreator = {
       type: ACTION_TYPE.loadComments,
       payload: comments
     };
+  },
+
+  isDataLoading: (is) => {
+    return {
+      type: ACTION_TYPE.isDataLoading,
+      payload: is
+    };
   }
 };
 
@@ -69,6 +78,7 @@ const Operation = {
     return api.get(`/login`)
       .then((response) => {
         if (response.status === 200) {
+          dispatch(ActionCreator.isDataLoading(true));
           dispatch(ActionCreator.setAuthorizationStatus(false));
           dispatch(ActionCreator.setUser(response.data));
         }
@@ -118,6 +128,10 @@ const reducer = (state = initialState, action) => {
 
     case ACTION_TYPE.loadComments: return Object.assign({}, state, {
       comments: action.payload
+    });
+
+    case ACTION_TYPE.isDataLoading: return Object.assign({}, state, {
+      isLoading: action.payload
     });
   }
 

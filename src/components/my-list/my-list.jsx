@@ -59,7 +59,7 @@ MyList.propTypes = {
     posterImage: PropTypes.string,
     previewImage: PropTypes.string,
     genre: PropTypes.string
-  })).isRequired,
+  })),
   handleGenreChange: PropTypes.func,
   handleFavouriteFilmsLoad: PropTypes.func
 };

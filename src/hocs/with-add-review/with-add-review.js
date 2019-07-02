@@ -34,7 +34,7 @@ const withAddReview = (Component) => {
       />;
     }
 
-    _onSubmit(evt) {
+    _handleSubmit(evt) {
       evt.preventDefault();
 
       const {comment, rating} = this.state;

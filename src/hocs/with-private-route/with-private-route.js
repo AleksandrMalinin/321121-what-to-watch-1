@@ -1,22 +1,23 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 
 const withPrivateRoute = (Component) => {
-  class WithPrivateRoute extends PureComponent {
-    render() {
-      if (this.props.isAuthorizationRequired) {
-        return <Redirect to="/login"/>;
-      }
+  const WithPrivateRoute = (props) => {
+    const {isAuthorizationRequired} = props;
 
-      return <Component {...this.props}/>;
+    if (isAuthorizationRequired) {
+      return <Redirect to="/login"/>;
     }
-  }
+
+    return <Component {...props}/>;
+  };
 
   WithPrivateRoute.propTypes = {
-    isAuthorizationRequired: PropTypes.bool
+    isAuthorizationRequired: PropTypes.bool,
+    isLoading: PropTypes.bool
   };
 
   const mapStateToProps = (state) => ({

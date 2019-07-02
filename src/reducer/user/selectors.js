@@ -13,3 +13,7 @@ export const getUser = (state) => {
 export const getComments = (state) => {
   return state[NAME_SPACE].comments;
 };
+
+export const isDataLoading = (state) => {
+  return state[NAME_SPACE].isLoading;
+};

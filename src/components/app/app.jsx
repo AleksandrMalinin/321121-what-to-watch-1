@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route} from "react-router-dom";
@@ -11,46 +11,44 @@ import MyList from '../my-list/my-list.jsx';
 import MovieDetails from '../movie-details/movie-details.jsx';
 import AddReview from '../add-review/add-review.jsx';
 
-class App extends PureComponent {
-  render() {
-    const {
-      moviesList,
-      moviesLength,
-      moviesShown,
-      handleGenreChange,
-      genres,
-      handleMoreButtonClick,
-      fullVideoShown,
-      handlePlayButtonClick,
-      handleChangeFavouriteStatus
-    } = this.props;
+const App = (props) => {
+  const {
+    moviesList,
+    moviesLength,
+    moviesShown,
+    handleGenreChange,
+    genres,
+    handleMoreButtonClick,
+    fullVideoShown,
+    handlePlayButtonClick,
+    handleChangeFavouriteStatus
+  } = props;
 
-    return <Switch>
-      <Route path="/" exact render={() => <MainScreen
-        genres={genres}
-        moviesList={moviesList}
-        moviesLength={moviesLength}
-        moviesShown={moviesShown}
-        handleGenreChange={handleGenreChange}
-        isAuthorizationRequired={this.props.isAuthorizationRequired}
-        handleMoreButtonClick={handleMoreButtonClick}
-        fullVideoShown={fullVideoShown}
-        handlePlayButtonClick={handlePlayButtonClick}
-        handleChangeFavouriteStatus={handleChangeFavouriteStatus}
-      />}/>
-      <Route path="/login" exact component={SignIn}/>
-      <Route path="/mylist" exact component={MyList}/>
-      <Route path="/film/:id" exact render={(props) => <MovieDetails
-        {...props}
-        moviesShown={moviesShown}
-        fullVideoShown={fullVideoShown}
-        handlePlayButtonClick={handlePlayButtonClick}
-        handleChangeFavouriteStatus={handleChangeFavouriteStatus}/>
-      }/>
-      <Route path="/reviews/add/:id" exact render={(props) => <AddReview {...props}/>}/>
-    </Switch>;
-  }
-}
+  return <Switch>
+    <Route path="/" exact render={() => <MainScreen
+      genres={genres}
+      moviesList={moviesList}
+      moviesLength={moviesLength}
+      moviesShown={moviesShown}
+      handleGenreChange={handleGenreChange}
+      isAuthorizationRequired={props.isAuthorizationRequired}
+      handleMoreButtonClick={handleMoreButtonClick}
+      fullVideoShown={fullVideoShown}
+      handlePlayButtonClick={handlePlayButtonClick}
+      handleChangeFavouriteStatus={handleChangeFavouriteStatus}
+    />}/>
+    <Route path="/login" exact component={SignIn}/>
+    <Route path="/mylist" exact component={MyList}/>
+    <Route path="/film/:id" exact render={(params) => <MovieDetails
+      {...params}
+      moviesShown={moviesShown}
+      fullVideoShown={fullVideoShown}
+      handlePlayButtonClick={handlePlayButtonClick}
+      handleChangeFavouriteStatus={handleChangeFavouriteStatus}/>
+    }/>
+    <Route path="/reviews/add/:id" exact render={() => <AddReview {...props}/>}/>
+  </Switch>;
+};
 
 App.propTypes = {
   moviePromo: PropTypes.object,
