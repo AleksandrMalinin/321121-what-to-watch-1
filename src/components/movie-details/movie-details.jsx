@@ -16,7 +16,7 @@ class MovieDetails extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.handleChangeFavouriteStatus = this._handleChangeFavouriteStatus.bind(this);
+    this.handleFavouriteStatusChange = this._handleFavouriteStatusChange.bind(this);
   }
 
   render() {
@@ -57,7 +57,7 @@ class MovieDetails extends PureComponent {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list movie-card__button" type="button" onClick={this.handleChangeFavouriteStatus}>
+                  <button className="btn btn--list movie-card__button" type="button" onClick={this.handleFavouriteStatusChange}>
                     {movie && !movie.is_favorite ?
                       <svg viewBox="0 0 19 20" width="19" height="20">
                         <use xlinkHref="#add"></use>
@@ -122,7 +122,7 @@ class MovieDetails extends PureComponent {
     }
   }
 
-  _handleChangeFavouriteStatus() {
+  _handleFavouriteStatusChange() {
     const id = this.props.movie.id;
     const status = this.props.movie.is_favorite;
 
@@ -130,7 +130,7 @@ class MovieDetails extends PureComponent {
       return this.props.history.push(`/login`);
     }
 
-    return this.props.handleChangeFavouriteStatus(id, status);
+    return this.props.handleFavouriteStatusChange(id, status);
   }
 }
 
@@ -141,7 +141,7 @@ MovieDetails.propTypes = {
   fullVideoShown: PropTypes.bool,
   handlePlayButtonClick: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
-  handleChangeFavouriteStatus: PropTypes.func,
+  handleFavouriteStatusChange: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   })

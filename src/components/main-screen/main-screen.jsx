@@ -16,7 +16,7 @@ class MainScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onChangeFavouriteStatus = this._onChangeFavouriteStatus.bind(this);
+    this.handleFavouriteStatusChange = this._handleFavouriteStatusChange.bind(this);
   }
 
   render() {
@@ -140,7 +140,7 @@ class MainScreen extends PureComponent {
     </React.Fragment>;
   }
 
-  _onChangeFavouriteStatus() {
+  _handleFavouriteStatusChange() {
     const id = this.props.moviePromo.id;
     const status = this.props.moviePromo.is_favorite;
 

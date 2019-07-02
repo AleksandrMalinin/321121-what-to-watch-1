@@ -21,7 +21,7 @@ const App = (props) => {
     handleMoreButtonClick,
     fullVideoShown,
     handlePlayButtonClick,
-    handleChangeFavouriteStatus
+    handleFavouriteStatusChange
   } = props;
 
   return <Switch>
@@ -35,7 +35,7 @@ const App = (props) => {
       handleMoreButtonClick={handleMoreButtonClick}
       fullVideoShown={fullVideoShown}
       handlePlayButtonClick={handlePlayButtonClick}
-      handleChangeFavouriteStatus={handleChangeFavouriteStatus}
+      handleFavouriteStatusChange={handleFavouriteStatusChange}
     />}/>
     <Route path="/login" exact component={SignIn}/>
     <Route path="/mylist" exact component={MyList}/>
@@ -44,7 +44,7 @@ const App = (props) => {
       moviesShown={moviesShown}
       fullVideoShown={fullVideoShown}
       handlePlayButtonClick={handlePlayButtonClick}
-      handleChangeFavouriteStatus={handleChangeFavouriteStatus}/>
+      handleFavouriteStatusChange={handleFavouriteStatusChange}/>
     }/>
     <Route path="/reviews/add/:id" exact render={() => <AddReview {...props}/>}/>
   </Switch>;
@@ -67,7 +67,7 @@ App.propTypes = {
   handleMoreButtonClick: PropTypes.func,
   fullVideoShown: PropTypes.bool,
   handlePlayButtonClick: PropTypes.func,
-  handleChangeFavouriteStatus: PropTypes.func,
+  handleFavouriteStatusChange: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -93,7 +93,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreators.changeFullVideoState(state));
   },
 
-  handleChangeFavouriteStatus: (id, status) => {
+  handleFavouriteStatusChange: (id, status) => {
     dispatch(Operation.changeFavouriteStatus(id, status));
   }
 });
