@@ -111,7 +111,7 @@ class MainScreen extends PureComponent {
               movies={moviesList}
               moviesLength={moviesLength}
               moviesShown={moviesShown}
-              onMoreButtonClick={handleMoreButtonClick}
+              handleMoreButtonClick={handleMoreButtonClick}
             /> : ``
           }
 
