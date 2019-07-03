@@ -212,6 +212,7 @@ Array [
         action="#"
         className="add-review__form"
       >
+        
         <div
           className="rating"
         >
@@ -302,6 +303,7 @@ Array [
             <button
               className="add-review__btn"
               disabled={false}
+              required={true}
               type="submit"
             >
               Post
