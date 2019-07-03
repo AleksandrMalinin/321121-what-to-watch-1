@@ -414,6 +414,9 @@ main {
   .add-review__btn:hover {
     opacity: 0.5; }
 
+  .add-review__btn:disabled {
+    opacity: 0.5; }
+
 .breadcrumbs {
   margin: 0 20px; }
 
@@ -1253,7 +1256,8 @@ main {
   .sign-in__link:hover, .sign-in__link:focus {
     color: #DFCF77; }
 
-.sign-in__message {
+.sign-in__message,
+.add-review__message {
   text-align: center;
   font-size: 22px;
   color: #DFCF77;
@@ -1262,6 +1266,11 @@ main {
   margin-bottom: 42px; }
   .sign-in__message p {
     margin: 0; }
+
+.add-review__message {
+  margin-bottom: 10px; }
+  .add-review__message p {
+    color: firebrick; }
 
 .sign-in__error-message {
   font-size: 22px;

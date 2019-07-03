@@ -11,6 +11,7 @@ import withAddReview from '../../hocs/with-add-review/with-add-review.js';
 const AddReview = (props) => {
   const {
     movie,
+    error,
     comment,
     handleRatingCheck,
     handleReviewChange,
@@ -55,6 +56,12 @@ const AddReview = (props) => {
 
         <div className="add-review">
           <form action="#" className="add-review__form" onSubmit={handleSubmit}>
+            { error ?
+              <div className="add-review__message">
+                <p>Не забудьте выставить фильму оценку :D</p>
+              </div> :
+              ``
+            }
             <div className="rating">
               <div className="rating__stars">
                 <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={handleRatingCheck} checked/>
@@ -77,7 +84,7 @@ const AddReview = (props) => {
             <div className="add-review__text">
               <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" required onChange={handleReviewChange}></textarea>
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit" disabled={comment.length < constants.MIN_FIELD_LENGTH}>Post</button>
+                <button className="add-review__btn" type="submit" required disabled={comment.length < constants.MIN_FIELD_LENGTH}>Post</button>
               </div>
 
             </div>
@@ -90,6 +97,7 @@ const AddReview = (props) => {
 
 AddReview.propTypes = {
   movie: PropTypes.object,
+  error: PropTypes.bool,
   comment: PropTypes.string,
   handleRatingCheck: PropTypes.func,
   handleReviewChange: PropTypes.func,

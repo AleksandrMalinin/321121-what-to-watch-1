@@ -17,7 +17,8 @@ const withAddReview = (Component) => {
 
       this.state = {
         rating: 0,
-        comment: ``
+        comment: ``,
+        error: false
       };
 
       this.handleRatingCheck = this._handleRatingCheck.bind(this);
@@ -31,6 +32,7 @@ const withAddReview = (Component) => {
       return <Component
         {...this.props}
         movie={movie}
+        error={this.state.error}
         comment={this.state.comment}
         handleRatingCheck={this.handleRatingCheck}
         handleReviewChange={this.handleReviewChange}
@@ -52,9 +54,15 @@ const withAddReview = (Component) => {
 
           throw new Error(`Something went wrong :/`);
         });
+
+        evt.target.reset();
       }
 
-      evt.target.reset();
+      if (rating === 0) {
+        this.setState({
+          error: true
+        });
+      }
     }
 
     _handleRatingCheck(evt) {
