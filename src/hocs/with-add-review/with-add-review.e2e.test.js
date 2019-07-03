@@ -16,7 +16,7 @@ const mockStore = createStore(reducer);
 const MockComponent = () => <div/>;
 const MockComponentWrapped = withAddReview(MockComponent);
 
-it(`Should change activeItem when callback is being called`, () => {
+it(`Should return callback on submit event`, () => {
   const handlePostReview = jest.fn();
   const defaultProps = {
     match: {params: {code: 123}},
