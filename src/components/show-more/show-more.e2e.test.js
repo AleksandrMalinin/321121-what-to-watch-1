@@ -12,36 +12,36 @@ const moviesLength = 60;
 const moviesShown = constants.LIMIT_QUANTITY;
 
 it(`On more-button click handler is being called`, () => {
-  const onClick = jest.fn();
+  const mockFunction = jest.fn();
   const app = mount(
       <BrowserRouter>
         <ShowMore
           moviesLength={moviesLength}
           moviesShown={moviesShown}
-          onMoreButtonClick={onClick}
+          onMoreButtonClick={mockFunction}
         />
       </BrowserRouter>
   );
 
   const moreButton = app.find(`.catalog__button`);
   moreButton.simulate(`click`);
-  expect(onClick).toHaveBeenCalledTimes(1);
+  expect(mockFunction).toHaveBeenCalledTimes(1);
 });
 
 it(`On more-button click returns correct film's quantity`, () => {
   const quantity = moviesLength >= moviesShown ? moviesShown : moviesLength;
-  const onClick = jest.fn(() => moviesShown + quantity);
+  const mockFunction = jest.fn(() => moviesShown + quantity);
   const app = mount(
       <BrowserRouter>
         <ShowMore
           moviesLength={moviesLength}
           moviesShown={moviesShown}
-          onMoreButtonClick={onClick}
+          onMoreButtonClick={mockFunction}
         />
       </BrowserRouter>
   );
 
   const moreButton = app.find(`.catalog__button`);
   moreButton.simulate(`click`);
-  expect(onClick).toHaveReturnedWith(40);
+  expect(mockFunction).toHaveReturnedWith(40);
 });

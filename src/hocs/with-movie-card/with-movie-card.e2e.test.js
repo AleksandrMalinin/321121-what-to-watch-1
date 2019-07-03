@@ -11,10 +11,10 @@ const MockComponent = () => <div/>;
 const MockComponentWrapped = withMovieCard(MockComponent);
 
 it(`On movie-card mouseenter state changes`, () => {
-  const handleMouseEnter = jest.fn();
+  const onMouseEnter = jest.fn();
   const filmCard = mount(
       <MockComponentWrapped
-        handleMouseEnter={handleMouseEnter}
+        onMouseEnter={onMouseEnter}
       />
   );
 

@@ -17,18 +17,18 @@ const MockComponent = () => <div/>;
 const MockComponentWrapped = withAddReview(MockComponent);
 
 it(`Should return callback on submit event`, () => {
-  const onPostReview = jest.fn();
+  const mockFunction = jest.fn();
   const defaultProps = {
     match: {params: {code: 123}},
   };
   const wrapper = mount(
       <Provider store={mockStore}>
         <BrowserRouter>
-          <MockComponentWrapped {...defaultProps} onSubmit={onPostReview(defaultMovie.id, comment.comment, comment.rating)}/>
+          <MockComponentWrapped {...defaultProps} onSubmit={mockFunction(defaultMovie.id, comment.comment, comment.rating)}/>
         </BrowserRouter>
       </Provider>);
 
   wrapper.simulate(`submit`);
-  expect(onPostReview).toHaveBeenCalledTimes(1);
-  expect(onPostReview).toHaveBeenCalledWith(defaultMovie.id, comment.comment, comment.rating);
+  expect(mockFunction).toHaveBeenCalledTimes(1);
+  expect(mockFunction).toHaveBeenCalledWith(defaultMovie.id, comment.comment, comment.rating);
 });
