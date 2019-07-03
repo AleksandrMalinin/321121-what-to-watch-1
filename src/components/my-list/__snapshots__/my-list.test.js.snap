@@ -21,6 +21,7 @@ exports[`MyList correctly renders 1`] = `
         Catalog
       </h2>
       <WithActiveItem
+        handleChange={[MockFunction]}
         movies={
           Array [
             Object {
@@ -55,7 +56,6 @@ exports[`MyList correctly renders 1`] = `
             },
           ]
         }
-        onChange={[MockFunction]}
       />
     </section>
     <footer

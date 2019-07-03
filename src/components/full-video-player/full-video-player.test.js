@@ -8,7 +8,7 @@ it(`FullVideoPlayer correctly renders`, () => {
   const tree = renderer
   .create(<FullVideoPlayer
     movie={defaultMovie}
-    onClick={mockFunction}
+    handleClick={mockFunction}
   />)
   .toJSON();
 

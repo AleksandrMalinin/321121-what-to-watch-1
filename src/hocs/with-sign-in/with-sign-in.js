@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Operation} from '../../reducer/user/user.js';
 
 const withSignIn = (Component) => {
   class WithSignIn extends PureComponent {
@@ -7,36 +9,46 @@ const withSignIn = (Component) => {
       super(props);
 
       this.state = {
+        error: false,
         email: null,
         password: null
       };
 
-      this.onSubmit = this.onSubmit.bind(this);
-      this.onEmailChange = this.onEmailChange.bind(this);
-      this.onPasswordChange = this.onPasswordChange.bind(this);
+      this.handleSubmit = this._handleSubmit.bind(this);
+      this.handleEmailChange = this._handleEmailChange.bind(this);
+      this.handlePasswordChange = this._handlePasswordChange.bind(this);
     }
 
     render() {
       return <Component
         {...this.props}
-        onSubmit={this.onSubmit}
-        onEmailChange={this.onEmailChange}
-        onPasswordChange={this.onPasswordChange}
+        error={this.state.error}
+        handleSubmit={this.handleSubmit}
+        handleEmailChange={this.handleEmailChange}
+        handlePasswordChange={this.handlePasswordChange}
       />;
     }
 
-    onSubmit(evt) {
+    _handleSubmit(evt) {
       evt.preventDefault();
 
       const {email, password} = this.state;
 
       if (email && password) {
-        this.props.onSubmit(email, password);
-        this.props.history.push(`/`);
+        this.props.handleSubmit(email, password)
+        .then((response) => {
+          if (!response.error) {
+            this.props.history.push(`/`);
+          } else {
+            this.setState({
+              error: response.error
+            });
+          }
+        });
       }
     }
 
-    onEmailChange(evt) {
+    _handleEmailChange(evt) {
       const target = evt.target;
 
       if (evt) {
@@ -46,7 +58,7 @@ const withSignIn = (Component) => {
       }
     }
 
-    onPasswordChange(evt) {
+    _handlePasswordChange(evt) {
       const target = evt.target;
 
       if (evt) {
@@ -58,13 +70,19 @@ const withSignIn = (Component) => {
   }
 
   WithSignIn.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired
     })
   };
 
-  return WithSignIn;
+  const mapDispatchToProps = (dispatch) => ({
+    handleSubmit: (email, password) => {
+      return dispatch(Operation.loginUser(email, password));
+    }
+  });
+
+  return connect(undefined, mapDispatchToProps)(WithSignIn);
 };
 
 export default withSignIn;

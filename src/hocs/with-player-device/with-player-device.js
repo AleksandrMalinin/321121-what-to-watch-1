@@ -19,22 +19,8 @@ const withPlayerDevice = (Component) => {
       };
 
       this._videoRef = React.createRef();
-      this.onControlButtonClick = this._onControlButtonClick.bind(this);
-      this.onFullModeButtonClick = this._onFullModeButtonClick.bind(this);
-    }
-
-    render() {
-      return <Component
-        {...this.props}
-        isPlaying={this.state.isPlaying}
-        progress={this.state.progress}
-        togglerPosition={this.state.togglerPosition}
-        seconds={this.state.seconds}
-        time={this.state.time}
-        videoRef={this._videoRef}
-        onControlButtonClick={this.onControlButtonClick}
-        onFullModeButtonClick={this.onFullModeButtonClick}
-      />;
+      this.handleControlButtonClick = this._handleControlButtonClick.bind(this);
+      this.handleFullModeButtonClick = this._handleFullModeButtonClick.bind(this);
     }
 
     componentDidMount() {
@@ -56,7 +42,7 @@ const withPlayerDevice = (Component) => {
         isPlaying: this.props.isPlaying
       });
 
-      this.runPlayer();
+      this._runPlayer();
     }
 
     componentDidUpdate() {
@@ -64,11 +50,25 @@ const withPlayerDevice = (Component) => {
 
       if (this.state.progress === MAX_PROGRESS) {
         video.load();
-        this.stopPlayer();
+        this._stopPlayer();
       }
     }
 
-    _onControlButtonClick() {
+    render() {
+      return <Component
+        {...this.props}
+        isPlaying={this.state.isPlaying}
+        progress={this.state.progress}
+        togglerPosition={this.state.togglerPosition}
+        seconds={this.state.seconds}
+        time={this.state.time}
+        videoRef={this._videoRef}
+        handleControlButtonClick={this.handleControlButtonClick}
+        handleFullModeButtonClick={this.handleFullModeButtonClick}
+      />;
+    }
+
+    _handleControlButtonClick() {
       const video = this._videoRef.current;
 
       this.setState({
@@ -84,13 +84,13 @@ const withPlayerDevice = (Component) => {
       }
     }
 
-    _onFullModeButtonClick() {
+    _handleFullModeButtonClick() {
       const video = this._videoRef.current;
 
       video.requestFullscreen();
     }
 
-    runPlayer() {
+    _runPlayer() {
       const intervalId = setInterval(() =>
         this.setState({
           seconds: this.state.seconds + SEC,
@@ -103,7 +103,7 @@ const withPlayerDevice = (Component) => {
       });
     }
 
-    stopPlayer() {
+    _stopPlayer() {
       clearInterval(this.state.interval);
 
       if (this.state.progress === MAX_PROGRESS && this.state.isPlaying) {
@@ -135,9 +135,9 @@ const withPlayerDevice = (Component) => {
     time: PropTypes.number,
     interval: PropTypes.number,
     videoRef: PropTypes.object,
-    onPlayButtonClick: PropTypes.func,
-    onControlButtonClick: PropTypes.func,
-    onFullModeButtonClick: PropTypes.func
+    handlePlayButtonClick: PropTypes.func,
+    handleControlButtonClick: PropTypes.func,
+    handleFullModeButtonClick: PropTypes.func
   };
 
   return WithPlayerDevice;

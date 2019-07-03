@@ -18,7 +18,7 @@ it(`On more-button click handler is being called`, () => {
         <ShowMore
           moviesLength={moviesLength}
           moviesShown={moviesShown}
-          onMoreButtonClick={handleClick}
+          handleMoreButtonClick={handleClick}
         />
       </BrowserRouter>
   );
@@ -36,7 +36,7 @@ it(`On more-button click returns correct film's quantity`, () => {
         <ShowMore
           moviesLength={moviesLength}
           moviesShown={moviesShown}
-          onMoreButtonClick={handleClick}
+          handleMoreButtonClick={handleClick}
         />
       </BrowserRouter>
   );

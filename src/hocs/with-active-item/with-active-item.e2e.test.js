@@ -13,6 +13,6 @@ const MockComponentWrapped = withActiveItem(films[0].genre)(MockComponent);
 it(`Should change activeItem when callback is being called`, () => {
   const wrapper = shallow(<MockComponentWrapped/>);
 
-  wrapper.instance().onItemChange(films[2].genre);
+  wrapper.instance().handleItemChange(films[2].genre);
   expect(wrapper.state().activeItem).toEqual(films[2].genre);
 });

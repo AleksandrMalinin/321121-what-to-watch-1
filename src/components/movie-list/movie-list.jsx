@@ -1,30 +1,34 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
-class MovieList extends PureComponent {
-  render() {
-    const {movies, onChange} = this.props;
-    const moviesCut = movies.slice(0, this.props.moviesShown);
+const MovieList = (props) => {
+  const {movies, handleChange} = props;
+  let moviesCut;
 
-    return <div className="catalog__movies-list">
-      {moviesCut.map((movie) => <MovieCard
-        movie={movie}
-        key={movie.name}
-        onMouseEnter={onChange}
-        onMouseLeave={onChange}
-      />)}
-    </div>;
+  if (movies) {
+    moviesCut = movies.slice(0, props.moviesShown);
   }
-}
+
+  return <div className="catalog__movies-list">
+    {moviesCut ? moviesCut.map((movie) => <MovieCard
+      movie={movie}
+      key={movie.name}
+      handleMouseEnter={handleChange}
+      handleMouseLeave={handleChange}
+    />
+    ) :
+      ``}
+  </div>;
+};
 
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string
-  })).isRequired,
+  })),
   moviesShown: PropTypes.number,
-  onChange: PropTypes.func
+  handleChange: PropTypes.func
 };
 
 export default withActiveItem(null)(MovieList);

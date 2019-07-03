@@ -9,8 +9,8 @@ it(`Tabs correctly renders`, () => {
   .create(
       <Tabs
         movie={defaultMovie}
-        onChange={mockFunction}
-        onLoadComments={mockFunction}
+        handleChange={mockFunction}
+        handleCommentsLoad={mockFunction}
       />
   )
   .toJSON();

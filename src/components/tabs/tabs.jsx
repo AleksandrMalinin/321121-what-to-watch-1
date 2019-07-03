@@ -13,7 +13,19 @@ class Tabs extends PureComponent {
   constructor() {
     super();
 
-    this.onTabSwitch = (genre) => this._onTabSwitch.bind(this, genre);
+    this.handleTabSwitch = (genre) => this._handleTabSwitch.bind(this, genre);
+  }
+
+  componentDidMount() {
+    if (this.props.movie) {
+      this.props.handleCommentsLoad(this.props.movie.id);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie.id !== this.props.movie.id) {
+      this.props.handleCommentsLoad(this.props.movie.id);
+    }
   }
 
   render() {
@@ -33,7 +45,7 @@ class Tabs extends PureComponent {
         <nav className="movie-nav movie-card__nav">
           <ul className="movie-nav__list">
             {tabNames.map((tabName, i) => <li className={`movie-nav__item ` + (activeItem === tabName ? `movie-nav__item--active` : ``)} key={i}>
-              <a href="#" className="movie-nav__link" onClick={this.onTabSwitch(tabName)}>{tabName}</a>
+              <a href="#" className="movie-nav__link" onClick={this.handleTabSwitch(tabName)}>{tabName}</a>
             </li>)}
           </ul>
         </nav>
@@ -108,21 +120,9 @@ class Tabs extends PureComponent {
     }
   }
 
-  _onTabSwitch(name, event) {
+  _handleTabSwitch(name, event) {
     event.preventDefault();
-    this.props.onChange(name);
-  }
-
-  componentDidMount() {
-    if (this.props.movie) {
-      this.props.onLoadComments(this.props.movie.id);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.movie.id !== this.props.movie.id) {
-      this.props.onLoadComments(this.props.movie.id);
-    }
+    this.props.handleChange(name);
   }
 }
 
@@ -130,8 +130,8 @@ Tabs.propTypes = {
   movie: PropTypes.object,
   activeItem: PropTypes.string,
   comments: PropTypes.array,
-  onChange: PropTypes.func,
-  onLoadComments: PropTypes.func
+  handleChange: PropTypes.func,
+  handleCommentsLoad: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -139,7 +139,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadComments: (id) => {
+  handleCommentsLoad: (id) => {
     dispatch(Operation.loadComments(id));
   }
 });

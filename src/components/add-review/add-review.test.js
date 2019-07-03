@@ -18,7 +18,7 @@ it(`AddReview correctly renders`, () => {
           <AddReview
             movie={defaultMovie}
             comment={comment.comment}
-            onPostReview={mockFunction}
+            handlePostReview={mockFunction}
           />
         </BrowserRouter>
       </Provider>)

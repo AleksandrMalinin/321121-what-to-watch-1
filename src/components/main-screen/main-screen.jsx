@@ -16,7 +16,7 @@ class MainScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onChangeFavouriteStatus = this._onChangeFavouriteStatus.bind(this);
+    this.handleFavouriteStatusChange = this._handleFavouriteStatusChange.bind(this);
   }
 
   render() {
@@ -26,12 +26,12 @@ class MainScreen extends PureComponent {
       moviesLength,
       moviesShown,
       genres,
-      onGenreChange,
+      handleGenreChange,
       isAuthorizationRequired,
-      onMoreButtonClick,
+      handleMoreButtonClick,
       isPlaying,
       fullVideoShown,
-      onPlayButtonClick
+      handlePlayButtonClick
     } = this.props;
 
     return <React.Fragment>
@@ -63,13 +63,13 @@ class MainScreen extends PureComponent {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
+                <button className="btn btn--play movie-card__button" type="button" onClick={handlePlayButtonClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button" onClick={this.onChangeFavouriteStatus}>
+                <button className="btn btn--list movie-card__button" type="button" onClick={this.handleFavouriteStatusChange}>
                   {moviePromo && !moviePromo.is_favorite ?
                     <svg viewBox="0 0 19 20" width="19" height="20">
                       <use xlinkHref="#add"></use>
@@ -98,7 +98,7 @@ class MainScreen extends PureComponent {
 
           <GenresList
             genres={genres}
-            onGenreChange={onGenreChange}
+            handleGenreChange={handleGenreChange}
           />
 
           <MovieList
@@ -111,7 +111,7 @@ class MainScreen extends PureComponent {
               movies={moviesList}
               moviesLength={moviesLength}
               moviesShown={moviesShown}
-              onMoreButtonClick={onMoreButtonClick}
+              handleMoreButtonClick={handleMoreButtonClick}
             /> : ``
           }
 
@@ -133,14 +133,14 @@ class MainScreen extends PureComponent {
       </div>
 
       {fullVideoShown ? <FullVideoPlayer
-        onPlayButtonClick={onPlayButtonClick}
+        handlePlayButtonClick={handlePlayButtonClick}
         movie={moviePromo}
         isPlaying={isPlaying}/> : ``
       }
     </React.Fragment>;
   }
 
-  _onChangeFavouriteStatus() {
+  _handleFavouriteStatusChange() {
     const id = this.props.moviePromo.id;
     const status = this.props.moviePromo.is_favorite;
 
@@ -148,7 +148,7 @@ class MainScreen extends PureComponent {
       return this.props.history.push(`/login`);
     }
 
-    return this.props.onChangeFavouriteStatus(id, status);
+    return this.props.handleFavouriteStatusChange(id, status);
   }
 }
 
@@ -165,11 +165,11 @@ MainScreen.propTypes = {
   moviesShown: PropTypes.number,
   isPlaying: PropTypes.bool,
   fullVideoShown: PropTypes.bool,
-  onPlayButtonClick: PropTypes.func,
-  onGenreChange: PropTypes.func,
+  handlePlayButtonClick: PropTypes.func,
+  handleGenreChange: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
-  onMoreButtonClick: PropTypes.func,
-  onChangeFavouriteStatus: PropTypes.func,
+  handleMoreButtonClick: PropTypes.func,
+  handleFavouriteStatusChange: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   })

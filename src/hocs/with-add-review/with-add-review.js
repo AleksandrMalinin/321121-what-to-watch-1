@@ -8,17 +8,22 @@ import {constants} from '../../constants.js';
 
 const withAddReview = (Component) => {
   class WithAddReview extends PureComponent {
+    get isValidForm() {
+      return isCorrectLength(this.state.comment.length, constants.MIN_FIELD_LENGTH, constants.MAX_FIELD_LENGTH);
+    }
+
     constructor(props) {
       super(props);
 
       this.state = {
-        rating: 0,
-        comment: ``
+        rating: 1,
+        comment: ``,
+        error: false
       };
 
-      this.onRatingCheck = this._onRatingCheck.bind(this);
-      this.onReviewChange = this._onReviewChange.bind(this);
-      this.onSubmit = this._onSubmit.bind(this);
+      this.handleRatingCheck = this._handleRatingCheck.bind(this);
+      this.handleReviewChange = this._handleReviewChange.bind(this);
+      this.handleSubmit = this._handleSubmit.bind(this);
     }
 
     render() {
@@ -27,33 +32,37 @@ const withAddReview = (Component) => {
       return <Component
         {...this.props}
         movie={movie}
+        error={this.state.error}
+        rating={this.state.rating}
         comment={this.state.comment}
-        onRatingCheck={this.onRatingCheck}
-        onReviewChange={this.onReviewChange}
-        onSubmit={this.onSubmit}
+        handleRatingCheck={this.handleRatingCheck}
+        handleReviewChange={this.handleReviewChange}
+        handleSubmit={this.handleSubmit}
       />;
     }
 
-    _onSubmit(evt) {
+    _handleSubmit(evt) {
       evt.preventDefault();
 
       const {comment, rating} = this.state;
 
       if (this.isValidForm) {
-        this.props.onPostReview(this.props.movie.id, comment, parseInt(rating, 10))
+        this.props.handlePostReview(this.props.movie.id, comment, parseInt(rating, 10))
         .then((response) => {
           if (!response.error) {
-            return this.props.history.push(`/film/${this.props.movie.id}`);
+            this.props.history.push(`/film/${this.props.movie.id}`);
+          } else {
+            this.setState({
+              error: response.error
+            });
           }
-
-          throw new Error(`Something went wrong :/`);
         });
-      }
 
-      evt.target.reset();
+        evt.target.reset();
+      }
     }
 
-    _onRatingCheck(evt) {
+    _handleRatingCheck(evt) {
       const target = evt.target;
 
       if (evt) {
@@ -63,24 +72,20 @@ const withAddReview = (Component) => {
       }
     }
 
-    _onReviewChange(evt) {
+    _handleReviewChange(evt) {
       const target = evt.target;
 
       if (evt) {
         this.setState({
-          comment: target.value,
+          comment: target.value
         });
       }
-    }
-
-    get isValidForm() {
-      return this.state.rating !== 0 && isCorrectLength(this.state.comment.length, constants.MIN_FIELD_LENGTH, constants.MAX_FIELD_LENGTH);
     }
   }
 
   WithAddReview.propTypes = {
     movie: PropTypes.object,
-    onPostReview: PropTypes.func,
+    handlePostReview: PropTypes.func,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired
     })
@@ -91,7 +96,7 @@ const withAddReview = (Component) => {
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    onPostReview: (id, comment, rating) => {
+    handlePostReview: (id, comment, rating) => {
       return dispatch(Operation.addReview(id, comment, rating));
     }
   });

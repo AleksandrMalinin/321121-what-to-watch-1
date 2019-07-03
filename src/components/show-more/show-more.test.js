@@ -15,7 +15,7 @@ it(`ShowMore correctly renders`, () => {
         <ShowMore
           moviesLength={moviesLength}
           moviesShown={moviesShown}
-          onMoreButtonClick={mockFunction}
+          handleMoreButtonClick={mockFunction}
         />
       </BrowserRouter>)
   .toJSON();

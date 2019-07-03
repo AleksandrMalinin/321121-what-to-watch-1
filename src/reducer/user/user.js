@@ -57,7 +57,11 @@ const Operation = {
         if (response.status === 200) {
           dispatch(ActionCreator.setAuthorizationStatus(false));
           dispatch(ActionCreator.authorizeUser(response.data));
+
+          return {error: false};
         }
+
+        return {error: true};
       });
   },
 
@@ -67,6 +71,8 @@ const Operation = {
         if (response.status === 200) {
           dispatch(ActionCreator.setAuthorizationStatus(false));
           dispatch(ActionCreator.setUser(response.data));
+        } else {
+          dispatch(ActionCreator.setAuthorizationStatus(true));
         }
       });
   },
@@ -76,11 +82,10 @@ const Operation = {
       .then((response) => {
         if (response.status === 200) {
           dispatch(ActionCreator.addReview(response.data));
+
+          return {error: false};
         }
 
-        return {error: false};
-      }).
-      catch(() => {
         return {error: true};
       });
   },
