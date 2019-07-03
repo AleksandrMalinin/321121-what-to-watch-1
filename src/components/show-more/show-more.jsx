@@ -16,12 +16,12 @@ class ShowMore extends PureComponent {
   }
 
   _handleMoreButtonClick() {
-    this.props.handleMoreButtonClick(this.quantity + this.props.moviesShown);
+    this.props.onMoreButtonClick(this.quantity + this.props.moviesShown);
   }
 }
 
 ShowMore.propTypes = {
-  handleMoreButtonClick: PropTypes.func,
+  onMoreButtonClick: PropTypes.func,
   moviesLength: PropTypes.number,
   moviesShown: PropTypes.number
 };

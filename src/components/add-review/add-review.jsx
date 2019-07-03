@@ -14,9 +14,9 @@ const AddReview = (props) => {
     error,
     rating,
     comment,
-    handleRatingCheck,
-    handleReviewChange,
-    handleSubmit
+    onRatingCheck,
+    onReviewChange,
+    onSubmit
   } = props;
 
   if (!movie) {
@@ -56,7 +56,7 @@ const AddReview = (props) => {
         </div>
 
         <div className="add-review">
-          <form action="#" className="add-review__form" onSubmit={handleSubmit}>
+          <form action="#" className="add-review__form" onSubmit={onSubmit}>
             { error ?
               <div className="add-review__message">
                 <p>Something went wrong ¯ \ _ (ツ) _ / ¯</p>
@@ -65,25 +65,25 @@ const AddReview = (props) => {
             }
             <div className="rating">
               <div className="rating__stars">
-                <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={handleRatingCheck} checked={parseInt(rating, 10) === 1}/>
+                <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={onRatingCheck} checked={parseInt(rating, 10) === 1}/>
                 <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
-                <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onChange={handleRatingCheck} checked={parseInt(rating, 10) === 2}/>
+                <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onChange={onRatingCheck} checked={parseInt(rating, 10) === 2}/>
                 <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onChange={handleRatingCheck} checked={parseInt(rating, 10) === 3}/>
+                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onChange={onRatingCheck} checked={parseInt(rating, 10) === 3}/>
                 <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
-                <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onChange={handleRatingCheck} checked={parseInt(rating, 10) === 4}/>
+                <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onChange={onRatingCheck} checked={parseInt(rating, 10) === 4}/>
                 <label className="rating__label" htmlFor="star-4">Rating 4</label>
 
-                <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onChange={handleRatingCheck} checked={parseInt(rating, 10) === 5}/>
+                <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onChange={onRatingCheck} checked={parseInt(rating, 10) === 5}/>
                 <label className="rating__label" htmlFor="star-5">Rating 5</label>
               </div>
             </div>
 
             <div className="add-review__text">
-              <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" required onChange={handleReviewChange}></textarea>
+              <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" required onChange={onReviewChange}></textarea>
               <div className="add-review__submit">
                 <button className="add-review__btn" type="submit" required disabled={comment.length < constants.MIN_FIELD_LENGTH}>Post</button>
               </div>
@@ -100,10 +100,10 @@ AddReview.propTypes = {
   movie: PropTypes.object,
   error: PropTypes.bool,
   comment: PropTypes.string,
-  handleRatingCheck: PropTypes.func,
-  handleReviewChange: PropTypes.func,
-  handlePostReview: PropTypes.func,
-  handleSubmit: PropTypes.func,
+  onRatingCheck: PropTypes.func,
+  onReviewChange: PropTypes.func,
+  onPostReview: PropTypes.func,
+  onSubmit: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   })

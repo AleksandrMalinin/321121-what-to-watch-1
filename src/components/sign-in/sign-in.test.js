@@ -15,7 +15,7 @@ it(`SignIn correctly renders`, () => {
       <Provider store={mockStore}>
         <BrowserRouter>
           <SignIn
-            handleSubmit={mockFunction}
+            onSubmit={mockFunction}
           />
         </BrowserRouter>
       </Provider>

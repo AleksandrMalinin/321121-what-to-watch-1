@@ -32,7 +32,6 @@ exports[`MovieDetails correctly renders 1`] = `
 >
   <BrowserRouter>
     <MovieDetails
-      handleCommentsLoad={[MockFunction]}
       movie={
         Object {
           "background_color": "#AD9F8B",
@@ -92,6 +91,7 @@ exports[`MovieDetails correctly renders 1`] = `
           },
         ]
       }
+      onCommentsLoad={[MockFunction]}
     />
     )
   </BrowserRouter>

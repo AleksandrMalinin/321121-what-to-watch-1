@@ -22,16 +22,16 @@ class GenresList extends PureComponent {
 
   _handleGenreChange(genre, event) {
     event.preventDefault();
-    this.props.handleChange(genre);
-    this.props.handleGenreChange(genre);
+    this.props.onChange(genre);
+    this.props.onGenreChange(genre);
   }
 }
 
 GenresList.propTypes = {
   genres: PropTypes.array.isRequired,
   activeItem: PropTypes.string.isRequired,
-  handleChange: PropTypes.func,
-  handleGenreChange: PropTypes.func
+  onChange: PropTypes.func,
+  onGenreChange: PropTypes.func
 };
 
 export default withActiveItem(constants.DEFAULT_GENRE)(GenresList);

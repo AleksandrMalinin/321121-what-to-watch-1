@@ -63,8 +63,8 @@ const withPlayerDevice = (Component) => {
         seconds={this.state.seconds}
         time={this.state.time}
         videoRef={this._videoRef}
-        handleControlButtonClick={this.handleControlButtonClick}
-        handleFullModeButtonClick={this.handleFullModeButtonClick}
+        onControlButtonClick={this.handleControlButtonClick}
+        onFullModeButtonClick={this.handleFullModeButtonClick}
       />;
     }
 
@@ -77,10 +77,10 @@ const withPlayerDevice = (Component) => {
 
       if (!this.state.isPlaying) {
         video.play();
-        this.runPlayer();
+        this._runPlayer();
       } else {
         video.pause();
-        this.stopPlayer();
+        this._stopPlayer();
       }
     }
 
@@ -135,9 +135,9 @@ const withPlayerDevice = (Component) => {
     time: PropTypes.number,
     interval: PropTypes.number,
     videoRef: PropTypes.object,
-    handlePlayButtonClick: PropTypes.func,
-    handleControlButtonClick: PropTypes.func,
-    handleFullModeButtonClick: PropTypes.func
+    onPlayButtonClick: PropTypes.func,
+    onControlButtonClick: PropTypes.func,
+    onFullModeButtonClick: PropTypes.func
   };
 
   return WithPlayerDevice;

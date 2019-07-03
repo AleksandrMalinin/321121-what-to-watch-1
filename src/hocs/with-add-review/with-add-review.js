@@ -35,9 +35,9 @@ const withAddReview = (Component) => {
         error={this.state.error}
         rating={this.state.rating}
         comment={this.state.comment}
-        handleRatingCheck={this.handleRatingCheck}
-        handleReviewChange={this.handleReviewChange}
-        handleSubmit={this.handleSubmit}
+        onRatingCheck={this.handleRatingCheck}
+        onReviewChange={this.handleReviewChange}
+        onSubmit={this.handleSubmit}
       />;
     }
 
@@ -47,7 +47,7 @@ const withAddReview = (Component) => {
       const {comment, rating} = this.state;
 
       if (this.isValidForm) {
-        this.props.handlePostReview(this.props.movie.id, comment, parseInt(rating, 10))
+        this.props.onPostReview(this.props.movie.id, comment, parseInt(rating, 10))
         .then((response) => {
           if (!response.error) {
             this.props.history.push(`/film/${this.props.movie.id}`);
@@ -85,7 +85,7 @@ const withAddReview = (Component) => {
 
   WithAddReview.propTypes = {
     movie: PropTypes.object,
-    handlePostReview: PropTypes.func,
+    onPostReview: PropTypes.func,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired
     })
@@ -96,7 +96,7 @@ const withAddReview = (Component) => {
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    handlePostReview: (id, comment, rating) => {
+    onPostReview: (id, comment, rating) => {
       return dispatch(Operation.addReview(id, comment, rating));
     }
   });

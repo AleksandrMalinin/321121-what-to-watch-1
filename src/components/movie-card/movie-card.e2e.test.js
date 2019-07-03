@@ -9,12 +9,12 @@ import {films} from '../../mocks/mocks.js';
 Enzyme.configure({adapter: new Adapter()});
 
 it(`On movie-card click handler is being called`, () => {
-  const handleClick = jest.fn();
+  const mockFunction = jest.fn();
   const app = mount(
       <BrowserRouter>
         <MovieCard
           movie={films[0]}
-          handleClick={handleClick}
+          onClick={mockFunction}
         />
       </BrowserRouter>
   );
@@ -22,35 +22,35 @@ it(`On movie-card click handler is being called`, () => {
   const link = app.find(`.small-movie-card__link`).first();
   link.simulate(`click`);
 
-  expect(handleClick).toHaveBeenCalledTimes(1);
+  expect(mockFunction).toHaveBeenCalledTimes(1);
 });
 
 it(`On movie-card mouseenter handler is being called`, () => {
-  const handleMouseEnter = jest.fn();
+  const mockFunction = jest.fn();
   const app = mount(
       <BrowserRouter>
         <MovieCard
           movie={films[0]}
-          handleMouseEnter={handleMouseEnter}
+          onMouseEnter={mockFunction}
         />
       </BrowserRouter>
   );
 
   app.simulate(`mouseenter`);
-  expect(handleMouseEnter).toHaveBeenCalledTimes(1);
+  expect(mockFunction).toHaveBeenCalledTimes(1);
 });
 
 it(`On movie-card mouseleave handler is being called`, () => {
-  const handleMouseLeave = jest.fn();
+  const mockFunction = jest.fn();
   const app = mount(
       <BrowserRouter>
         <MovieCard
           movie={films[0]}
-          handleMouseLeave={handleMouseLeave}
+          onMouseLeave={mockFunction}
         />
       </BrowserRouter>
   );
 
   app.simulate(`mouseleave`);
-  expect(handleMouseLeave).toHaveBeenCalledTimes(1);
+  expect(mockFunction).toHaveBeenCalledTimes(1);
 });

@@ -11,7 +11,7 @@ it(`MovieList correctly renders`, () => {
       <BrowserRouter>
         <MovieList
           movies={films}
-          handleGenreChange={mockFunction}
+          onGenreChange={mockFunction}
         />
       </BrowserRouter>)
   .toJSON();
