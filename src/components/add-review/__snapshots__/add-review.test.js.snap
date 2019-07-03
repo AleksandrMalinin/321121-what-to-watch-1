@@ -220,7 +220,7 @@ Array [
             className="rating__stars"
           >
             <input
-              checked={true}
+              checked={false}
               className="rating__input"
               id="star-1"
               name="rating"
@@ -234,6 +234,7 @@ Array [
               Rating 1
             </label>
             <input
+              checked={false}
               className="rating__input"
               id="star-2"
               name="rating"
@@ -247,6 +248,7 @@ Array [
               Rating 2
             </label>
             <input
+              checked={false}
               className="rating__input"
               id="star-3"
               name="rating"
@@ -260,6 +262,7 @@ Array [
               Rating 3
             </label>
             <input
+              checked={false}
               className="rating__input"
               id="star-4"
               name="rating"
@@ -273,6 +276,7 @@ Array [
               Rating 4
             </label>
             <input
+              checked={false}
               className="rating__input"
               id="star-5"
               name="rating"
