@@ -9,7 +9,7 @@ import {constants} from '../../constants.js';
 const withAddReview = (Component) => {
   class WithAddReview extends PureComponent {
     get isValidForm() {
-      return this.state.rating !== 0 && isCorrectLength(this.state.comment.length, constants.MIN_FIELD_LENGTH, constants.MAX_FIELD_LENGTH);
+      return isCorrectLength(this.state.comment.length, constants.MIN_FIELD_LENGTH, constants.MAX_FIELD_LENGTH);
     }
 
     constructor(props) {
@@ -18,8 +18,7 @@ const withAddReview = (Component) => {
       this.state = {
         rating: 1,
         comment: ``,
-        error: false,
-        disconnect: false
+        error: false
       };
 
       this.handleRatingCheck = this._handleRatingCheck.bind(this);
@@ -34,7 +33,6 @@ const withAddReview = (Component) => {
         {...this.props}
         movie={movie}
         error={this.state.error}
-        disconnect={this.state.disconnect}
         rating={this.state.rating}
         comment={this.state.comment}
         handleRatingCheck={this.handleRatingCheck}
@@ -55,18 +53,12 @@ const withAddReview = (Component) => {
             this.props.history.push(`/film/${this.props.movie.id}`);
           } else {
             this.setState({
-              disconnect: response.error
+              error: response.error
             });
           }
         });
 
         evt.target.reset();
-      }
-
-      if (rating === 0) {
-        this.setState({
-          error: true
-        });
       }
     }
 
