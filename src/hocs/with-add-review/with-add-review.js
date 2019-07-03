@@ -35,6 +35,7 @@ const withAddReview = (Component) => {
         movie={movie}
         error={this.state.error}
         disconnect={this.state.disconnect}
+        rating={this.state.rating}
         comment={this.state.comment}
         handleRatingCheck={this.handleRatingCheck}
         handleReviewChange={this.handleReviewChange}
@@ -84,7 +85,7 @@ const withAddReview = (Component) => {
 
       if (evt) {
         this.setState({
-          comment: target.value,
+          comment: target.value
         });
       }
     }
