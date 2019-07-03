@@ -16,9 +16,10 @@ const withAddReview = (Component) => {
       super(props);
 
       this.state = {
-        rating: 0,
+        rating: 1,
         comment: ``,
-        error: false
+        error: false,
+        disconnect: false
       };
 
       this.handleRatingCheck = this._handleRatingCheck.bind(this);
@@ -33,6 +34,7 @@ const withAddReview = (Component) => {
         {...this.props}
         movie={movie}
         error={this.state.error}
+        disconnect={this.state.disconnect}
         comment={this.state.comment}
         handleRatingCheck={this.handleRatingCheck}
         handleReviewChange={this.handleReviewChange}
@@ -49,10 +51,12 @@ const withAddReview = (Component) => {
         this.props.handlePostReview(this.props.movie.id, comment, parseInt(rating, 10))
         .then((response) => {
           if (!response.error) {
-            return this.props.history.push(`/film/${this.props.movie.id}`);
+            this.props.history.push(`/film/${this.props.movie.id}`);
+          } else {
+            this.setState({
+              disconnect: response.error
+            });
           }
-
-          throw new Error(`Something went wrong :/`);
         });
 
         evt.target.reset();

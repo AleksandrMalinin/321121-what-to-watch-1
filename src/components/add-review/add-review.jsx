@@ -12,6 +12,7 @@ const AddReview = (props) => {
   const {
     movie,
     error,
+    disconnect,
     comment,
     handleRatingCheck,
     handleReviewChange,
@@ -56,9 +57,16 @@ const AddReview = (props) => {
 
         <div className="add-review">
           <form action="#" className="add-review__form" onSubmit={handleSubmit}>
-            { error ?
+            { error && !disconnect ?
               <div className="add-review__message">
                 <p>Не забудьте выставить фильму оценку :D</p>
+              </div> :
+              ``
+            }
+
+            { disconnect ?
+              <div className="add-review__message">
+                <p>Something went wrong ¯ \ _ (ツ) _ / ¯</p>
               </div> :
               ``
             }
@@ -98,6 +106,7 @@ const AddReview = (props) => {
 AddReview.propTypes = {
   movie: PropTypes.object,
   error: PropTypes.bool,
+  disconnect: PropTypes.bool,
   comment: PropTypes.string,
   handleRatingCheck: PropTypes.func,
   handleReviewChange: PropTypes.func,
