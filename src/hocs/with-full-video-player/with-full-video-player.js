@@ -17,12 +17,12 @@ const withFullVideoPlayer = (Component) => {
       return <Component
         {...this.props}
         isPlaying={this.state.isPlaying}
-        handlePlayButtonClick={this.handlePlayButtonClick}
+        onPlayButtonClick={this.handlePlayButtonClick}
       />;
     }
 
     _handlePlayButtonClick() {
-      this.props.handlePlayButtonClick(!this.props.fullVideoShown);
+      this.props.onPlayButtonClick(!this.props.fullVideoShown);
 
       this.setState({
         isPlaying: !this.state.isPlaying,
@@ -41,7 +41,7 @@ const withFullVideoPlayer = (Component) => {
     }),
     isPlaying: PropTypes.bool,
     fullVideoShown: PropTypes.bool,
-    handlePlayButtonClick: PropTypes.func
+    onPlayButtonClick: PropTypes.func
   };
 
   return WithFullVideoPlayer;

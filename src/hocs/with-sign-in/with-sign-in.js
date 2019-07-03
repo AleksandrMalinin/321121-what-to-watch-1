@@ -23,9 +23,9 @@ const withSignIn = (Component) => {
       return <Component
         {...this.props}
         error={this.state.error}
-        handleSubmit={this.handleSubmit}
-        handleEmailChange={this.handleEmailChange}
-        handlePasswordChange={this.handlePasswordChange}
+        onSubmit={this.handleSubmit}
+        onEmailChange={this.handleEmailChange}
+        onPasswordChange={this.handlePasswordChange}
       />;
     }
 
@@ -35,7 +35,7 @@ const withSignIn = (Component) => {
       const {email, password} = this.state;
 
       if (email && password) {
-        this.props.handleSubmit(email, password)
+        this.props.onSubmit(email, password)
         .then((response) => {
           if (!response.error) {
             this.props.history.push(`/`);
@@ -70,14 +70,14 @@ const withSignIn = (Component) => {
   }
 
   WithSignIn.propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired
     })
   };
 
   const mapDispatchToProps = (dispatch) => ({
-    handleSubmit: (email, password) => {
+    onSubmit: (email, password) => {
       return dispatch(Operation.loginUser(email, password));
     }
   });

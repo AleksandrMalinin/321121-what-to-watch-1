@@ -17,7 +17,7 @@ const withActiveItem = (initialItem) => (Component) => {
       return <Component
         {...this.props}
         activeItem={this.state.activeItem}
-        handleChange={this.handleItemChange}
+        onChange={this.handleItemChange}
       />;
     }
 
@@ -30,7 +30,7 @@ const withActiveItem = (initialItem) => (Component) => {
 
   WithActiveItem.propTypes = {
     activeItem: PropTypes.string,
-    handleChange: PropTypes.func
+    onChange: PropTypes.func
   };
 
   return WithActiveItem;

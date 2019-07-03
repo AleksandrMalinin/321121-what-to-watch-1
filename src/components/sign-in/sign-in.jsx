@@ -6,7 +6,7 @@ import Logo from '../logo/logo.jsx';
 import withSignIn from '../../hocs/with-sign-in/with-sign-in.js';
 
 const SignIn = (props) => {
-  const {error, handleSubmit, handleEmailChange, handlePasswordChange} = props;
+  const {error, onSubmit, onEmailChange, onPasswordChange} = props;
 
   return <React.Fragment>
     <Sprite/>
@@ -19,7 +19,7 @@ const SignIn = (props) => {
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+        <form action="#" className="sign-in__form" onSubmit={onSubmit}>
           {
             error ?
               <div className="sign-in__message">
@@ -29,11 +29,11 @@ const SignIn = (props) => {
           }
           <div className="sign-in__fields">
             <div className="sign-in__field">
-              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={handleEmailChange} required/>
+              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={onEmailChange} required/>
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" onChange={handlePasswordChange} required/>
+              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" onChange={onPasswordChange} required/>
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
@@ -62,12 +62,12 @@ const SignIn = (props) => {
 
 SignIn.propTypes = {
   error: PropTypes.bool,
-  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }),
-  handleEmailChange: PropTypes.func,
-  handlePasswordChange: PropTypes.func
+  onEmailChange: PropTypes.func,
+  onPasswordChange: PropTypes.func
 };
 
 export default withRouter(withSignIn(SignIn));

@@ -26,12 +26,12 @@ class MainScreen extends PureComponent {
       moviesLength,
       moviesShown,
       genres,
-      handleGenreChange,
+      onGenreChange,
       isAuthorizationRequired,
-      handleMoreButtonClick,
+      onMoreButtonClick,
       isPlaying,
       fullVideoShown,
-      handlePlayButtonClick
+      onPlayButtonClick
     } = this.props;
 
     return <React.Fragment>
@@ -63,7 +63,7 @@ class MainScreen extends PureComponent {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={handlePlayButtonClick}>
+                <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -98,7 +98,7 @@ class MainScreen extends PureComponent {
 
           <GenresList
             genres={genres}
-            handleGenreChange={handleGenreChange}
+            onGenreChange={onGenreChange}
           />
 
           <MovieList
@@ -111,7 +111,7 @@ class MainScreen extends PureComponent {
               movies={moviesList}
               moviesLength={moviesLength}
               moviesShown={moviesShown}
-              handleMoreButtonClick={handleMoreButtonClick}
+              onMoreButtonClick={onMoreButtonClick}
             /> : ``
           }
 
@@ -133,7 +133,7 @@ class MainScreen extends PureComponent {
       </div>
 
       {fullVideoShown ? <FullVideoPlayer
-        handlePlayButtonClick={handlePlayButtonClick}
+        onPlayButtonClick={onPlayButtonClick}
         movie={moviePromo}
         isPlaying={isPlaying}/> : ``
       }
@@ -148,7 +148,7 @@ class MainScreen extends PureComponent {
       return this.props.history.push(`/login`);
     }
 
-    return this.props.handleFavouriteStatusChange(id, status);
+    return this.props.onFavouriteStatusChange(id, status);
   }
 }
 
@@ -165,11 +165,11 @@ MainScreen.propTypes = {
   moviesShown: PropTypes.number,
   isPlaying: PropTypes.bool,
   fullVideoShown: PropTypes.bool,
-  handlePlayButtonClick: PropTypes.func,
-  handleGenreChange: PropTypes.func,
+  onPlayButtonClick: PropTypes.func,
+  onGenreChange: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
-  handleMoreButtonClick: PropTypes.func,
-  handleFavouriteStatusChange: PropTypes.func,
+  onMoreButtonClick: PropTypes.func,
+  onFavouriteStatusChange: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   })

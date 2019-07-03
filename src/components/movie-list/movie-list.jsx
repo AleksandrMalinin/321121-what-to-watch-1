@@ -4,7 +4,7 @@ import MovieCard from '../movie-card/movie-card.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
 const MovieList = (props) => {
-  const {movies, handleChange} = props;
+  const {movies, onChange} = props;
   let moviesCut;
 
   if (movies) {
@@ -15,8 +15,8 @@ const MovieList = (props) => {
     {moviesCut ? moviesCut.map((movie) => <MovieCard
       movie={movie}
       key={movie.name}
-      handleMouseEnter={handleChange}
-      handleMouseLeave={handleChange}
+      onMouseEnter={onChange}
+      onMouseLeave={onChange}
     />
     ) :
       ``}
@@ -28,7 +28,7 @@ MovieList.propTypes = {
     title: PropTypes.string
   })),
   moviesShown: PropTypes.number,
-  handleChange: PropTypes.func
+  onChange: PropTypes.func
 };
 
 export default withActiveItem(null)(MovieList);

@@ -18,13 +18,13 @@ class Tabs extends PureComponent {
 
   componentDidMount() {
     if (this.props.movie) {
-      this.props.handleCommentsLoad(this.props.movie.id);
+      this.props.onCommentsLoad(this.props.movie.id);
     }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.movie.id !== this.props.movie.id) {
-      this.props.handleCommentsLoad(this.props.movie.id);
+      this.props.onCommentsLoad(this.props.movie.id);
     }
   }
 
@@ -122,7 +122,7 @@ class Tabs extends PureComponent {
 
   _handleTabSwitch(name, event) {
     event.preventDefault();
-    this.props.handleChange(name);
+    this.props.onChange(name);
   }
 }
 
@@ -130,8 +130,8 @@ Tabs.propTypes = {
   movie: PropTypes.object,
   activeItem: PropTypes.string,
   comments: PropTypes.array,
-  handleChange: PropTypes.func,
-  handleCommentsLoad: PropTypes.func
+  onChange: PropTypes.func,
+  onCommentsLoad: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -139,7 +139,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleCommentsLoad: (id) => {
+  onCommentsLoad: (id) => {
     dispatch(Operation.loadComments(id));
   }
 });

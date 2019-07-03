@@ -10,7 +10,7 @@ it(`MyList correctly renders`, () => {
   .render(
       <MyList
         moviesFavourite={films}
-        handleGenreChange={mockFunction}
+        onGenreChange={mockFunction}
       />
   );
 

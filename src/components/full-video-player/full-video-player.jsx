@@ -13,9 +13,9 @@ const FullVideoPlayer = (props) => {
     seconds,
     time,
     videoRef,
-    handlePlayButtonClick,
-    handleControlButtonClick,
-    handleFullModeButtonClick,
+    onPlayButtonClick,
+    onControlButtonClick,
+    onFullModeButtonClick,
   } = props;
 
   return <div className="player">
@@ -26,7 +26,7 @@ const FullVideoPlayer = (props) => {
       />
     </video>
 
-    <button type="button" className="player__exit" onClick={handlePlayButtonClick}>Exit</button>
+    <button type="button" className="player__exit" onClick={onPlayButtonClick}>Exit</button>
 
     <div className="player__controls">
       <div className="player__controls-row">
@@ -38,7 +38,7 @@ const FullVideoPlayer = (props) => {
       </div>
 
       <div className="player__controls-row">
-        <button type="button" className="player__play" onClick={handleControlButtonClick}>
+        <button type="button" className="player__play" onClick={onControlButtonClick}>
           {!isPlaying ?
             <svg viewBox="0 0 19 19" width="19" height="19">
               <use xlinkHref="#play-s"></use>
@@ -52,7 +52,7 @@ const FullVideoPlayer = (props) => {
         </button>
         <div className="player__name">{movie.name}</div>
 
-        <button type="button" className="player__full-screen" onClick={handleFullModeButtonClick}>
+        <button type="button" className="player__full-screen" onClick={onFullModeButtonClick}>
           <svg viewBox="0 0 27 27" width="27" height="27">
             <use xlinkHref="#full-screen"></use>
           </svg>
@@ -80,9 +80,9 @@ FullVideoPlayer.propTypes = {
   time: PropTypes.number,
   interval: PropTypes.number,
   videoRef: PropTypes.object,
-  handlePlayButtonClick: PropTypes.func,
-  handleControlButtonClick: PropTypes.func,
-  handleFullModeButtonClick: PropTypes.func
+  onPlayButtonClick: PropTypes.func,
+  onControlButtonClick: PropTypes.func,
+  onFullModeButtonClick: PropTypes.func
 };
 
 export default withPlayerDevice(FullVideoPlayer);
