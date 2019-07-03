@@ -17,6 +17,7 @@ it(`On movie-card mouseenter state changes`, () => {
         handleMouseEnter={handleMouseEnter}
       />
   );
+
   filmCard.simulate(`mouseenter`);
   setTimeout(() => {
     expect(filmCard.state().isPlaying).toEqual(true);
